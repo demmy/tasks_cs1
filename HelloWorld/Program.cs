@@ -10,10 +10,12 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
+            string message = "Change hello world file";
+            Console.WriteLine(message);
             Console.WriteLine("+========================================+");
             Console.WriteLine("+         HELLO     WORLD                +");
             Console.WriteLine("+=======================================+");
-            
+            Console.ReadKey();
             Console.WriteLine("Strange merge...");
             Console.WriteLine("Well, hello creepy world...");
             
