@@ -10,6 +10,15 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
+            char[] hellowords = new char[]
+            {
+                'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd'
+            };
+            foreach (var word in hellowords)
+            {
+                Console.Write(word);
+            }
+            Console.ReadKey();
         }
     }
 }
