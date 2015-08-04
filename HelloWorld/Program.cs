@@ -12,6 +12,9 @@ namespace HelloWorld
         {
             string message = "Change hello world file";
             Console.WriteLine(message);
+            Console.WriteLine("+========================================+");
+            Console.WriteLine("+         HELLO     WORLD                +");
+            Console.WriteLine("+========================================+");
             Console.ReadKey();
         }
     }
