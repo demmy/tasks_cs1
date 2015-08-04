@@ -12,7 +12,7 @@ namespace HelloWorld
         {
             char[] hellowords = new char[]
             {
-                'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd'
+                'H', 'o', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd'
             };
             foreach (var word in hellowords)
             {
