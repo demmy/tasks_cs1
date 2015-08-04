@@ -13,6 +13,9 @@ namespace HelloWorld
             Console.WriteLine("+========================================+");
             Console.WriteLine("+         HELLO     WORLD                +");
             Console.WriteLine("+========================================+");
+            Console.WriteLine("Hello world");
+            Console.ReadKey(true);
+
         }
     }
 }
