@@ -10,6 +10,9 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
+            string message = "Change hello wold file";
+            Console.WriteLine(message);
+            Console.ReadKey();
         }
     }
 }
