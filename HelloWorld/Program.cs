@@ -14,8 +14,13 @@ namespace HelloWorld
             Console.WriteLine(message);
             Console.WriteLine("+========================================+");
             Console.WriteLine("+         HELLO     WORLD                +");
-            Console.WriteLine("+========================================+");
+            Console.WriteLine("+=======================================+");
             Console.ReadKey();
+            Console.WriteLine("Strange merge...");
+            Console.WriteLine("Well, hello creepy world...");
+            
+            
+            Console.ReadLine();
         }
     }
 }
