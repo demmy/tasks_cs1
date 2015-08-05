@@ -19,7 +19,9 @@ namespace HelloWorld
             str.AppendLine("This world is beautiful! And this string is changeable!");
             Console.WriteLine("Good Day! {0}", str.ToString());
             Console.WriteLine("+========================================+");
-            Console.ReadKey();
+            Console.WriteLine("Strange merge...");
+            Console.WriteLine("Well, hello creepy world...");
+            Console.ReadLine();
         }
     }
 }
