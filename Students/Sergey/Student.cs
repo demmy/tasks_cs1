@@ -8,19 +8,21 @@ namespace Students.Sergey
 {
     class Student : IStudent
     {
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public DateTime DateOfBirth { get; private set; }
+        public Group CurrentGroup { get; set; }
+
+        private Dictionary<Subject, Mark> _subjectMarks;
+
         public Student(DateTime dateOfBirth, string lastName, string firstName)
         {
             DateOfBirth = dateOfBirth;
             LastName = lastName;
             FirstName = firstName;
+            _subjectMarks  = new Dictionary<Subject, Mark>();
         }
-
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public DateTime DateOfBirth { get; private set; }
-
-        private Dictionary<Subject, Mark> _subjectMarks;
-
+        
         public int Age
         {
             get
@@ -50,10 +52,7 @@ namespace Students.Sergey
         {
             _subjectMarks.Add(subject, mark);
         }
-
-        public Group CurrentGroup { get; set; }
-
-
+        
         public IReadOnlyDictionary<Subject, Mark> GetAllMarks()
         {
             return _subjectMarks;
