@@ -28,11 +28,6 @@ namespace Students.Sergey
             throw new NotImplementedException();
         }
 
-        public IReadOnlyList<KeyValuePair<Subject, Mark>> GetAllMarks()
-        {
-            throw new NotImplementedException();
-        }
-
         public Group CurrentGroup
         {
             get
@@ -43,6 +38,12 @@ namespace Students.Sergey
             {
                 throw new NotImplementedException();
             }
+        }
+
+
+        public IReadOnlyDictionary<Subject, Mark> GetAllMarks()
+        {
+            throw new NotImplementedException();
         }
     }
 }
