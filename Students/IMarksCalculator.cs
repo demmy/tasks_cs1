@@ -14,7 +14,6 @@ namespace Students
 
         IReadOnlyList<KeyValuePair<Group, double>> AverageMarkPerGroup(IReadOnlyList<IStudent> students);
 
-        IReadOnlyList<KeyValuePair<Tuple<Group, Subject>, double>> 
-            AverageMarkPerGroupPerSubject(IReadOnlyList<IStudent> students);
+        IReadOnlyList<KeyValuePair<Tuple<Group, Subject>, double>> AverageMarkPerGroupPerSubject(IReadOnlyList<IStudent> students);
     }
 }
