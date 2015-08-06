@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Students
 {
     enum Subject { Math, Physics, Programming, History, English };
-    enum Mark { Excellent = 5, Good = 4, Satisfactory = 3, Poor = 2, Bad = 1 };
+    enum Mark { Excellent = 5, Good = 4, Satisfactory = 3, Poor = 2, Bad = 1, NoMark = 0 };
     enum Group { CS1, CS2 };
 
     interface IStudent
