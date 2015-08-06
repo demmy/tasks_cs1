@@ -18,7 +18,7 @@ namespace Students
 
         Mark GetMark(Subject subject);
         void SetMark(Subject subject, Mark mark);
-        IReadOnlyList<KeyValuePair<Subject, Mark>> GetAllMarks();
+        IReadOnlyDictionary<Subject, Mark> GetAllMarks();
         Group CurrentGroup { get; set; }
     }
 }
