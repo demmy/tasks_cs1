@@ -8,42 +8,62 @@ namespace Students.Nikita
 {
     class Student : IStudent
     {
+        private string _firstName;
+        private string _secondName;
+        private Mark _mark;
+        private Dictionary<Subject, Mark> _subjectsMarks;
+        private DateTime _birthDate;
+
+        public Group CurrentGroup { get; set; }
+
+
+        public Student(string firstName, string secondName, Mark mark, Group group, Dictionary<Subject, Mark> subjectsMarks, DateTime birthDate)
+        {
+            _firstName = firstName;
+            _secondName = secondName;
+            _mark = mark;
+            CurrentGroup = group;
+            _subjectsMarks = subjectsMarks;
+            _birthDate = birthDate;
+        }
+
         public int Age
         {
-            get { throw new NotImplementedException(); }
+            get { return ((new DateTime(1,1,1) + (DateTime.Now - _birthDate)).Year - 1)}
         }
 
         public string FullName
         {
-            get { throw new NotImplementedException(); }
+            get { return string.Format("{0} {1}", _firstName, _secondName); }
         }
 
         public Mark GetMark(Subject subject)
         {
-            throw new NotImplementedException();
+            foreach (var pair in _subjectsMarks)
+            {
+                if (pair.Key == subject)
+                {
+                    return pair.Value;
+                }
+            }
+            return Mark.Bad;
         }
 
         public void SetMark(Subject subject, Mark mark)
         {
-            throw new NotImplementedException();
-        }
-
-        public Group CurrentGroup
-        {
-            get
+            foreach (var pair in _subjectsMarks)
             {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
+                if (pair.Key == subject)
+                {
+                    _subjectsMarks[pair.Key] = mark;
+                }
             }
         }
 
 
         public IReadOnlyDictionary<Subject, Mark> GetAllMarks()
         {
-            throw new NotImplementedException();
+            return _subjectsMarks;
         }
     }
 }
