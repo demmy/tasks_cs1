@@ -8,12 +8,17 @@ namespace Students
 {
     interface IMarksCalculator
     {
-        IReadOnlyList<KeyValuePair<IStudent, double>> AverageMarkPerStudent(IReadOnlyList<IStudent> students);
+        IReadOnlyDictionary<IStudent, double> AverageMarkPerStudent(IReadOnlyList<IStudent> students);
 
-        IReadOnlyList<KeyValuePair<Mark, double>> AverageMarkPerSubject(IReadOnlyList<IStudent> students);
+        IReadOnlyDictionary<Subject, double> AverageMarkPerSubject(IReadOnlyList<IStudent> students);
 
-        IReadOnlyList<KeyValuePair<Group, double>> AverageMarkPerGroup(IReadOnlyList<IStudent> students);
+        IReadOnlyDictionary<Group, double> AverageMarkPerGroup(IReadOnlyList<IStudent> students);
 
+<<<<<<< HEAD
         IReadOnlyList<KeyValuePair<Tuple<Group, Subject>, double>> AverageMarkPerGroupPerSubject(IReadOnlyList<IStudent> students);
+=======
+        IReadOnlyDictionary<Tuple<Group, Subject>, double>
+            AverageMarkPerGroupPerSubject(IReadOnlyList<IStudent> students);
+>>>>>>> origin/master
     }
 }
