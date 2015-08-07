@@ -21,7 +21,7 @@ namespace HelloWorld
             Console.WriteLine("+========================================+");
             Console.WriteLine("Strange merge...");
             Console.WriteLine("Well, hello creepy world...");
-            Console.ReadLine();
+            Console.ReadKey();
         }
     }
 }
