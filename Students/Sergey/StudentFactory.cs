@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,11 +62,38 @@ namespace Students.Sergey
             "Карина"
         };
 
+        private class StudentMarksCalculator: IMarksCalculator
+        {
+
+            public IReadOnlyDictionary<IStudent, double> AverageMarkPerStudent(IReadOnlyList<IStudent> students)
+            {
+                var averageMarks = students.ToDictionary(student => student,
+                    student => student.GetAllMarks().Average(x => (int) x.Value));
+                return averageMarks;
+            }
+
+            public IReadOnlyDictionary<Subject, double> AverageMarkPerSubject(IReadOnlyList<IStudent> students)
+            {
+                var averageMarks = new Dictionary<Subject, double>();
+                return averageMarks;
+            }
+
+            public IReadOnlyDictionary<Group, double> AverageMarkPerGroup(IReadOnlyList<IStudent> students)
+            {
+                throw new NotImplementedException();
+            }
+
+            public IReadOnlyDictionary<Tuple<Group, Subject>, double> AverageMarkPerGroupPerSubject(IReadOnlyList<IStudent> students)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         private DateTime RndDateOfBirth(DateTime startPoint, DateTime endPoint)
         {
             var date = startPoint;
             int daysRange = (endPoint - startPoint).Days;
-            return date.AddDays(daysRange);
+            return date.AddDays(_rnd.Next(daysRange));
         }
         public IStudent CreateRandomStudent()
         {
@@ -92,7 +120,7 @@ namespace Students.Sergey
 
         public IMarksCalculator MarksCalculator
         {
-            get { throw new NotImplementedException(); }
+            get { return new StudentMarksCalculator(); }
         }
 
 

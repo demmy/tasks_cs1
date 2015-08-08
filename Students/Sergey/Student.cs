@@ -8,8 +8,8 @@ namespace Students.Sergey
 {
     class Student : IStudent
     {
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
+        private readonly string _firstName;
+        private readonly string _lastName;
         public DateTime DateOfBirth { get; private set; }
         public Group CurrentGroup { get; set; }
 
@@ -18,8 +18,8 @@ namespace Students.Sergey
         public Student(DateTime dateOfBirth, string lastName, string firstName)
         {
             DateOfBirth = dateOfBirth;
-            LastName = lastName;
-            FirstName = firstName;
+            _lastName = lastName;
+            _firstName = firstName;
             _subjectMarks  = new Dictionary<Subject, Mark>();
         }
         
@@ -37,7 +37,7 @@ namespace Students.Sergey
         {
             get
             {
-                return String.Format("{0} {1}", FirstName, LastName);
+                return String.Format("{0} {1}", _firstName, _lastName);
             }
         }
 
