@@ -74,7 +74,16 @@ namespace Students.Sergey
 
             public IReadOnlyDictionary<Subject, double> AverageMarkPerSubject(IReadOnlyList<IStudent> students)
             {
-                var averageMarks = new Dictionary<Subject, double>();
+                var subjects = Enum.GetValues(typeof(Subject)).Cast<Subject>();
+                var subjs = subjects as IList<Subject> ?? subjects.ToList();
+
+                var averageMarks = subjs.ToDictionary<Subject, Subject, double>(subject => subject, subject => 0f);
+
+                foreach (var subj in students.SelectMany(student => student.GetAllMarks()))
+                    averageMarks[subj.Key] += (int)subj.Value;
+                foreach (var subj in subjs)
+                    averageMarks[subj] /= students.Count;
+                
                 return averageMarks;
             }
 
