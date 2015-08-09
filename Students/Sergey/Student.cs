@@ -37,7 +37,7 @@ namespace Students.Sergey
         {
             get
             {
-                return String.Format("{0} {1}", _firstName, _lastName);
+                return string.Format("{0} {1}", _firstName, _lastName);
             }
         }
 
