@@ -80,18 +80,19 @@ namespace Students.Sergey
 
             public IReadOnlyDictionary<Subject, double> AverageMarkPerSubject(IReadOnlyList<IStudent> students)
             {
-                //Get all subjects, avoid multiple enumerators
-                var subjects = Enum.GetValues(typeof(Subject)).Cast<Subject>();
-                var subjs = subjects as IList<Subject> ?? subjects.ToList();
-                //Create dictionary where will be put all average marks per subject
-                var averageMarks = subjs.ToDictionary<Subject, Subject, double>(subject => subject, subject => 0f);
-                //Sum of marks for each subject (now we see why LINQ is not the SQL like)
-                foreach (var subj in students.SelectMany(student => student.GetAllMarks()))
-                    averageMarks[subj.Key] += (int)subj.Value;
-                //To calc average from Sum of marks per subject, now it works in case every student has got all subject
-                //If we need more, we should create an array with number of students learning current subject
-                foreach (var subj in subjs)
-                    averageMarks[subj] /= students.Count;
+                //Get (something like) Enumeration of Dictionaries of Subject+Mark
+                var allMarks = from student in students select student.GetAllMarks();
+
+                //Get something of grouped by Subject marks 
+                var sub = from mark in allMarks
+                    from pair in mark
+                    group pair.Value by pair.Key
+                    into g
+                    orderby g.Key
+                    select g;
+
+                //Get the Dictionary of Subject and Average Mark
+                var averageMarks = sub.ToDictionary(x => x.Key, y => y.Average(z => (int) z));
 
                 return averageMarks;
             }
@@ -102,6 +103,7 @@ namespace Students.Sergey
                 var marksByGroup = from student in students
                                    group student.GetAllMarks().Values.Average(num => (int)num)
                                    by student.CurrentGroup;
+
                 //Here we get Dictionary of Group and average mark per Group
                 var averageMarks = marksByGroup.ToDictionary(group => group.Key,
                     aver => aver.Average(x => x));
@@ -111,7 +113,7 @@ namespace Students.Sergey
 
             public IReadOnlyDictionary<Tuple<Group, Subject>, double> AverageMarkPerGroupPerSubject(IReadOnlyList<IStudent> students)
             {
-                throw new NotImplementedException();
+                throw new NotImplementedException(); 
             }
         }
         #endregion
