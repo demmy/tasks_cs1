@@ -29,7 +29,7 @@ namespace Students.Nikita
 
         public int Age
         {
-            get { return ((new DateTime(1,1,1) + (DateTime.Now - _birthDate)).Year - 1)}
+            get { return ((new DateTime(1, 1, 1) + (DateTime.Now - _birthDate)).Year - 1); }
         }
 
         public string FullName
