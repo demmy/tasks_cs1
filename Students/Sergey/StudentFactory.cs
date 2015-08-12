@@ -183,14 +183,14 @@ namespace Students.Sergey
 
             var newStudent = new Student(rndDateOfBirth, rndLastName, rndFirstName)
             {
-                CurrentGroup = (Group)_rnd.Next(Enum.GetNames(typeof(Group)).Length)
+                CurrentGroup = (Group) _rnd.Next(Enum.GetNames(typeof (Group)).Length)
             };
 
-            var subjects = Enum.GetValues(typeof(Subject)).Cast<Subject>();
-            int marksNumber = Enum.GetValues(typeof(Mark)).Length;
+            var subjects = Enum.GetValues(typeof (Subject)).Cast<Subject>();
+            int marksNumber = Enum.GetValues(typeof (Mark)).Length;
             foreach (var subject in subjects)
             {
-                newStudent.SetMark(subject, (Mark)_rnd.Next(marksNumber));
+                newStudent.SetMark(subject, (Mark) _rnd.Next(marksNumber));
             }
             return newStudent;
         }
