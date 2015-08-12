@@ -80,7 +80,7 @@ namespace Students.Sergey
             {
                 //Just get the average mark per student
                 var averageMarks = students.ToDictionary(student => student,
-                    student => student.GetAllMarks().Average(x => (int)x.Value));
+                    student => student.GetAllMarks().Average(mark => (int)mark.Value));
                 return averageMarks;
             }
             /// <summary>
@@ -98,12 +98,12 @@ namespace Students.Sergey
                 var sub = from mark in allMarks
                           from pair in mark
                           group pair.Value by pair.Key
-                              into g
-                              orderby g.Key
-                              select g;
+                              into result
+                              orderby result.Key
+                              select result;
 
                 //Get the Dictionary of Subject and Average Mark
-                var averageMarks = sub.ToDictionary(x => x.Key, y => y.Average(z => (int)z));
+                var averageMarks = sub.ToDictionary(subject => subject.Key, marks => marks.Average(mark => (int)mark));
 
                 return averageMarks;
             }
@@ -117,7 +117,10 @@ namespace Students.Sergey
                 //We get the (something) that is grouped by Group field and with (something like) Enumeration of average marks per Student
                 var marksByGroup = from student in students
                                    group student.GetAllMarks().Values.Average(num => (int)num)
-                                   by student.CurrentGroup;
+                                   by student.CurrentGroup
+                                   into result
+                                   orderby result.Key
+                                   select result;
 
                 //Here we get Dictionary of Group and average mark per Group
                 var averageMarks = marksByGroup.ToDictionary(group => group.Key,
@@ -140,10 +143,13 @@ namespace Students.Sergey
                 var drub = from grMarks in marksByGroup
                            from marks in grMarks
                            from mark in marks
-                           group mark.Value by new Tuple<Group, Subject>(grMarks.Key, mark.Key);
+                           group mark.Value by new Tuple<Group, Subject>(grMarks.Key, mark.Key)
+                           into result
+                           orderby result.Key
+                           select result;
                 //Convert to dictionary of Tuple Group-Subject with value of average marks from collection got from previous step
                 var averageMarks = drub.ToDictionary(groupSubjPair => groupSubjPair.Key,
-                    average => average.Average(x => (int)x));
+                    marks => marks.Average(mark => (int)mark));
 
                 return averageMarks;
             }
