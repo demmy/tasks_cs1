@@ -8,42 +8,92 @@ namespace Students.Taisiya
 {
     class Student : IStudent
     {
+        private string FirstName;
+        private string LastName;
+        private DateOfBirth Birthday;
+        private Group GroupName;
+        private Dictionary<Subject, Mark> MarksList;
+
+        public Student(string firstName, string lastName, DateOfBirth birthday , Group groupName)
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Birthday = birthday;
+            this.GroupName = groupName;
+            this.MarksList = new Dictionary<Subject, Mark>();
+        }
+
         public int Age
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                int FullAge = DateTime.Now.Year - Birthday.YearOfBirth;
+                if (DateTime.Now.Month < Birthday.MonthOfBirth || (DateTime.Now.Month == Birthday.MonthOfBirth && DateTime.Now.Day < Birthday.DayOfBirth))
+                {
+                    FullAge--;
+                }
+                return FullAge; throw new NotImplementedException();
+            }
         }
+
+
 
         public string FullName
         {
-            get { throw new NotImplementedException(); }
+            get 
+            { 
+                return this.FirstName + " " + this.LastName; 
+            }
         }
 
         public Mark GetMark(Subject subject)
         {
-            throw new NotImplementedException();
+            foreach (var m in MarksList)
+                if (m.Key == subject)
+                    return m.Value;
+            return 0;
         }
 
         public void SetMark(Subject subject, Mark mark)
         {
-            throw new NotImplementedException();
+            MarksList.Add(subject, mark);                
         }
 
         public Group CurrentGroup
         {
             get
             {
-                throw new NotImplementedException();
+                return this.GroupName;
             }
             set
             {
-                throw new NotImplementedException();
+                if (this.GroupName == Group.CS1) this.GroupName = Group.CS2;
+                else this.GroupName = Group.CS1;
             }
         }
 
 
         public IReadOnlyDictionary<Subject, Mark> GetAllMarks()
         {
-            throw new NotImplementedException();
+            return MarksList;
         }
+    }
+
+    struct DateOfBirth
+    {
+        public int DayOfBirth;
+        public int MonthOfBirth;
+        public int YearOfBirth;
+        public string PlaceOfBirth;
+
+        public DateOfBirth(int DayOfBirth, int MonthOfBirth, int YearOfBirth, string PlaceOfBirth)
+        {
+            this.DayOfBirth = DayOfBirth;
+            this.MonthOfBirth = MonthOfBirth;
+            this.YearOfBirth = YearOfBirth;
+            this.PlaceOfBirth = PlaceOfBirth;
+        }
+
+
     }
 }
