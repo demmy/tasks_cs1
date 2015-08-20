@@ -36,8 +36,6 @@ namespace Students.Taisiya
             }
         }
 
-
-
         public string FullName
         {
             get 
@@ -61,17 +59,9 @@ namespace Students.Taisiya
 
         public Group CurrentGroup
         {
-            get
-            {
-                return this.GroupName;
-            }
-            set
-            {
-                if (this.GroupName == Group.CS1) this.GroupName = Group.CS2;
-                else this.GroupName = Group.CS1;
-            }
+            get { return this.GroupName; }
+            set { this.GroupName = value; }
         }
-
 
         public IReadOnlyDictionary<Subject, Mark> GetAllMarks()
         {
