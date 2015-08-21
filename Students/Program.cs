@@ -52,6 +52,8 @@ namespace Students
                             Console.WriteLine("Group {0} subject {1} has average mark {2}",
                                 mark.Key.Item1, mark.Key.Item2, mark.Value);
                         }
+
+   
                     }
                 }
                 catch(Exception e)
@@ -62,6 +64,9 @@ namespace Students
                 }
             }
             Console.ReadKey(true);
+
+
+            
         }
     }
 }
