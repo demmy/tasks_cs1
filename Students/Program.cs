@@ -66,6 +66,107 @@ namespace Students
             Console.ReadKey(true);
 
 
+
+
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Compare work of subprogram  calculator.AverageMarkPerSubject(students)");
+
+            foreach (var factory in factories)
+            {
+                try
+                {
+
+                    Console.WriteLine("====== Calculation by programmer {0} =======", factory.ProgrammerName);
+                    IMarksCalculator calculator = factory.MarksCalculator;
+
+                    if (calculator != null)
+                    {
+                        foreach (var mark in calculator.AverageMarkPerSubject(students))
+                        {
+                            Console.WriteLine("Subject {0} has average mark {1}", mark.Key, mark.Value);
+                        }
+
+
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Not all initializations or calculations implemented. Problem: {0}", e.Message);
+                    Console.WriteLine("Details: {0}", e.ToString());
+                    continue;
+                }
+            }
+
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Compare work of subprogram  calculator.AverageMarkPerGroup(students)");
+
+            foreach (var factory in factories)
+            {
+                try
+                {
+
+                    Console.WriteLine("====== Calculation by programmer {0} =======", factory.ProgrammerName);
+                    IMarksCalculator calculator = factory.MarksCalculator;
+
+                    if (calculator != null)
+                    {
+
+                        foreach (var mark in calculator.AverageMarkPerGroup(students))
+                        {
+                            Console.WriteLine("Group {0} has average mark {1}", mark.Key, mark.Value);
+                        }
+
+
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Not all initializations or calculations implemented. Problem: {0}", e.Message);
+                    Console.WriteLine("Details: {0}", e.ToString());
+                    continue;
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Compare work of subprogram  calculator.AverageMarkPerGroupPerSubject(students)");
+
+            foreach (var factory in factories)
+            {
+                try
+                {
+
+                    Console.WriteLine("====== Calculation by programmer {0} =======", factory.ProgrammerName);
+                    IMarksCalculator calculator = factory.MarksCalculator;
+
+                    if (calculator != null)
+                    {
+
+                        foreach (var mark in calculator.AverageMarkPerGroupPerSubject(students))
+                        {
+                            Console.WriteLine("Group {0} subject {1} has average mark {2}",
+                                mark.Key.Item1, mark.Key.Item2, mark.Value);
+                        }
+
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Not all initializations or calculations implemented. Problem: {0}", e.Message);
+                    Console.WriteLine("Details: {0}", e.ToString());
+                    continue;
+                }
+            }
+
+            Console.ReadKey(true);
+
             
         }
     }
