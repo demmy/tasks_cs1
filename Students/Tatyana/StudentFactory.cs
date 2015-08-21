@@ -73,8 +73,8 @@ namespace Students.Tatyana
                             sumMarksSubject.Add(subjectMark.Key, 0);
                         }
 
-                        countStudentForSubject[subjectMark.Key] += (int)subjectMark.Value;
-                        sumMarksSubject[subjectMark.Key]++;
+                        sumMarksSubject[subjectMark.Key] += (int)subjectMark.Value;
+                        countStudentForSubject[subjectMark.Key]++;
                     }
                 }
 
@@ -103,8 +103,8 @@ namespace Students.Tatyana
                     }
                     foreach (var subjectMark in s.GetAllMarks())
                     {
-                        countStudentForGroup[s.CurrentGroup] += (int)subjectMark.Value;
-                        sumMarksGroup[s.CurrentGroup]++;
+                        sumMarksGroup[s.CurrentGroup] += (int)subjectMark.Value;
+                        countStudentForGroup[s.CurrentGroup]++;
                     }
                 }
 
