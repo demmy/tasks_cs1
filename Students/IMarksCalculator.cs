@@ -14,7 +14,6 @@ namespace Students
 
         IReadOnlyDictionary<Group, double> AverageMarkPerGroup(IReadOnlyList<IStudent> students);
 
-        IReadOnlyDictionary<Tuple<Group, Subject>, double>
-            AverageMarkPerGroupPerSubject(IReadOnlyList<IStudent> students);
+        IReadOnlyDictionary<Tuple<Group, Subject>, double> AverageMarkPerGroupPerSubject(IReadOnlyList<IStudent> students); 
     }
 }
