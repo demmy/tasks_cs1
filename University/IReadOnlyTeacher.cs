@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace University
 {
-    interface IReadOnlyTeacher
+    enum PositionType { Professor, Lector, Assistant };
+
+    interface IReadOnlyTeacher: IReadOnlyPerson
     {
         PositionType Position { get;  }
     }
