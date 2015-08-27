@@ -8,31 +8,54 @@ namespace University
 {
     class Program
     {
+        static void MainTatyana()
+        {
+        
+        }
+
+        static void MainTaisiya()
+        {
+        
+        }
+
+        static void MainSergey()
+        {
+        
+        }
+
+        static void MainNikita()
+        {
+        
+        }
+
         static void Main(string[] args)
         {
-            List<IUniversityFactory> factories = new List<IUniversityFactory>();
-            factories.Add(new Tatyana.UniversityFactory());
-            factories.Add(new Taisiya.UniversityFactory());
-            factories.Add(new Sergey.UniversityFactory());
-            factories.Add(new Nikita.UniversityFactory());
-            factories.Add(new Aleksandr.UniversityFactory());
-
-            foreach (var factory in factories)
+            try
             {
-                try
+                if (args.Length > 0)
                 {
-                    Console.WriteLine("Programmer: {0}", factory.ProgrammerName);
-
-                    IUniversity university = factory.CreateUniversity("Super new university");
-                    
-                    //university.CurrentSchedule
+                    Console.WriteLine("Argument: {0}", args[0]);
+                    switch (args[0])
+                    {
+                        case "Tatyana":
+                            MainTatyana();
+                            break;
+                        case "Taisiya":
+                            MainTaisiya();
+                            break;
+                        case "Nikita":
+                            MainNikita();
+                            break;
+                        case "Sergey":
+                            MainSergey();
+                            break;
+                    }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Not all code implemented. Problem: {0}", e.Message);
-                    Console.WriteLine("Details: {0}", e.ToString());
-                    continue;
-                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Not all code implemented. Problem: {0}", e.Message);
+                Console.WriteLine("Details: {0}", e.ToString());
             }
         }
     }

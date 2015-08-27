@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace University
 {
+    enum LessonsOrder { ZeroLesson = 0, FirstLesson, SecondLesson, ThirdLesson, FourthLesson,
+        FifthLesson, SixthLesson, SeventhLesson, EighthLesson };
+
     interface ISchedule
     {
         /// <summary>
@@ -44,26 +47,8 @@ namespace University
         /// <returns>list of lessons data per day: date, time of start, name of room, list of group names</returns>
         IReadOnlyDictionary<DateTime, Tuple<DateTime, string, IReadOnlyList<string>>> GetByTeacher(string teacherName);
 
-        /// <summary>
-        /// list of names of rooms
-        /// </summary>
-        IReadOnlyList<string> RoomsNames { get; }
+        IEnumerable<DateTime> AllExistingDates { get; }
 
-        /// <summary>
-        /// list of names of teachers
-        /// </summary>
-        IReadOnlyList<string> TeachersNames { get; }
-
-        /// <summary>
-        /// list of names of groups
-        /// </summary>
-        IReadOnlyList<string> GroupsNames { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="groupName"></param>
-        /// <returns>list of names of students</returns>
-        IReadOnlyList<string> GetStudentsNames(string groupName);
+        IReadOnlyDictionary<Tuple<DateTime, LessonsOrder>, IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>> GetWeekData(DateTime dateAtThisWeek);
     }
 }
