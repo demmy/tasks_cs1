@@ -195,3 +195,11 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 *.orig
+University/ISchedule.cs
+University/Nikita/Schedule.cs
+University/Nikita/Room.cs
+*.cs
+University/IUniversity.cs
+University/Nikita/UniversityFactory.cs
+*.cs
+University/Program.cs
