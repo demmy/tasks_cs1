@@ -55,7 +55,7 @@ namespace Collections.Sergey.Collections
         public T First(int priority)
         {
             if (!_queue.ContainsKey(priority))
-                throw new Exception("There are no elements of such priority");
+                throw new KeyNotFoundException("There are no elements of such priority");
             else
             {
                 T firstElement = _queue[priority].First();
@@ -78,7 +78,7 @@ namespace Collections.Sergey.Collections
         public T Last(int priority)
         {
             if (!_queue.ContainsKey(priority))
-                throw new Exception("There are no elements of such priority");
+                throw new KeyNotFoundException("There are no elements of such priority");
             else
             {
                 T firstElement = _queue[priority].Last();
@@ -97,7 +97,7 @@ namespace Collections.Sergey.Collections
         public int GetCount(int priority)
         {
             if (!_queue.ContainsKey(priority))
-                throw new Exception("There are no elements of such priority");
+                throw new KeyNotFoundException("There are no elements of such priority");
             else
                 return _queue[priority].Count;
         }
