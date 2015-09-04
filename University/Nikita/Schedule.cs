@@ -6,37 +6,30 @@ using System.Threading.Tasks;
 
 namespace University.Nikita
 {
-    class Schedule : ISchedule
+    internal class Schedule : ISchedule
     {
         private Dictionary<DateTime, List<ScheduleItem>> _items;
-
-        public Schedule(Dictionary<DateTime, List<ScheduleItem>> items)
-        {
-           _items = items;
-        }
-        /// <returns>list of lessons data per room: name of room, time of start, 
-        /// name of teacher, list of group names.</returns>
-        public IReadOnlyDictionary<string, Tuple<DateTime, string, IReadOnlyList<string>>> GetByDay(DateTime day)
-        {
-           
-        }
-
-        public IReadOnlyDictionary<DateTime, IReadOnlyDictionary<string, Tuple<DateTime, string, IReadOnlyList<string>>>> GetAll()
+        public IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>> GetByDay(DateTime day)
         {
             throw new NotImplementedException();
         }
 
-        public IReadOnlyDictionary<DateTime, Tuple<DateTime, string, IReadOnlyList<string>>> GetByRoom(string roomName)
+        public IReadOnlyDictionary<DateTime, IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public IReadOnlyDictionary<DateTime, Tuple<DateTime, string, bool>> GetByGroup(string groupName)
+        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>> GetByRoom(string roomName)
         {
             throw new NotImplementedException();
         }
 
-        public IReadOnlyDictionary<DateTime, Tuple<DateTime, string, IReadOnlyList<string>>> GetByTeacher(string teacherName)
+        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, bool>>> GetByGroup(string groupName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, string, IReadOnlyList<string>>>> GetByTeacher(string teacherName)
         {
             throw new NotImplementedException();
         }
