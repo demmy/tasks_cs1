@@ -16,12 +16,16 @@ namespace University.Tatyana
 
         public IUniversity CreateUniversity(string title)
         {
-            List<Room> rooms = new List<Room>();
-            List<Teacher> teachers = new List<Teacher>();
-            List<Student> students = new List<Student>();
-            List<Group> groups = new List<Group>();
+            //list<room> rooms = new list<room>();
+            //list<teacher> teachers = new list<teacher>();
+            //list<student> students = new list<student>();
+            //list<group> groups = new list<group>();
+            List<Room> rooms = CreateListRooms(r.Next(10,20),4);
+            List<Teacher> teachers =CreateListTeacher(r.Next(10,15));
+             
+            List<Group> groups = CreateListGroupsWithStudents(3,5,1,2);
             Schedule schedule= new Schedule();
-            return new University(title, groups, teachers, rooms, schedule);
+            return new University(title, groups, teachers, rooms);
            
 
         }
@@ -31,7 +35,7 @@ namespace University.Tatyana
             get { return "Tatyana"; }
         }
 
-        private Student CreateRandomStudent()
+       public Student CreateRandomStudent()
         {
             indexOfUniqueStudent++;
             string firstName1 = "Student" + indexOfUniqueStudent.ToString();
@@ -42,7 +46,7 @@ namespace University.Tatyana
         }
 
 
-        private Teacher CreateRandomTeacher()
+        public Teacher CreateRandomTeacher()
         {
             indexOfUniqueTeacher++;
             PositionType p = (PositionType)r.Next(1, 4);
@@ -63,7 +67,7 @@ namespace University.Tatyana
             return students;
         }
 
-        private List<Teacher> CreateListTeacher(int length)
+        public List<Teacher> CreateListTeacher(int length)
         {
             List<Teacher> teachers = new List<Teacher>();
             for (int i = 0; i < length; i++)
@@ -110,7 +114,7 @@ namespace University.Tatyana
                 return groups;
         }
 
-        private List<Group> CreateListGroupsWithStudents(int countGroup, int maxCountStudents,
+        public List<Group> CreateListGroupsWithStudents(int countGroup, int maxCountStudents,
           int countFaculty, int countSpesiality)
         {
             List<Group> groups = new List<Group>();

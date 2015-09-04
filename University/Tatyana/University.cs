@@ -8,10 +8,10 @@ namespace University.Tatyana
 {
     class University : IUniversity
     {
-        List<Group> groups;
-        List<Teacher> teachers;
-        List<Room> rooms;
-        Schedule schedule;
+        List<Group> groups = new List<Group>();
+        List<Teacher> teachers = new List<Teacher>();
+        List<Room> rooms = new List<Room>();
+        Schedule schedule = new Schedule();
         string name;
 
         public string Name 
@@ -20,21 +20,21 @@ namespace University.Tatyana
         public University(string title)
         {
             name = title;
-            List<Group> groups = new List<Group>();
-            List<Teacher> teachers = new List<Teacher>();
-            List<Room> rooms = new List<Room>();
-            Schedule schedule = new Schedule();
+            
 
         }
 
-        public University(string title, List<Group> groups1, List<Teacher> teachers1,
-                              List<Room> rooms1, Schedule schedule1)
+       // public University(string title, List<Group> groups1, List<Teacher> teachers1,
+               //               List<Room> rooms1, Schedule schedule1)
+        public University(string title, IEnumerable<Group> groups1, IEnumerable<Teacher> teachers1,
+                              IEnumerable<Room> rooms1):this(title)
         {
-            name = title;
-            groups = groups1;
-            teachers = teachers1;
-            rooms = rooms1;
-            schedule = schedule1;
+            
+            groups.AddRange(groups1);
+            
+            teachers.AddRange(teachers1);
+            rooms.AddRange(rooms1);
+            
         }
 
 

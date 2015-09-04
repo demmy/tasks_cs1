@@ -11,7 +11,7 @@ namespace University.Tatyana
         List<Student> students;
         FacultyType faculty;
         string id;
-        static Dictionary<Tuple<int, string>, int> existingGroupsCount;
+        static Dictionary<Tuple<int, string>, int> existingGroupsCount=new Dictionary<Tuple<int,string>,int>();
         
 
 
@@ -28,8 +28,10 @@ namespace University.Tatyana
         public  IEnumerable<IReadOnlyPerson> Students
         {
             get {
-                foreach (Student s in students)
-                         yield return s;
+                return students;
+                //foreach (Student s in students)
+                //    yield return s;
+                
                 }
         }
 
@@ -42,8 +44,9 @@ namespace University.Tatyana
                 existingGroupsCount[t] = 0;
             }
             existingGroupsCount[t]++;
-            id = string.Format("{0}-{1}-{2}", speciality, (year % 100), 
-                 existingGroupsCount[t] );
+            id = string.Format("{0}-{1}-{2}", speciality, (year % 100), existingGroupsCount[t] );
+           // id = string.Format("{0}-{1}-{2}", Shifr(speciality), (year % 100), existingGroupsCount[t]);
+            students = new List<Student>();
             
         }
 
