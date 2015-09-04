@@ -1,6 +1,0 @@
-C:\Users\student\Documents\Tanya\tasks_cs1\University\bin\Debug\University.exe.config
-C:\Users\student\Documents\Tanya\tasks_cs1\University\bin\Debug\University.exe
-C:\Users\student\Documents\Tanya\tasks_cs1\University\bin\Debug\University.pdb
-C:\Users\student\Documents\Tanya\tasks_cs1\University\obj\Debug\University.csprojResolveAssemblyReference.cache
-C:\Users\student\Documents\Tanya\tasks_cs1\University\obj\Debug\University.exe
-C:\Users\student\Documents\Tanya\tasks_cs1\University\obj\Debug\University.pdb
