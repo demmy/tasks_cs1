@@ -49,6 +49,7 @@
     <Compile Include="Sergey\CollectionsExercises.cs" />
     <Compile Include="Taisiya\CollectionsExercises.cs" />
     <Compile Include="Tatyana\CollectionsExercises.cs" />
+    <Compile Include="Tatyana\PriorityQueue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
