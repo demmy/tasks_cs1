@@ -10,6 +10,7 @@ namespace University
     {
         static void MainTatyana()
         {
+            
             Tatyana.UniversityFactory factory=new Tatyana.UniversityFactory();
             Tatyana.University u1=(Tatyana.University)factory.CreateUniversity("U1");
 
