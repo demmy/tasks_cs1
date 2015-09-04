@@ -41,7 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aleksandr\UniversityFactory.cs" />
+    <Compile Include="IReadOnlyGroup.cs" />
+    <Compile Include="IReadOnlyPerson.cs" />
+    <Compile Include="IRoom.cs" />
+    <Compile Include="IReadOnlyTeacher.cs" />
     <Compile Include="ISchedule.cs" />
     <Compile Include="IUniversity.cs" />
     <Compile Include="IUniversityFactory.cs" />
