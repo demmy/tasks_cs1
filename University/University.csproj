@@ -48,14 +48,6 @@
     <Compile Include="ISchedule.cs" />
     <Compile Include="IUniversity.cs" />
     <Compile Include="IUniversityFactory.cs" />
-    <Compile Include="Nikita\Group.cs" />
-    <Compile Include="Nikita\Person.cs" />
-    <Compile Include="Nikita\Room.cs" />
-    <Compile Include="Nikita\Schedule.cs" />
-    <Compile Include="Nikita\ScheduleItem.cs" />
-    <Compile Include="Nikita\Student.cs" />
-    <Compile Include="Nikita\Teacher.cs" />
-    <Compile Include="Nikita\University.cs" />
     <Compile Include="Nikita\UniversityFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

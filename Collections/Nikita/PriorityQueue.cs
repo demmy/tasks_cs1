@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CodeDom;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Collections.Nikita
 {
-    class PriorityQueue<T> : IPriorityQueue<T>
+    class PriorityQueue<T> : IPriorityQueue<T>, ICollection<T>
     {
         SortedDictionary<int, List<T>> _itemsList = new SortedDictionary<int, List<T>>();
 
@@ -73,6 +74,31 @@ namespace Collections.Nikita
             return returnValue;
         }
 
+        public void Add(T item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(T item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(T item)
+        {
+            throw new NotImplementedException();
+        }
+
         public int Count
         {
             get
@@ -81,9 +107,24 @@ namespace Collections.Nikita
             }
         }
 
+        public bool IsReadOnly
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         public int GetCount(int priority)
         {
             return _itemsList[priority].Count;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
