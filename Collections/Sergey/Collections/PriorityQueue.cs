@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Collections.Sergey.Collections
 {
-    class PriorityQueue<T> : IPriorityQueue<T>
+    partial class PriorityQueue<T>
     {
         private int _count = 0;
         private readonly Dictionary<int, List<T> > _queue = new Dictionary<int, List<T> >();
@@ -13,7 +13,7 @@ namespace Collections.Sergey.Collections
         {
             if (!_queue.ContainsKey(priority))
                   _queue.Add(priority,
-                      new List<T>() 
+                      new List<T> 
                       { 
                         val
                       });
@@ -35,8 +35,7 @@ namespace Collections.Sergey.Collections
                     _count--;
                     return dequedElement;
                 }
-                else
-                    throw new Exception("Can't dequeue element");
+                throw new Exception("Can't dequeue element");
             }
         }
 
