@@ -30,9 +30,8 @@ namespace Collections.Nikita
         }
 
       public T Dequeue()
-        {
-            if (_itemsList.Count == 0) throw new InvalidOperationException("Queue is empty");
-            T returnValue = _itemsList.ElementAt(0).Value[0];
+      {
+            var returnValue = First();
             DeleteRoot();
             return returnValue;
         }
@@ -54,6 +53,7 @@ namespace Collections.Nikita
         public T First(int priority)
         {
             if (_itemsList.Count == 0) throw new InvalidOperationException("Queue is empty");
+            if(!_itemsList.ContainsKey(priority)) throw new InvalidOperationException("No files with this priority");
             T returnValue = _itemsList[priority][0];
             return returnValue;
         }
@@ -70,6 +70,7 @@ namespace Collections.Nikita
         public T Last(int priority)
         {
             if (_itemsList.Count == 0) throw new InvalidOperationException("Queue is empty");
+            if (!_itemsList.ContainsKey(priority)) throw new InvalidOperationException("No files with this priority");
             T returnValue = _itemsList[priority][_itemsList[priority].Count];
             return returnValue;
         }
