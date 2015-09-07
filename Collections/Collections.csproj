@@ -45,6 +45,7 @@
     <Compile Include="IPriorityQueue.cs" />
     <Compile Include="Nikita\CollectionsExercises.cs" />
     <Compile Include="Nikita\PriorityQueue.cs" />
+    <Compile Include="Nikita\StudentDictionary.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sergey\CollectionsExercises.cs" />
