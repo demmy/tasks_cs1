@@ -45,6 +45,34 @@ namespace University.Tatyana
             get { return schedule; }
         }
 
+        public void AddRoom(Room r )
+        {
+            rooms.Add(r);
+        }
+        public void AddRooms(IEnumerable<Room> r )
+        {
+            rooms.AddRange(r);
+        }
+
+        public void AddTeacher(Teacher t)
+        {
+            teachers.Add(t);
+        }
+        public void AddTeachers(IEnumerable<Teacher> t)
+        {
+            teachers.AddRange(t);
+        }
+
+        public void AddGroup(Group g)
+        {
+            groups.Add(g);
+        }
+
+        public void AddGroups(IEnumerable<Group> g)
+        {
+            groups.AddRange(g); 
+        }
+
         public IReadOnlyList<string> RoomsNames
         {
             get 
@@ -106,5 +134,6 @@ namespace University.Tatyana
             }
             return studentsNames;
         }
+        
     }
 }

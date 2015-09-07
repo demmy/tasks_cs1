@@ -12,7 +12,7 @@ namespace University
         {
             
             Tatyana.UniversityFactory factory=new Tatyana.UniversityFactory();
-            Tatyana.University u1=(Tatyana.University)factory.CreateUniversity("U1");
+            //Tatyana.University u1=(Tatyana.University)factory.CreateUniversity("U1");
 
             //List<Tatyana.Room> rooms = factory.CreateListRooms(10, 4);
             //List<Tatyana.Teacher> teachers = factory.CreateListTeacher(11);

@@ -57,7 +57,6 @@
     <Compile Include="Tatyana\Person.cs" />
     <Compile Include="Tatyana\Room.cs" />
     <Compile Include="Tatyana\Schedule.cs" />
-    <Compile Include="Tatyana\ScheduleItem.cs" />
     <Compile Include="Tatyana\Student.cs" />
     <Compile Include="Tatyana\Teacher.cs" />
     <Compile Include="Tatyana\University.cs" />

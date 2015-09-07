@@ -77,7 +77,7 @@ namespace University.Tatyana
             return teachers;
         }
 
-        private List<Room> CreateListRooms(int length, int countBuilding)
+        public List<Room> CreateListRooms(int length, int countBuilding)
         {
             List<Room> rooms = new List<Room>();
             Dictionary<Building,int> count=new Dictionary<Building,int>();
@@ -122,7 +122,7 @@ namespace University.Tatyana
             for (int i = 0; i < countGroup; i++)
             {
                 groups.Add(new Group((FacultyType)r.Next(1, countFaculty + 1),
-                                      r.Next(2000 - 2008),
+                                      r.Next(2000, 2008),
                            string.Format("{0}", (SpecialityTitle)r.Next(1, countSpesiality + 1))));
             }
             foreach (Group group in groups)
