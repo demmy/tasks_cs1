@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Collections.Tatyana
 {
-    class PriorityQueue<T> :IPriorityQueue<T>
+    class PriorityQueue<T> :IPriorityQueue<T> , ICollection<T>
     {
         Dictionary<int, List<T>> elements = new Dictionary<int, List<T>>();
 
@@ -46,27 +46,35 @@ namespace Collections.Tatyana
         public T Dequeue()
         {
             T a = elements[Max()].ElementAt(0);
+            elements[Max()].Remove(a);
+            return a;
             
         }
 
         public T First()
         {
-            throw new NotImplementedException();
+            T a = elements[Max()].ElementAt(0);
+            return a;
+            
         }
 
         public T First(int priority)
         {
-            throw new NotImplementedException();
+            T a = elements[priority].ElementAt(0);
+            return a;
         }
 
         public T Last()
         {
-            throw new NotImplementedException();
+            T a = elements[Min()].ElementAt(elements[Min()].Count-1);
+            return a;
+           
         }
 
         public T Last(int priority)
         {
-            throw new NotImplementedException();
+            T a = elements[priority].ElementAt(elements[Min()].Count - 1);
+            return a;
         }
 
         public int Count()
@@ -82,6 +90,64 @@ namespace Collections.Tatyana
         public int GetCount(int priority)
         {
             return elements[priority].Count;
+        }
+
+
+        int IPriorityQueue<T>.Count
+        {
+            get {
+                int n = 0;
+                foreach (int i in elements.Keys)
+                {
+                    n += elements[i].Count;
+                }
+                return n;
+            }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(T item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(T item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        int ICollection<T>.Count
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool IsReadOnly
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool Remove(T item)
+        {
+            throw new NotImplementedException();
         }
     }
 }
