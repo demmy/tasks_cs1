@@ -15,6 +15,7 @@ namespace University.Nikita
             _items = items;
         }
 
+
         public IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>GetByDay(DateTime day)
         {
             var perRoomDict = new Dictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
