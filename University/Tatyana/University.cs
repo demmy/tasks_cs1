@@ -20,12 +20,9 @@ namespace University.Tatyana
         public University(string title)
         {
             name = title;
-            
-
         }
 
-       // public University(string title, List<Group> groups1, List<Teacher> teachers1,
-               //               List<Room> rooms1, Schedule schedule1)
+       
         public University(string title, IEnumerable<Group> groups1, IEnumerable<Teacher> teachers1,
                               IEnumerable<Room> rooms1):this(title)
         {
@@ -41,7 +38,6 @@ namespace University.Tatyana
 
         public ISchedule CurrentSchedule
         {
-
             get { return schedule; }
         }
 

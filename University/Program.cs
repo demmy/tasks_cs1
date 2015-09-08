@@ -12,7 +12,7 @@ namespace University
         {
             
             Tatyana.UniversityFactory factory=new Tatyana.UniversityFactory();
-            //Tatyana.University u1=(Tatyana.University)factory.CreateUniversity("U1");
+            Tatyana.University u1=(Tatyana.University)factory.CreateUniversity("U1");
 
             //List<Tatyana.Room> rooms = factory.CreateListRooms(10, 4);
             //List<Tatyana.Teacher> teachers = factory.CreateListTeacher(11);
@@ -41,19 +41,22 @@ namespace University
             g.Add(s3);
 
             Console.WriteLine("--------");
-            foreach (Tatyana.Student s in g.Students )
-                Console.WriteLine("{0} {1} ",  s.FullName, s.Age);
+            foreach (Tatyana.Student s in g.Students)
+                Console.WriteLine("{0} {1} ", s.FullName, s.Age);
             Console.WriteLine("----------------------------");
-            //foreach (string room in u1.RoomsNames)
-            //    Console.WriteLine(room);
-            //foreach (string teacher in u1.TeachersNames)
-            //    Console.WriteLine(teacher);
-            //foreach (string group in u1.GroupsNames)
-            //    Console.WriteLine(group);
-            //foreach (string group in u1.GroupsNames)
-            //    foreach(string student in u1.GetStudentsNames(group))
-            //      Console.WriteLine(student);
+            foreach (string room in u1.RoomsNames)
+                Console.WriteLine(room);
+            foreach (string teacher in u1.TeachersNames)
+                Console.WriteLine(teacher);
+            foreach (string group in u1.GroupsNames)
+                Console.WriteLine(group);
+            foreach (string group in u1.GroupsNames)
+                foreach (string student in u1.GetStudentsNames(group))
+                    Console.WriteLine(student);
 
+            Console.WriteLine(Shifr("ComputerScience"));
+            Console.WriteLine((int) DayOfWeek.Monday);
+            Console.WriteLine((int)DayOfWeek.Sunday);
             Console.ReadKey();
         }
 
@@ -101,6 +104,25 @@ namespace University
                 Console.WriteLine("Not all code implemented. Problem: {0}", e.Message);
                 Console.WriteLine("Details: {0}", e.ToString());
             }
+        }
+
+
+        static string Shifr(string a)
+        {
+            int i = 0;
+            while (i < 8)
+            {
+                if (object.Equals(string.Format("{0}", (SpecialityTitle) i ), a))
+                {
+                    break;
+                }
+                
+                i++;
+            }
+            
+            string[] shifr = new string[] {  "CSe", "CSy",
+                         "Mn", "Mr", "QP", "AP",   "En", "Gr" , "None" };
+            return shifr[i];
         }
     }
 }

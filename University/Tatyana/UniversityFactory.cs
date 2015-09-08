@@ -50,7 +50,7 @@ namespace University.Tatyana
         {
             indexOfUniqueTeacher++;
             PositionType p = (PositionType)r.Next(1, 4);
-            string firstName1 = p.ToString() + indexOfUniqueStudent.ToString();
+            string firstName1 = p.ToString() + indexOfUniqueTeacher.ToString();
             string middleName1 = "M" + r.Next(1, 1000).ToString();
             string lastName1 = "N" + r.Next(1, 1000).ToString();
             DateTime dateOfBirth1 = (new DateTime(1950, 1, 1)).AddDays(r.Next(20000));

@@ -44,27 +44,31 @@ namespace University.Tatyana
                 existingGroupsCount[t] = 0;
             }
             existingGroupsCount[t]++;
-            id = string.Format("{0}-{1}-{2}", speciality, (year % 100), existingGroupsCount[t] );
-           // id = string.Format("{0}-{1}-{2}", Shifr(speciality), (year % 100), existingGroupsCount[t]);
+            id = string.Format("{0}-{1}-{2}", speciality, string.Format("{0}{1}", (year % 100) > 9 ? "0" : "", year % 100), existingGroupsCount[t]);
+            id = string.Format("{0}-{1}-{2}", Shifr(speciality), string.Format("{0}{1}", (year % 100) <=9 ? "0" : "", year % 100),
+                                                                 existingGroupsCount[t]);
             students = new List<Student>();
             
-        }
+        } 
 
-        private string Shifr(string a)
+        public string Shifr(string a)
         {
-            int i = 1;
-            while (i <= 9)
+            int i = 0;
+            while (i < 8)
             {
                 if (object.Equals(string.Format("{0}", (SpecialityTitle)i), a))
                 {
                     break;
                 }
+
                 i++;
             }
-            string[] shifr = new string[] { "AP", "CSe", "CSy",
-                        "En", "Gr", "Mn", "Mr",  "QP", "None" };
-            return shifr[i - 1];
+
+            string[] shifr = new string[] {  "CSe", "CSy",
+                         "Mn", "Mr", "QP", "AP",   "En", "Gr" , "None" };
+            return shifr[i];
         }
+        
 
         public void Add(Student s)
         {
