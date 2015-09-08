@@ -15,13 +15,9 @@ namespace University.Nikita
             _items = items;
         }
 
-        /// <returns>list of lessons data per room: name of room, list of data: time of start, 
-        /// list of names of teachers, list of group names.</returns>
-        public IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>
-            GetByDay(DateTime day)
+        public IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>GetByDay(DateTime day)
         {
-            var perRoomDict =
-                new Dictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
+            var perRoomDict = new Dictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
             foreach (var pair in _items)
             {
                 if (pair.Key != day) continue;
@@ -54,31 +50,18 @@ namespace University.Nikita
             return perRoomDict;
         }
 
-        /// <returns>list of lessons data per day per room: date, name of room, 
-        /// list of data: time of start, list of names of teacher, list of group names.</returns>
-        public
-            IReadOnlyDictionary
-                <DateTime,
-                    IReadOnlyDictionary
-                        <string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>> GetAll()
+        public IReadOnlyDictionary <DateTime, IReadOnlyDictionary <string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>> GetAll()
         {
-            var perDateDict =
-                new Dictionary
-                    <DateTime,
-                        IReadOnlyDictionary
-                            <string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>>();
+            var perDateDict = new Dictionary<DateTime, IReadOnlyDictionary <string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>>();
             foreach (var pair in _items)
             {
-                var perRoomDict =
-                    new Dictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>
-                        ();
+                var perRoomDict = new Dictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
                 foreach (var item in pair.Value)
                 {
                     if (perRoomDict.ContainsKey(item.Room.Id))
                     {
                         var tuplesList =
-                            (List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>)
-                                perRoomDict[item.Room.Id];
+                            (List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>)perRoomDict[item.Room.Id];
                         tuplesList.Add(
                             new Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>(
                                 ScheduleItem.DateLessonTimes[item.Order],
@@ -102,15 +85,9 @@ namespace University.Nikita
             return perDateDict;
         }
 
-        /// <param name="roomName"></param>
-        /// <returns>list of lessons data per day: date, list of data: time of start, list of names of teacher, list of group names</returns>
-
-        public
-            IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>
-            GetByRoom(string roomName)
+        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>GetByRoom(string roomName)
         {
-            var perDateDict =
-                new Dictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
+            var perDateDict = new Dictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
             foreach (var pair in _items)
             {
                 foreach (var item in pair.Value)
@@ -119,9 +96,7 @@ namespace University.Nikita
                     {
                         if (perDateDict.ContainsKey(pair.Key))
                         {
-                            var tuplesList =
-                                (List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>)
-                                    perDateDict[pair.Key];
+                            var tuplesList = (List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>)perDateDict[pair.Key];
                             tuplesList.Add(new Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>(
                                 ScheduleItem.DateLessonTimes[item.Order],
                                 item.Teachers.Select(t => t.FullName).ToList(),
@@ -145,10 +120,7 @@ namespace University.Nikita
             return perDateDict;
         }
 
-        /// <param name="groupName"></param>
-        /// <returns>list of lessons data per day: list of data: date, time of start, list of names of teacher, flag if this is multiple group lesson</returns>
-        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, bool>>> GetByGroup(
-            string groupName)
+        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, bool>>> GetByGroup(string groupName)
         {
             var perDateDict = new Dictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, bool>>>();
             foreach (var pair in _items)
@@ -184,8 +156,6 @@ namespace University.Nikita
             return perDateDict;
         }
 
-        /// <param name="teacherName"></param>
-        /// <returns>list of lessons data per day: date, list of data: time of start, name of room, list of group names</returns>
         public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, string, IReadOnlyList<string>>>> GetByTeacher
             (string teacherName)
         {

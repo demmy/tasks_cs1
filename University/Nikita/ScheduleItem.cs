@@ -18,7 +18,7 @@ namespace University.Nikita
             get { return _dateLessonTimes; }
         }
 
-        private static Dictionary<LessonsOrder, DateTime> _dateLessonTimes = new Dictionary<LessonsOrder, DateTime>()
+        private static readonly Dictionary<LessonsOrder, DateTime> _dateLessonTimes = new Dictionary<LessonsOrder, DateTime>()
         {
             {
                 LessonsOrder.FirstLesson, new DateTime(2000, 1, 1, 8, 0, 0)
