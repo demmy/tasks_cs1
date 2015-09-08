@@ -104,9 +104,7 @@ namespace University.Nikita
         /// <param name="roomName"></param>
         /// <returns>list of lessons data per day: date, list of data: time of start, list of names of teacher, list of group names</returns>
 
-        public
-            IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>
-            GetByRoom(string roomName)
+        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>> GetByRoom(string roomName)
         {
             var perDateDict = new Dictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
             foreach (var pair in _items)
@@ -120,27 +118,47 @@ namespace University.Nikita
                             var tuplesList =
                                 (List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>)
                                     perDateDict[pair.Key];
-                            tuplesList.Add(
+                            tuplesList.Add(new Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>(
+                                ScheduleItem.DateLessonTimes[item.Order],
+                                item.Teachers.Select(t => t.FullName).ToList(),
+                                item.Groups.Select(g => g.ID).ToList()));
+                            perDateDict.Add(pair.Key, tuplesList);
+                        }
+                        else
+                        {
+                            var tuplesList = new List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>()
+                            {
                                 new Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>(
                                     ScheduleItem.DateLessonTimes[item.Order],
                                     item.Teachers.Select(t => t.FullName).ToList(),
-                                    item.Groups.Select(g => g.ID).ToList()));
+                                    item.Groups.Select(g => g.ID).ToList())
+                            };
+                            perDateDict.Add(pair.Key, tuplesList);
                         }
                     }
-
                 }
             }
-            
-            
-            
             return perDateDict;
-
-
         }
-
+        /// <param name="groupName"></param>
+        /// <returns>list of lessons data per day: list of data: date, time of start, list of names of teacher, flag if this is multiple group lesson</returns>
         public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, bool>>> GetByGroup(string groupName)
         {
-            throw new NotImplementedException();
+            var perDateDict = new Dictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, bool>>>();
+            foreach (var pair in _items)
+            {
+                foreach (var item in pair.Value)
+                {
+                    foreach (var group in item.Groups)
+                    {
+                        if (group.ID == groupName)
+                        {
+                            
+                        }
+                    }
+                }
+            }
+            return perDateDict;
         }
 
         public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, string, IReadOnlyList<string>>>> GetByTeacher(string teacherName)
