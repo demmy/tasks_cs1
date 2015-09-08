@@ -42,7 +42,7 @@ namespace University.Nikita
                     {
                         var tuplesList = new List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>
                         {
-                           new Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>(
+                            new Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>(
                                 ScheduleItem.DateLessonTimes[item.Order],
                                 item.Teachers.Select(t => t.FullName).ToList(),
                                 item.Groups.Select(g => g.ID).ToList())
@@ -77,7 +77,8 @@ namespace University.Nikita
                     if (perRoomDict.ContainsKey(item.Room.Id))
                     {
                         var tuplesList =
-                       (List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>) perRoomDict[item.Room.Id];
+                            (List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>)
+                                perRoomDict[item.Room.Id];
                         tuplesList.Add(
                             new Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>(
                                 ScheduleItem.DateLessonTimes[item.Order],
@@ -104,9 +105,12 @@ namespace University.Nikita
         /// <param name="roomName"></param>
         /// <returns>list of lessons data per day: date, list of data: time of start, list of names of teacher, list of group names</returns>
 
-        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>> GetByRoom(string roomName)
+        public
+            IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>
+            GetByRoom(string roomName)
         {
-            var perDateDict = new Dictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
+            var perDateDict =
+                new Dictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
             foreach (var pair in _items)
             {
                 foreach (var item in pair.Value)
@@ -140,9 +144,11 @@ namespace University.Nikita
             }
             return perDateDict;
         }
+
         /// <param name="groupName"></param>
         /// <returns>list of lessons data per day: list of data: date, time of start, list of names of teacher, flag if this is multiple group lesson</returns>
-        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, bool>>> GetByGroup(string groupName)
+        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, bool>>> GetByGroup(
+            string groupName)
         {
             var perDateDict = new Dictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, bool>>>();
             foreach (var pair in _items)
@@ -153,7 +159,24 @@ namespace University.Nikita
                     {
                         if (group.ID == groupName)
                         {
-                            
+                            if (perDateDict.ContainsKey(pair.Key))
+                            {
+                                var tuplesList =
+                                    (List<Tuple<DateTime, IReadOnlyList<string>, bool>>) perDateDict[pair.Key];
+                                tuplesList.Add(
+                                    new Tuple<DateTime, IReadOnlyList<string>, bool>(
+                                        ScheduleItem.DateLessonTimes[item.Order],
+                                        item.Teachers.Select(t => t.FullName).ToList(), item.Groups.Count() > 1));
+                            }
+                            else
+                            {
+                                var tuplesList = new List<Tuple<DateTime, IReadOnlyList<string>, bool>>()
+                                {
+                                    new Tuple<DateTime, IReadOnlyList<string>, bool>(
+                                        ScheduleItem.DateLessonTimes[item.Order],
+                                        item.Teachers.Select(t => t.FullName).ToList(), item.Groups.Count() > 1)
+                                };
+                            }
                         }
                     }
                 }
@@ -161,18 +184,74 @@ namespace University.Nikita
             return perDateDict;
         }
 
-        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, string, IReadOnlyList<string>>>> GetByTeacher(string teacherName)
+        /// <param name="teacherName"></param>
+        /// <returns>list of lessons data per day: date, list of data: time of start, name of room, list of group names</returns>
+        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, string, IReadOnlyList<string>>>> GetByTeacher
+            (string teacherName)
         {
-            throw new NotImplementedException();
+            var perDateDict = new Dictionary<DateTime, IReadOnlyList<Tuple<DateTime, string, IReadOnlyList<string>>>>();
+            foreach (var pair in _items)
+            {
+                foreach (var item in pair.Value)
+                {
+                    foreach (var teacher in item.Teachers)
+                    {
+                        if (teacher.FullName == teacherName)
+                        {
+                            if (perDateDict.ContainsKey(pair.Key))
+                            {
+                                var tuplesList =
+                                    (List<Tuple<DateTime, string, IReadOnlyList<string>>>) perDateDict[pair.Key];
+                                tuplesList.Add(
+                                    new Tuple<DateTime, string, IReadOnlyList<string>>(
+                                        ScheduleItem.DateLessonTimes[item.Order],
+                                        item.Room.Id, item.Groups.Select(g => g.ID).ToList()));
+                            }
+                            else
+                            {
+                                var tuplesList = new List<Tuple<DateTime, string, IReadOnlyList<string>>>()
+                                {
+                                    new Tuple<DateTime, string, IReadOnlyList<string>>(
+                                        ScheduleItem.DateLessonTimes[item.Order],
+                                        item.Room.Id, item.Groups.Select(g => g.ID).ToList())
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            return perDateDict;
         }
 
         public IEnumerable<DateTime> AllExistingDates
         {
-            get { throw new NotImplementedException(); }
+            get { return _items.Keys; }
         }
 
-        public IReadOnlyDictionary<Tuple<DateTime, LessonsOrder>, IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>> GetWeekData(DateTime dateAtThisWeek)
+        public
+            IReadOnlyDictionary
+                <Tuple<DateTime, LessonsOrder>,
+                    IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>>
+            GetWeekData(DateTime dateAtThisWeek)
         {
-            throw new NotImplementedException();
+            var datesTuple = GetDateTimeSpan(dateAtThisWeek);
+            var datesOfWeek = new List<DateTime>();
+            for (int i = 0; ; i++)
+            {
+                
+            }
+            return null;
+        }
+
+        private static Tuple<DateTime, DateTime> GetDateTimeSpan(DateTime dateAtThisWeek)
+        {
+            var dayOfWeek = (int)dateAtThisWeek.DayOfWeek;
+            int daysToEndOfWeek;
+            int daysToStartOfWeek;
+            for (daysToEndOfWeek = 0; dayOfWeek!=7; dayOfWeek++, daysToEndOfWeek++) {}
+            dayOfWeek = (int)dateAtThisWeek.DayOfWeek;
+            for (daysToStartOfWeek = 0; dayOfWeek!=1; dayOfWeek--, daysToStartOfWeek++) {}
+            return new Tuple<DateTime, DateTime>(dateAtThisWeek.AddDays(-daysToStartOfWeek), dateAtThisWeek.AddDays(daysToEndOfWeek));
         }
     }
+}

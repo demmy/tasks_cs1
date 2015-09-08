@@ -19,7 +19,7 @@ namespace University.Nikita
             Name = title;
             _groups = new List<Group>();
             Rooms = new List<Room>();
-            _schedule = new Schedule();
+           // _schedule = new Schedule();
             _teachers = new List<Teacher>();
         }
 
