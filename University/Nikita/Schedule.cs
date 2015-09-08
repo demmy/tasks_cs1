@@ -228,30 +228,34 @@ namespace University.Nikita
             get { return _items.Keys; }
         }
 
-        public
-            IReadOnlyDictionary
-                <Tuple<DateTime, LessonsOrder>,
-                    IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>>
+        public IReadOnlyDictionary<Tuple<DateTime, LessonsOrder>, IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>>
             GetWeekData(DateTime dateAtThisWeek)
         {
-            var datesTuple = GetDateTimeSpan(dateAtThisWeek);
+            var startOfWeek = GetStartOfWeek(dateAtThisWeek);
             var datesOfWeek = new List<DateTime>();
-            for (int i = 0; ; i++)
+            for (int i = 1; i < 8; i++)
             {
-                
+                datesOfWeek.Add(startOfWeek.AddDays(i));
             }
-            return null;
+            var returnDict = new Dictionary<Tuple<DateTime, LessonsOrder>, IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>>();
+            foreach (var date in datesOfWeek)
+            {
+                foreach (var item in _items[date])
+                {
+                    var tuplesList = new List<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>()
+                    {
+                        new Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>(item.Room, (IReadOnlyList<IReadOnlyTeacher>) item.Teachers,
+                            (IReadOnlyList<IReadOnlyGroup>) item.Groups)
+                    };
+                    returnDict.Add(new Tuple<DateTime, LessonsOrder>(date, item.Order), tuplesList);
+                }
+            }
+            return returnDict;
         }
 
-        private static Tuple<DateTime, DateTime> GetDateTimeSpan(DateTime dateAtThisWeek)
+        private static DateTime GetStartOfWeek(DateTime dateAtThisWeek)
         {
-            var dayOfWeek = (int)dateAtThisWeek.DayOfWeek;
-            int daysToEndOfWeek;
-            int daysToStartOfWeek;
-            for (daysToEndOfWeek = 0; dayOfWeek!=7; dayOfWeek++, daysToEndOfWeek++) {}
-            dayOfWeek = (int)dateAtThisWeek.DayOfWeek;
-            for (daysToStartOfWeek = 0; dayOfWeek!=1; dayOfWeek--, daysToStartOfWeek++) {}
-            return new Tuple<DateTime, DateTime>(dateAtThisWeek.AddDays(-daysToStartOfWeek), dateAtThisWeek.AddDays(daysToEndOfWeek));
+            return dateAtThisWeek.AddDays(-((int) dateAtThisWeek.DayOfWeek));
         }
     }
 }

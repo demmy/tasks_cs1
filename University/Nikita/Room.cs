@@ -10,7 +10,7 @@ namespace University.Nikita
     {
         A, B, C, D
     }
-    class Room
+    class Room: IRoom
     {
         public Building Building { get; private set; }
         public int Number { get; private set; }
