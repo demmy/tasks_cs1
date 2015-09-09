@@ -12,7 +12,7 @@ namespace University
         {
             
             Tatyana.UniversityFactory factory=new Tatyana.UniversityFactory();
-            Tatyana.University u1=(Tatyana.University)factory.CreateUniversity("U1");
+            Tatyana.University u2=(Tatyana.University)factory.CreateUniversity("U2");
 
             //List<Tatyana.Room> rooms = factory.CreateListRooms(10, 4);
             //List<Tatyana.Teacher> teachers = factory.CreateListTeacher(11);
@@ -44,19 +44,17 @@ namespace University
             foreach (Tatyana.Student s in g.Students)
                 Console.WriteLine("{0} {1} ", s.FullName, s.Age);
             Console.WriteLine("----------------------------");
-            foreach (string room in u1.RoomsNames)
+            foreach (string room in u2.RoomsNames)
                 Console.WriteLine(room);
-            foreach (string teacher in u1.TeachersNames)
+            foreach (string teacher in u2.TeachersNames)
                 Console.WriteLine(teacher);
-            foreach (string group in u1.GroupsNames)
+            foreach (string group in u2.GroupsNames)
                 Console.WriteLine(group);
-            foreach (string group in u1.GroupsNames)
-                foreach (string student in u1.GetStudentsNames(group))
+            foreach (string group in u2.GroupsNames)
+                foreach (string student in u2.GetStudentsNames(group))
                     Console.WriteLine(student);
 
-            Console.WriteLine(Shifr("ComputerScience"));
-            Console.WriteLine((int) DayOfWeek.Monday);
-            Console.WriteLine((int)DayOfWeek.Sunday);
+            ISchedule schedule = u2.CurrentSchedule;
             Console.ReadKey();
         }
 
