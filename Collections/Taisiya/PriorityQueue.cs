@@ -33,8 +33,9 @@ namespace Collections.Taisiya
                 throw new Exception("The queue is empty. Can't do dequeue.");
             else
             {
-                items.Remove(items.Keys.Min());
-                return First();
+                T item = First();
+                items[items.Keys.Min()].Remove(First());
+                return item;
             }
         }
 
@@ -45,20 +46,15 @@ namespace Collections.Taisiya
 
         public T First(int priority)
         {
-            //if (items[priority].Count == 0 )
-            //    throw new Exception("The queue is empty. Can't return first element.");
-           // else
-           // {
-                try
-                {
-                    var item = items.Where(x => x.Key == priority).First().Value.First();
-                    return item;
-                }
-                catch (Exception e)
-                {
-                    throw new Exception("There are not any elements with such priority in the queue.");
-                }
-          //  }
+            try
+            {
+                var item = items.Where(x => x.Key == priority).First().Value.First();
+                return item;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("There are not any elements with such priority in the queue.");
+            }
         }
 
         public T Last()
@@ -68,12 +64,14 @@ namespace Collections.Taisiya
 
         public T Last(int priority)
         {
-            if (items[priority].Count == 0)
-                throw new Exception("The queue is empty. Can't return last element.");
-            else
+            try
             {
                 var item = items.Where(x => x.Key == priority).Last().Value.Last();
                 return item;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("There are not any elements with such priority in the queue.");
             }
         }
 
@@ -84,11 +82,13 @@ namespace Collections.Taisiya
 
         public int GetCount(int priority)
         {
-            if (items[priority].Count == 0)
-                throw new Exception("There are not any elements with such priority in the queue.");
-            else
+            try
             {
                 return items[priority].Count;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("There are not any elements with such priority in the queue.");
             }
         }
     }
