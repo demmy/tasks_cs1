@@ -117,37 +117,63 @@ namespace Collections.Tatyana
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            elements[0].Add(item);
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            Dictionary<int, List<T>> elements = new Dictionary<int, List<T>>();
         }
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            bool b = false;
+            foreach (int i in elements.Keys)
+            {
+                foreach (T e in elements[i])
+                {
+                    if (object.Equals(e, item))
+                    {
+                        
+                        b=true;
+                        break;
+                    }
+                }
+            }
+            return b;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            elements[0].Add(array[arrayIndex]);
         }
 
         int ICollection<T>.Count
         {
-            get { throw new NotImplementedException(); }
+            get { return this.elements.Count; }
         }
 
         public bool IsReadOnly
         {
-            get { throw new NotImplementedException(); }
+            get { return false; }
         }
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            bool b = false;
+            foreach (int i in elements.Keys)
+            {
+                foreach (T e in elements[i])
+                {
+                    if (object.Equals(e, item))
+                    {
+                        elements[i].Remove(e);
+                        b = true;
+                       
+                    }
+                }
+            }
+            return b;
         }
     }
 }
