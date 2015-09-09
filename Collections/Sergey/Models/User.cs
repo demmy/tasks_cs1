@@ -8,9 +8,9 @@ namespace Collections.Sergey.Models
 {
     class User
     {
-        private readonly string _firstName;
-        private readonly string _familyName;
-        private readonly DateTime _dateOfBirth;
+        protected readonly string _firstName;
+        protected readonly string _familyName;
+        protected readonly DateTime _dateOfBirth;
 
         public User(string firstName, string familyName, DateTime dateOfBirth)
         {
