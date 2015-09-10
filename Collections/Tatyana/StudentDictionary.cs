@@ -17,12 +17,12 @@ namespace Collections.Tatyana
 
     }
 
-    public class StudentDictionary : KeyedCollection<Tuple<string, string>, Student>
-    {
-        protected override Tuple<string, string> GetKeyForItem(Student item)
-        {
-            return new Tuple<string, string> (item.firstName, item.lastName);
+    //public class StudentDictionary : KeyedCollection<Tuple<string, string>, Student>
+    //{
+    //    protected override Tuple<string, string> GetKeyForItem(Student item)
+    //    {
+    //        return new Tuple<string, string> (item.firstName, item.lastName);
 
-        }
-    }
+    //    }
+    //}
 }

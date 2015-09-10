@@ -53,7 +53,9 @@
     <Compile Include="Tatyana\MyLogger.cs" />
     <Compile Include="Tatyana\MySingleCollection.cs" />
     <Compile Include="Tatyana\PriorityQueue.cs" />
-    <Compile Include="Tatyana\StudentDictionary.cs" />
+    <Compile Include="Tatyana\StudentDictionary.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
