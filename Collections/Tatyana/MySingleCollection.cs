@@ -8,50 +8,72 @@ namespace Collections.Tatyana
 {
     class MySingleCollection<T>: ICollection<T>
     {
+        List<T> list = new List<T>();
+        MyLogger history = new MyLogger();
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            list.Add(item);
+            history.Log("AddNewElement", item);
         }
 
+        
         public void Clear()
         {
-            throw new NotImplementedException();
+
+            history.Log("Delete all elements", list);
+            list.Clear();
+
         }
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            return list.Contains(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            list.Add(array[arrayIndex]);
+            history.Log("AddNewElement", array[arrayIndex]);
         }
 
         public int Count
         {
-            get { throw new NotImplementedException(); }
+            get { return list.Count; }
         }
 
         public bool IsReadOnly
         {
-            get { throw new NotImplementedException(); }
+            get { return false; }
         }
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            bool b = false;
+            foreach (T i in list)
+            {
+                if (object.Equals(item, i))
+                {
+                    list.Remove(item);
+                    history.Log("DeleteElement", item);
+                    b = true;
+                }
+            }
+            return b;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            foreach (T t in list)
+            {
+                yield return t;
+            }
+            
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
     }
 }

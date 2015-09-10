@@ -49,6 +49,8 @@
     <Compile Include="Sergey\CollectionsExercises.cs" />
     <Compile Include="Taisiya\CollectionsExercises.cs" />
     <Compile Include="Tatyana\CollectionsExercises.cs" />
+    <Compile Include="Tatyana\ILogger.cs" />
+    <Compile Include="Tatyana\MyLogger.cs" />
     <Compile Include="Tatyana\MySingleCollection.cs" />
     <Compile Include="Tatyana\PriorityQueue.cs" />
     <Compile Include="Tatyana\StudentDictionary.cs" />

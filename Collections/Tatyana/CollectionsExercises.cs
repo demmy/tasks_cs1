@@ -10,7 +10,11 @@ namespace Collections.Tatyana
     {
         public void WorkPriorityQueue()
         {
-            throw new NotImplementedException();
+            PriorityQueue<int> numbers = new PriorityQueue<int>();
+            numbers.Add(10);
+            numbers.Enqueue(2, 11);
+            Console.WriteLine(numbers.First());
+            Console.ReadKey();
         }
        
     }
