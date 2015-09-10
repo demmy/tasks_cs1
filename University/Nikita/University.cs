@@ -8,19 +8,16 @@ namespace University.Nikita
 {
     class University : IUniversity
     {
-        private List<Group> _groups;
-        private List<Teacher> _teachers;
+        private List<Group> _groups = new List<Group>();
+        private List<Teacher> _teachers = new List<Teacher>();
         public List<Room> Rooms { get; private set; }
-        private Schedule _schedule;
+        private Schedule _schedule = new Schedule(null);
         public string Name { get; private set; }
 
         public University(string title)
         {
             Name = title;
-            _groups = new List<Group>();
             Rooms = new List<Room>();
-            _schedule = new Schedule(null);
-            _teachers = new List<Teacher>();
         }
 
         public void Add(Student s)
@@ -36,12 +33,12 @@ namespace University.Nikita
 
         public void Add(Teacher t)
         {
-            if(t!=null) _teachers.Add(t);
+             _teachers.Add(t);
         }
 
         public void Add(Room r)
         {
-            if(r!=null) Rooms.Add(r);
+            Rooms.Add(r);
         }
 
         public ISchedule CurrentSchedule
