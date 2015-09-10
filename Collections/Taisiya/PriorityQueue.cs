@@ -6,25 +6,26 @@ using System.Threading.Tasks;
 
 namespace Collections.Taisiya
 {
-    class PriorityQueue<T>: IPriorityQueue<T>
+    class PriorityQueue<T> : IPriorityQueue<T>, ICollection<T>
     {
-        private Dictionary<int, List<T>> items = new Dictionary<int,List<T>>();
+        private Dictionary<int, List<T>> items = new Dictionary<int, List<T>>();
 
         public void Enqueue(T val, int priority)
         {
-            if (items.ContainsKey(priority))
-                items[priority].Add(val);
-            else
-                items.Add(priority, new List<T> { val });                
+            if (!items.ContainsKey(priority))
+                items[priority] = new List<T>();
+
+            items[priority].Add(val);
+
         }
 
         public void Enqueue(List<T> val, int priority)
         {
-            if (items.ContainsKey(priority))
-                foreach(var v in val)
-                    items[priority].Add(v);
-            else
-                items.Add(priority, val);
+            if (!items.ContainsKey(priority))
+                items[priority] = new List<T>();
+
+            foreach (var v in val)
+                items[priority].Add(v);
         }
 
         public T Dequeue()
@@ -90,6 +91,63 @@ namespace Collections.Taisiya
             {
                 throw new Exception("There are not any elements with such priority in the queue.");
             }
+        }
+
+        public void Add(T item)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void Clear()
+        {
+            List<int> keys = new List<int>();
+            keys.AddRange(items.Keys);
+
+            foreach (var k in keys)
+                items.Remove(k);
+        }
+
+        public bool Contains(T item)
+        {
+            bool flag = false;
+
+            foreach (var it in items)
+            {
+                foreach (var i in it.Value)
+                {
+                    if (i.ToString() == item.ToString())
+                    {
+                        flag = true;
+                    }
+                }
+            }
+            return flag;
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
+
+        public bool Remove(T item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return (IEnumerator<T>)GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return (System.Collections.IEnumerator)GetEnumerator();
         }
     }
 }
