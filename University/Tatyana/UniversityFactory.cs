@@ -35,8 +35,9 @@ namespace University.Tatyana
             List<Group> groups2=new List<Group>();
             groups2.Add(groups.ElementAt<Group>
                 (0));
+            u1.AddLesson(DateTime.Now, LessonsOrder.EighthLesson, rooms.ElementAt<Room>(1), teachers, groups);
 
-            u1.AddLesson(date1, LessonsOrder.FirstLesson, rooms.ElementAt<Room>(0), teachers1, groups1);
+            //u1.AddLesson(date1, LessonsOrder.FirstLesson, rooms.ElementAt<Room>(1), teachers1, groups1);
             //u1.AddLesson(date1, LessonsOrder.SecondLesson, rooms.ElementAt<Room>(0), teachers1, groups1);
             //u1.AddLesson(date1, LessonsOrder.ThirdLesson, rooms.ElementAt<Room>(1), teachers1, groups2);
             //u1.AddLesson(date1, LessonsOrder.FirstLesson, rooms.ElementAt<Room>(2), teachers1, groups2);

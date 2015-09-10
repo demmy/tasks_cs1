@@ -12,11 +12,23 @@ namespace University.Tatyana
     {
         class ScheduleItem
         {
+            List<Teacher> teachers = new List<Teacher>();
+            List<Group> groups = new List<Group>();
             public LessonsOrder Lesson { get; set; }
             public Room Room { get; set; }
-            public IEnumerable<Teacher> Teachsrs { get; set; }
-            public IEnumerable<Group> Groups { get; set; }
-
+            public IEnumerable<Teacher> Teachsrs { get { return teachers; } set { teachers.AddRange(value); } }
+            public IEnumerable<Group> Groups { get { return groups; } set { groups.AddRange(value); } }
+            public ScheduleItem()
+            {
+            }
+            public ScheduleItem(LessonsOrder lesson, Room room, IEnumerable<Teacher> teachers, IEnumerable<Group> groups)
+            {
+                Lesson = lesson;
+                Room = room;
+                Teachsrs = teachers;
+                Groups = groups;
+                
+            }
         }
         Dictionary<DateTime, List<ScheduleItem>> items;
         TimeSpan[] timeOfStart = new TimeSpan[9] { new TimeSpan(6, 30, 0), new TimeSpan(8,0,0),
@@ -48,37 +60,37 @@ namespace University.Tatyana
         {
             bool b = true;
             
-            foreach (Teacher t in teachers)
-            {
-                if (IsLessonTeacher(date, lesson, t))
-                {
-                    b = false;
-                    break;
-                }
-            }
-            if (b)
-            {
-                foreach (Group g in groups)
-                {
-                    if (IsLessonGroup(date, lesson, g))
-                    {
-                        b = false;
-                        break;
-                    }
-                }
-            }
-            if (IsLessonRoom(date, lesson, room))
-            {
-                b = false;
-            }
-                if (b)
-                {
-                    if (!items.ContainsKey(date))
-                    {
-                        items[date] = new List<ScheduleItem>();
-                    }
+            //foreach (Teacher t in teachers)
+            //{
+            //    if (IsLessonTeacher(date, lesson, t))
+            //    {
+            //        b = false;
+            //        break;
+            //    }
+            //}
+            //if (b)
+            //{
+            //    foreach (Group g in groups)
+            //    {
+            //        if (IsLessonGroup(date, lesson, g))
+            //        {
+            //            b = false;
+            //            break;
+            //        }
+            //    }
+            //}
+            //if (IsLessonRoom(date, lesson, room))
+            //{
+            //    b = false;
+            //}
+            //    if (b)
+            //    {
+            //        if (!items.ContainsKey(date))
+            //        {
+            //            items[date] = new List<ScheduleItem>();
+            //        }
                     items[date].Add(new ScheduleItem() { Lesson = lesson, Room = room, Teachsrs = teachers, Groups = groups });
-                }
+             //   }
             return b;
         }
 
