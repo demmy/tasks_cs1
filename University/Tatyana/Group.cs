@@ -34,6 +34,15 @@ namespace University.Tatyana
                 
                 }
         }
+        public void Add(Student s)
+        {
+            students.Add(s);
+        }
+
+        public void AddStudents(IEnumerable<Student> s)
+        {
+            students.AddRange(s);
+        }
 
         public Group(FacultyType f, int year, string speciality)
         {
@@ -70,10 +79,7 @@ namespace University.Tatyana
         }
         
 
-        public void Add(Student s)
-        {
-            students.Add(s);
-        }
+        
 
         
     }

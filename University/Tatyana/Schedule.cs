@@ -12,11 +12,23 @@ namespace University.Tatyana
     {
         class ScheduleItem
         {
+            List<Teacher> teachers = new List<Teacher>();
+            List<Group> groups = new List<Group>();
             public LessonsOrder Lesson { get; set; }
             public Room Room { get; set; }
-            public IEnumerable<Teacher> Teachsrs { get; set; }
-            public IEnumerable<Group> Groups { get; set; }
-
+            public IEnumerable<Teacher> Teachsrs { get { return teachers; } set { teachers.AddRange(value); } }
+            public IEnumerable<Group> Groups { get { return groups; } set { groups.AddRange(value); } }
+            public ScheduleItem()
+            {
+            }
+            public ScheduleItem(LessonsOrder lesson, Room room, IEnumerable<Teacher> teachers, IEnumerable<Group> groups)
+            {
+                Lesson = lesson;
+                Room = room;
+                Teachsrs = teachers;
+                Groups = groups;
+                
+            }
         }
         Dictionary<DateTime, List<ScheduleItem>> items;
         TimeSpan[] timeOfStart = new TimeSpan[9] { new TimeSpan(6, 30, 0), new TimeSpan(8,0,0),
@@ -24,21 +36,14 @@ namespace University.Tatyana
                new TimeSpan(14,10,0), new TimeSpan(15,40,0), new TimeSpan(16,10,0) ,
                 new TimeSpan(17,30,0) };
 
-        public Schedule()
-        {
-        }
-
-        //public Schedule(Dictionary<DateTime, List<ScheduleItem>> items1)
-        //{
-        //    items = items1;
-        //}
+        
 
         private TimeSpan TimeOfStart(LessonsOrder lesson)
         {
             return timeOfStart[(int)lesson];
         }
 
-        public bool IsLessonRoom(DateTime date, LessonsOrder lesson, Room room)
+        private bool IsLessonRoom(DateTime date, LessonsOrder lesson, Room room)
         {
             bool b = true;
             foreach (ScheduleItem s in items[date])
@@ -53,16 +58,66 @@ namespace University.Tatyana
 
         public bool AddLesson(DateTime date, LessonsOrder lesson, Room room, IEnumerable<Teacher> teachers, IEnumerable<Group> groups)
         {
-            bool b = false;
-            if (!IsLessonRoom(date, lesson, room))
-            {
-                items[date].Add(new ScheduleItem(){Lesson= lesson, Room= room, Teachsrs= teachers, Groups= groups });
-                b = true;
+            bool b = true;
+            
+            //foreach (Teacher t in teachers)
+            //{
+            //    if (IsLessonTeacher(date, lesson, t))
+            //    {
+            //        b = false;
+            //        break;
+            //    }
+            //}
+            //if (b)
+            //{
+            //    foreach (Group g in groups)
+            //    {
+            //        if (IsLessonGroup(date, lesson, g))
+            //        {
+            //            b = false;
+            //            break;
+            //        }
+            //    }
+            //}
+            //if (IsLessonRoom(date, lesson, room))
+            //{
+            //    b = false;
+            //}
+            //    if (b)
+            //    {
+            //        if (!items.ContainsKey(date))
+            //        {
+            //            items[date] = new List<ScheduleItem>();
+            //        }
+                    items[date].Add(new ScheduleItem() { Lesson = lesson, Room = room, Teachsrs = teachers, Groups = groups });
+             //   }
+            return b;
+        }
 
+        private bool IsLessonTeacher(DateTime date, LessonsOrder lesson, Teacher teacher)
+        {
+            bool b = true;
+            foreach (ScheduleItem s in items[date])
+            {
+                if (s.Lesson == lesson && s.Teachsrs.Contains<Teacher>(teacher) )
+                {
+                    b = false;
+                }
             }
             return b;
         }
-           
+        private bool IsLessonGroup(DateTime date, LessonsOrder lesson, Group group)
+        {
+            bool b = true;
+            foreach (ScheduleItem s in items[date])
+            {
+                if (s.Lesson == lesson && s.Groups.Contains<Group>(group))
+                {
+                    b = false;
+                }
+            }
+            return b;
+        }
 
 
         public IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>> GetByDay(DateTime day)
