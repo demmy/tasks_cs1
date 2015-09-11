@@ -12,12 +12,10 @@ namespace University.Tatyana
     {
         class ScheduleItem
         {
-            List<Teacher> teachers = new List<Teacher>();
-            List<Group> groups = new List<Group>();
             public LessonsOrder Lesson { get; set; }
             public Room Room { get; set; }
-            public IEnumerable<Teacher> Teachsrs { get { return teachers; } set { teachers.AddRange(value); } }
-            public IEnumerable<Group> Groups { get { return groups; } set { groups.AddRange(value); } }
+            public IEnumerable<Teacher> Teachsrs { get; set; }
+            public IEnumerable<Group> Groups { get; set; }
             public ScheduleItem()
             {
             }
@@ -30,7 +28,7 @@ namespace University.Tatyana
                 
             }
         }
-        Dictionary<DateTime, List<ScheduleItem>> items;
+        Dictionary<DateTime, List<ScheduleItem>> items = new Dictionary<DateTime, List<ScheduleItem>>();
         TimeSpan[] timeOfStart = new TimeSpan[9] { new TimeSpan(6, 30, 0), new TimeSpan(8,0,0),
                new TimeSpan(9,30,0), new TimeSpan(11,10,0), new TimeSpan(12,30,0),
                new TimeSpan(14,10,0), new TimeSpan(15,40,0), new TimeSpan(16,10,0) ,
@@ -83,14 +81,14 @@ namespace University.Tatyana
             //{
             //    b = false;
             //}
-            //    if (b)
-            //    {
-            //        if (!items.ContainsKey(date))
-            //        {
-            //            items[date] = new List<ScheduleItem>();
-            //        }
-                    items[date].Add(new ScheduleItem() { Lesson = lesson, Room = room, Teachsrs = teachers, Groups = groups });
-             //   }
+            if (b)
+            {
+                if (!items.ContainsKey(date))
+                {
+                    items[date] = new List<ScheduleItem>();
+                }
+                items[date].Add(new ScheduleItem() { Lesson = lesson, Room = room, Teachsrs = teachers, Groups = groups });
+            }
             return b;
         }
 

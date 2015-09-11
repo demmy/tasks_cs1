@@ -37,11 +37,11 @@ namespace University.Tatyana
                 (0));
             u1.AddLesson(DateTime.Now, LessonsOrder.EighthLesson, rooms.ElementAt<Room>(1), teachers, groups);
 
-            //u1.AddLesson(date1, LessonsOrder.FirstLesson, rooms.ElementAt<Room>(1), teachers1, groups1);
-            //u1.AddLesson(date1, LessonsOrder.SecondLesson, rooms.ElementAt<Room>(0), teachers1, groups1);
-            //u1.AddLesson(date1, LessonsOrder.ThirdLesson, rooms.ElementAt<Room>(1), teachers1, groups2);
-            //u1.AddLesson(date1, LessonsOrder.FirstLesson, rooms.ElementAt<Room>(2), teachers1, groups2);
-            //u1.AddLesson(date1, LessonsOrder.FirstLesson, rooms.ElementAt<Room>(0), teachers1, groups1);
+            u1.AddLesson(date1, LessonsOrder.FirstLesson, rooms.ElementAt<Room>(1), teachers1, groups1);
+            u1.AddLesson(date1, LessonsOrder.SecondLesson, rooms.ElementAt<Room>(0), teachers1, groups1);
+            u1.AddLesson(date1, LessonsOrder.ThirdLesson, rooms.ElementAt<Room>(1), teachers1, groups2);
+            u1.AddLesson(date1, LessonsOrder.FirstLesson, rooms.ElementAt<Room>(2), teachers1, groups2);
+            u1.AddLesson(date1, LessonsOrder.FirstLesson, rooms.ElementAt<Room>(0), teachers1, groups1);
             return u1;
 
         }
@@ -68,7 +68,7 @@ namespace University.Tatyana
         public Teacher CreateRandomTeacher()
         {
             indexOfUniqueTeacher++;
-            PositionType p = (PositionType)r.Next(1, 4);
+            PositionType p = (PositionType)r.Next((int)PositionType.AfterLastPosition );
             string firstName1 = p.ToString() + indexOfUniqueTeacher.ToString();
             string middleName1 = "M" + r.Next(1, 1000).ToString();
             string lastName1 = "N" + r.Next(1, 1000).ToString();
