@@ -8,7 +8,7 @@ namespace University.Nikita
 {
     internal class Group : IReadOnlyGroup
     {
-        private List<Student> _students;
+        private List<Student> _students = new List<Student>();
         private static Dictionary<Tuple<int, string>, int> _existingGroupsCount = new Dictionary<Tuple<int, string>, int>();
 
         public string ID { get; private set; }
@@ -24,7 +24,6 @@ namespace University.Nikita
         {
             Faculty = f;
             ID = year + " " + speciality;
-            _students=new List<Student>();
             if (_existingGroupsCount.ContainsKey(new Tuple<int, string>(year, speciality)))
             {
                 _existingGroupsCount[new Tuple<int, string>(year, speciality)]++;
@@ -37,7 +36,7 @@ namespace University.Nikita
 
         public void Add(Student s)
         {
-            if(s!=null) _students.Add(s);
+            _students.Add(s);
         }
     }
 
