@@ -43,12 +43,15 @@ namespace University.Tatyana
 
         private bool IsLessonRoom(DateTime date, LessonsOrder lesson, Room room)
         {
-            bool b = true;
-            foreach (ScheduleItem s in items[date])
+            bool b = false;
+            if (items.ContainsKey(date))
             {
-                if (s.Lesson==lesson && object.Equals(s.Room, room))
+                foreach (ScheduleItem s in items[date])
                 {
-                    b = false;
+                    if (s.Lesson == lesson && object.Equals(s.Room, room))
+                    {
+                        b = true;
+                    }
                 }
             }
             return b;
@@ -57,30 +60,30 @@ namespace University.Tatyana
         public bool AddLesson(DateTime date, LessonsOrder lesson, Room room, IEnumerable<Teacher> teachers, IEnumerable<Group> groups)
         {
             bool b = true;
-            
-            //foreach (Teacher t in teachers)
-            //{
-            //    if (IsLessonTeacher(date, lesson, t))
-            //    {
-            //        b = false;
-            //        break;
-            //    }
-            //}
-            //if (b)
-            //{
-            //    foreach (Group g in groups)
-            //    {
-            //        if (IsLessonGroup(date, lesson, g))
-            //        {
-            //            b = false;
-            //            break;
-            //        }
-            //    }
-            //}
-            //if (IsLessonRoom(date, lesson, room))
-            //{
-            //    b = false;
-            //}
+
+            foreach (Teacher t in teachers)
+            {
+                if (IsLessonTeacher(date, lesson, t))
+                {
+                    b = false;
+                    break;
+                }
+            }
+            if (b)
+            {
+                foreach (Group g in groups)
+                {
+                    if (IsLessonGroup(date, lesson, g))
+                    {
+                        b = false;
+                        break;
+                    }
+                }
+            }
+            if (IsLessonRoom(date, lesson, room))
+            {
+                b = false;
+            }
             if (b)
             {
                 if (!items.ContainsKey(date))
@@ -94,26 +97,36 @@ namespace University.Tatyana
 
         private bool IsLessonTeacher(DateTime date, LessonsOrder lesson, Teacher teacher)
         {
-            bool b = true;
-            foreach (ScheduleItem s in items[date])
+            bool b = false;
+            if (items.ContainsKey(date))
             {
-                if (s.Lesson == lesson && s.Teachsrs.Contains<Teacher>(teacher) )
+                foreach (ScheduleItem s in items[date])
                 {
-                    b = false;
+                    if (s.Lesson == lesson && s.Teachsrs.Contains<Teacher>(teacher))
+                    {
+                        b = true;
+                        break;
+                    }
                 }
             }
             return b;
         }
         private bool IsLessonGroup(DateTime date, LessonsOrder lesson, Group group)
         {
-            bool b = true;
+            bool b = false;
+
+            if (items.ContainsKey(date))
+            {
             foreach (ScheduleItem s in items[date])
             {
                 if (s.Lesson == lesson && s.Groups.Contains<Group>(group))
                 {
-                    b = false;
+                    b = true;
+                    break;
                 }
             }
+        }
+
             return b;
         }
 
@@ -160,6 +173,7 @@ namespace University.Tatyana
                         new Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>(date, teacher, group);
                     a[s.Room.Id].Add(timeTeacherGroups);
                 }
+                
                 foreach (var t in a.Keys)
                 {
                     b[t] = a[t];
@@ -168,7 +182,8 @@ namespace University.Tatyana
             return b;
         }
 
-        public IReadOnlyDictionary<DateTime, IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>> GetAll()
+        public IReadOnlyDictionary<DateTime, IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, 
+                      IReadOnlyList<string>>>>> GetAll()
         {
             Dictionary<DateTime, Dictionary<string, List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>> a=
                 new Dictionary<DateTime, Dictionary<string,List<Tuple<DateTime,IReadOnlyList<string>,IReadOnlyList<string>>>>>();
@@ -176,7 +191,9 @@ namespace University.Tatyana
                 new Dictionary<DateTime, Dictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>>();
             Dictionary<DateTime, IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>> b =
                 new Dictionary<DateTime, IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>>();
-                            foreach (DateTime d in items.Keys )
+
+            
+            foreach (DateTime d in items.Keys )
             {
                 a[d] = new Dictionary<string, List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
                foreach (ScheduleItem s in items[d])
@@ -186,6 +203,7 @@ namespace University.Tatyana
                     {
                         a[d][s.Room.Id] = new List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>();
                     }
+                    
                     TimeSpan t = TimeOfStart(s.Lesson);
                     DateTime date = new DateTime(d.Year, d.Month, d.Day, t.Hours, t.Minutes, t.Seconds);
                     List<string> group = new List<string>();
@@ -198,27 +216,30 @@ namespace University.Tatyana
                     {
                         group.Add(g.ID);
                     }
-
+                    
                     Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>> timeTeacherGroups =
                         new Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>(date, teacher, group);
                     a[d][s.Room.Id].Add(timeTeacherGroups);
+                    
                    
                   }
-               foreach (ScheduleItem s in items[d])
-               {
-                   a1[d][s.Room.Id] = a[d][s.Room.Id];
-               }
-
-               //a1[d] = a[d];
             }
+
                             foreach (DateTime d in items.Keys)
                             {
+                                foreach (string s in a[d].Keys)
+                                {
+                                    a1[d] = new Dictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>,
+                                            IReadOnlyList<string>>>>();
+                                    a1[d][s] = a[d][s];
+                                }
                                 b[d] = a1[d];
                             }
                             return b;        
         }
 
-        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>> GetByRoom(string roomName)
+        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>
+                                            GetByRoom(string roomName)
         {
             Dictionary<DateTime, List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>> a =
                 new Dictionary<DateTime, List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
@@ -226,8 +247,10 @@ namespace University.Tatyana
                 new Dictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
             foreach (DateTime d in items.Keys)
             {
+                
                 foreach (ScheduleItem s in items[d])
                 {
+                    
                     if (object.Equals(s.Room.Id, roomName ))
                     {
                         if (!a.ContainsKey(d))
@@ -255,8 +278,7 @@ namespace University.Tatyana
                 }
                 
             }
-
-            foreach (DateTime d in items.Keys)
+            foreach (DateTime d in a.Keys)
             {
                 b[d] = a[d];
             }
@@ -304,7 +326,7 @@ namespace University.Tatyana
                 }
             }
 
-            foreach (DateTime d in items.Keys)
+            foreach (DateTime d in a.Keys)
             {
                 b[d] = a[d];
             }
@@ -347,7 +369,7 @@ namespace University.Tatyana
                 }
             }
 
-            foreach (DateTime d in items.Keys)
+            foreach (DateTime d in a.Keys)
             {
                 b[d] = a[d];
             }
@@ -359,8 +381,8 @@ namespace University.Tatyana
             get { return items.Keys; }
         }
 
-        public IReadOnlyDictionary<Tuple<DateTime, LessonsOrder>, IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>> 
-                                                                            GetWeekData(DateTime dateAtThisWeek)
+        public IReadOnlyDictionary<Tuple<DateTime, LessonsOrder>, IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>,
+                           IReadOnlyList<IReadOnlyGroup>>>>    GetWeekData(DateTime dateAtThisWeek)
         {
             Dictionary<Tuple<DateTime, LessonsOrder>, List<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>> a =
                 new Dictionary<Tuple<DateTime, LessonsOrder>, List<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>>();
@@ -370,9 +392,12 @@ namespace University.Tatyana
             int i=(int) dateAtThisWeek.DayOfWeek;
             DateTime monday = new DateTime(dateAtThisWeek1.Ticks - new DateTime(0, 0, i>0?(i - 1):6).Ticks);
             DateTime sunday = (i > 0) ? dateAtThisWeek.AddDays(7 - i) : dateAtThisWeek;
-            
+            Console.WriteLine("------------------3----------------------");
+            Console.ReadKey();
             foreach (DateTime d in items.Keys)
             {
+                Console.WriteLine("------------------2----------------------");
+                Console.ReadKey();
                 if (d >= monday && d <= sunday)
                 {
                     foreach (ScheduleItem s in items[d])
@@ -398,6 +423,8 @@ namespace University.Tatyana
                         a[lesson].Add(roomTeachersGroup);
                     }
                 }
+                Console.WriteLine("------------------1----------------------");
+                Console.ReadKey();
        
             }
 

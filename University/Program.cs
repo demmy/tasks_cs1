@@ -43,7 +43,13 @@ namespace University
             Console.WriteLine("--------");
             foreach (Tatyana.Student s in g.Students)
                 Console.WriteLine("{0} {1} ", s.FullName, s.Age);
+
             Console.WriteLine("----------------------------");
+            u2.AddRoom(new Tatyana.Room(Tatyana.Building.A, 1));
+            u2.AddRoom(new Tatyana.Room(Tatyana.Building.A, 5));
+            u2.AddGroup(new Tatyana.Group(FacultyType.Languages, 2008, "English"));
+            u2.AddGroup(new Tatyana.Group(FacultyType.Languages, 2008, "German"));
+
             foreach (string room in u2.RoomsNames)
                 Console.WriteLine(room);
             foreach (string teacher in u2.TeachersNames)
@@ -55,6 +61,94 @@ namespace University
                     Console.WriteLine(student);
 
             ISchedule schedule = u2.CurrentSchedule;
+            Console.WriteLine("----------------------------");
+            Console.ReadKey();
+            IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>> q1=
+                u2.CurrentSchedule.GetByDay(new DateTime(2015, 9, 10));
+            IReadOnlyDictionary<DateTime, IReadOnlyDictionary<string,
+        IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>> q2 =
+            u2.CurrentSchedule.GetAll();
+            
+                foreach (string d in q1.Keys)
+                {
+                    Console.WriteLine(d);
+                    
+                    foreach (var t2 in q1[d])
+                    {
+                        Console.WriteLine("{0}  {1}", d, t2.Item1);
+                        
+                        Console.Write("Teachers ---------------------------");
+                        foreach (string s in t2.Item2)
+                            Console.Write(s);
+                        Console.WriteLine();
+                        Console.Write("Groups ---------------------------");
+                        foreach (string s in t2.Item3)
+                            Console.Write(s);
+                        Console.WriteLine();
+                    }
+                }
+                foreach (DateTime date in q2.Keys)
+                {
+                    foreach (string d in q2[date].Keys)
+                    {
+                        foreach (var t in q2[date][d])
+                        {
+                            Console.WriteLine("{0}  {1}", d, t.Item1);
+                            Console.Write("Teachers ---------------------------");
+                            foreach (string s in t.Item2)
+                                Console.Write(s);
+                            Console.WriteLine();
+                            Console.Write("Groups ---------------------------");
+                            foreach (string s in t.Item3)
+                                Console.Write(s);
+                            Console.WriteLine();
+                        }
+                    }
+                }
+            Console.WriteLine();
+
+            
+            List<IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>> q3 =
+                new List<IReadOnlyDictionary<DateTime,IReadOnlyList<Tuple<DateTime,IReadOnlyList<string>,IReadOnlyList<string>>>>>();
+            foreach (string r in u2.RoomsNames )
+                          q3.Add( u2.CurrentSchedule.GetByRoom(r) ) ;
+
+
+               
+            IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, bool>>> q4 =
+                u2.CurrentSchedule.GetByGroup("En-08-1");
+
+            IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, string, IReadOnlyList<string>>>> q5 =
+                u2.CurrentSchedule.GetByTeacher(u2.TeachersNames.ElementAt<string>(0));
+
+            //IReadOnlyDictionary<Tuple<DateTime, LessonsOrder>, IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>,
+            //   IReadOnlyList<IReadOnlyGroup>>>> week = u2.CurrentSchedule.GetWeekData(DateTime.Now);
+
+            Console.WriteLine("---------------------------------------------------------------");
+            foreach (var q in q3)
+            {
+                foreach (DateTime date in q.Keys)
+                {
+                    
+                    foreach (var t in q[date])
+                    {
+                        Console.WriteLine("{0}  {1}", date, t.Item1);
+                        Console.Write("Teachers ---------------------------");
+                        foreach (string s in t.Item2)
+                            Console.Write(s);
+                        Console.WriteLine();
+                        Console.Write("Groups ---------------------------");
+                        foreach (string s in t.Item3)
+                            Console.Write(s);
+                        Console.WriteLine();
+                    }
+                }
+            }
+            foreach (DateTime f in u2.CurrentSchedule.AllExistingDates)
+            {
+                Console.WriteLine(f);
+            }
+
             Console.ReadKey();
         }
 
@@ -105,22 +199,6 @@ namespace University
         }
 
 
-        static string Shifr(string a)
-        {
-            int i = 0;
-            while (i < 8)
-            {
-                if (object.Equals(string.Format("{0}", (SpecialityTitle) i ), a))
-                {
-                    break;
-                }
-                
-                i++;
-            }
-            
-            string[] shifr = new string[] {  "CSe", "CSy",
-                         "Mn", "Mr", "QP", "AP",   "En", "Gr" , "None" };
-            return shifr[i];
-        }
+       
     }
 }
