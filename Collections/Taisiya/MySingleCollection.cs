@@ -12,11 +12,13 @@ namespace Collections.Taisiya
     {
         ILogger Logger;
         int Count;
+        Dictionary<int, ILogger> items = new Dictionary<int, ILogger>();
 
         public MySingleCollection(ILogger logger)
         {
             Logger = logger;
             Count++;
+            items.Add(Count, Logger);
         }
 
 
@@ -40,8 +42,12 @@ namespace Collections.Taisiya
 
         protected override void SetItem(int index, T item)
         {
-            Logger.Log("Setting of item " + item + " with index " + index + " in collection");
-            base.SetItem(index, item);
+            foreach (var it in items)
+                if (it.Key == index)
+                {
+                    Logger.Log("Element with index " + index + " is " + it.Value + ". Setting of item " + item + " with current index in collection");
+                    base.SetItem(index, item);
+                }
         }
     }
 
