@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace University.Tatyana
 {
 
-
+    
     class Schedule : ISchedule
     {
         class ScheduleItem
@@ -128,6 +128,27 @@ namespace University.Tatyana
         }
 
             return b;
+        }
+
+        public void W(DateTime t)
+        {
+            int i = (int)t.DayOfWeek;
+
+            Console.WriteLine();
+            Console.WriteLine(t);
+            Console.WriteLine(t.DayOfWeek);
+            Console.WriteLine(i);
+
+            DateTime t1 = new DateTime(1, 1, (i > 0) ? i : 7);
+            DateTime t2 = new DateTime(1, 1, 1);
+            TimeSpan t3 = new TimeSpan((i > 0) ? i - 1 : 6, 0, 0, 0);
+            DateTime monday = new DateTime(t.Ticks - t1.Ticks + t2.Ticks);
+            DateTime sunday = (i > 0) ? t.AddDays(7 - i) : t;
+            Console.WriteLine();
+            Console.WriteLine(t1);
+            Console.WriteLine(t2);
+            Console.WriteLine("{0}    {1}", monday, monday.DayOfWeek);
+            Console.WriteLine("{0}    {1}", sunday, sunday.DayOfWeek);
         }
 
 
@@ -388,17 +409,22 @@ namespace University.Tatyana
                 new Dictionary<Tuple<DateTime, LessonsOrder>, List<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>>();
             Dictionary<Tuple<DateTime, LessonsOrder>, IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>> b =
                 new Dictionary<Tuple<DateTime, LessonsOrder>, IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>>();
-            DateTime dateAtThisWeek1 = new DateTime(dateAtThisWeek.Year, dateAtThisWeek.Month, dateAtThisWeek.Day, 1, 0, 0);
+             DateTime dateAtThisWeek1 = new DateTime(dateAtThisWeek.Year, dateAtThisWeek.Month, dateAtThisWeek.Day, 0, 0, 0);
             int i=(int) dateAtThisWeek.DayOfWeek;
-            DateTime monday = new DateTime(dateAtThisWeek1.Ticks - new DateTime(0, 0, i>0?(i - 1):6).Ticks);
+            DateTime t1 = new DateTime(1, 1, (i > 0) ? i : 7);
+            DateTime t2 = new DateTime(1, 1, 1);
+            DateTime monday = new DateTime(dateAtThisWeek1.Ticks - t1.Ticks+t2.Ticks);
             DateTime sunday = (i > 0) ? dateAtThisWeek.AddDays(7 - i) : dateAtThisWeek;
-            Console.WriteLine("------------------3----------------------");
-            Console.ReadKey();
+            Console.WriteLine("{0}    {1}", monday, monday.DayOfWeek);
+            Console.WriteLine("{0}    {1}", sunday, sunday.DayOfWeek);
+            DateTime monday1 = new DateTime(dateAtThisWeek1.Ticks - t1.Ticks + t2.Ticks);
+            DateTime monday2 = new DateTime(monday1.Ticks+ new TimeSpan(7,0,0,0).Ticks);
+            Console.WriteLine("{0}    {1}", monday1, monday1.DayOfWeek);
+            Console.WriteLine("{0}    {1}", monday2, monday2.DayOfWeek);
+
             foreach (DateTime d in items.Keys)
             {
-                Console.WriteLine("------------------2----------------------");
-                Console.ReadKey();
-                if (d >= monday && d <= sunday)
+                if (d >= monday1 && d <= monday2)
                 {
                     foreach (ScheduleItem s in items[d])
                     {
@@ -423,9 +449,6 @@ namespace University.Tatyana
                         a[lesson].Add(roomTeachersGroup);
                     }
                 }
-                Console.WriteLine("------------------1----------------------");
-                Console.ReadKey();
-       
             }
 
             foreach (var t in a.Keys)
