@@ -16,17 +16,33 @@ namespace University.Tatyana
 
         public IUniversity CreateUniversity(string title)
         {
-            //list<room> rooms = new list<room>();
-            //list<teacher> teachers = new list<teacher>();
-            //list<student> students = new list<student>();
-            //list<group> groups = new list<group>();
-            List<Room> rooms = CreateListRooms(r.Next(10,20),4);
-            List<Teacher> teachers =CreateListTeacher(r.Next(10,15));
+            List<Room> rooms = CreateListRooms(5,4);
+            List<Teacher> teachers =CreateListTeacher(11);
              
             List<Group> groups = CreateListGroupsWithStudents(3,5,1,2);
-            Schedule schedule= new Schedule();
-            return new University(title, groups, teachers, rooms);
-           
+
+            University u1 = new University(title, groups, teachers, rooms);
+
+            DateTime date1 = new DateTime(2015, 9, 10);
+            List<Teacher> teachers1=new List<Teacher>();
+            teachers1.Add(teachers.ElementAt<Teacher>(0));
+            teachers1.Add(teachers.ElementAt<Teacher>(2));
+            List<Teacher> teachers2 = new List<Teacher>();
+            teachers2.Add(teachers.ElementAt<Teacher>(1));
+            List<Group> groups1=new List<Group>();
+            groups1.Add(groups.ElementAt<Group>(0)); 
+            groups1.Add(groups.ElementAt<Group>(1));
+            List<Group> groups2=new List<Group>();
+            groups2.Add(groups.ElementAt<Group>
+                (0));
+            u1.AddLesson(DateTime.Now, LessonsOrder.EighthLesson, rooms.ElementAt<Room>(1), teachers2, groups1);
+
+            u1.AddLesson(date1, LessonsOrder.FirstLesson, rooms.ElementAt<Room>(1), teachers1, groups1);
+            u1.AddLesson(date1, LessonsOrder.SecondLesson, rooms.ElementAt<Room>(0), teachers1, groups1);
+            u1.AddLesson(date1, LessonsOrder.ThirdLesson, rooms.ElementAt<Room>(1), teachers1, groups2);
+            u1.AddLesson(date1, LessonsOrder.FirstLesson, rooms.ElementAt<Room>(2), teachers1, groups2);
+            u1.AddLesson(date1, LessonsOrder.FirstLesson, rooms.ElementAt<Room>(0), teachers1, groups1);
+            return u1;
 
         }
 
@@ -34,6 +50,9 @@ namespace University.Tatyana
         {
             get { return "Tatyana"; }
         }
+
+        
+
 
        public Student CreateRandomStudent()
         {
@@ -49,7 +68,7 @@ namespace University.Tatyana
         public Teacher CreateRandomTeacher()
         {
             indexOfUniqueTeacher++;
-            PositionType p = (PositionType)r.Next(1, 4);
+            PositionType p = (PositionType)r.Next((int)PositionType.AfterLastPosition );
             string firstName1 = p.ToString() + indexOfUniqueTeacher.ToString();
             string middleName1 = "M" + r.Next(1, 1000).ToString();
             string lastName1 = "N" + r.Next(1, 1000).ToString();
@@ -57,7 +76,7 @@ namespace University.Tatyana
             return new Teacher(firstName1, middleName1, lastName1, dateOfBirth1,p);
         }
 
-        private List<Student> CreateListStudents(int length)
+        public List<Student> CreateListStudents(int length)
         {
             List<Student> students = new List<Student>();
             for (int i = 0; i < length; i++)
@@ -99,10 +118,10 @@ namespace University.Tatyana
                   int countFaculty, int countSpesiality)
         {
             List<Group> groups = new List<Group>();
-            Group group;
+            
             for (int i = 0; i < countGroup; i++)
             {
-                groups.Add(new Group((FacultyType) r.Next(1,countFaculty+1),
+                groups.Add(new Group((FacultyType) r.Next(countFaculty),
                                       r.Next(2000-2008), 
                            string.Format("{0}", (SpecialityTitle) r.Next(1,countSpesiality+1))));
             }
@@ -121,7 +140,7 @@ namespace University.Tatyana
             int countStudents;
             for (int i = 0; i < countGroup; i++)
             {
-                groups.Add(new Group((FacultyType)r.Next(1, countFaculty + 1),
+                groups.Add(new Group((FacultyType)r.Next(countFaculty),
                                       r.Next(2000, 2008),
                            string.Format("{0}", (SpecialityTitle)r.Next(1, countSpesiality + 1))));
             }
@@ -140,7 +159,6 @@ namespace University.Tatyana
             return groups;
         }
                  
-
         
     }
 }

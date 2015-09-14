@@ -44,9 +44,13 @@
     <Compile Include="ICollectionsExercises.cs" />
     <Compile Include="IPriorityQueue.cs" />
     <Compile Include="Nikita\CollectionsExercises.cs" />
+    <Compile Include="Nikita\PriorityQueue.cs" />
+    <Compile Include="Nikita\StudentDictionary.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sergey\CollectionsExercises.cs" />
+    <Compile Include="Sergey\Collections\PriorityQueue.cs" />
+    <Compile Include="Sergey\Models\User.cs" />
     <Compile Include="Taisiya\CollectionsExercises.cs" />
     <Compile Include="Tatyana\CollectionsExercises.cs" />
     <Compile Include="Tatyana\PriorityQueue.cs" />
@@ -54,6 +58,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

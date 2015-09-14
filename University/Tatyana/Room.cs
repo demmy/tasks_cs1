@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace University.Tatyana
 {
-    enum Building  {A, B, C, D}
+    enum Building  {A, B, C, D, AfterLastPosition}
     class Room  : IRoom
     {
         Building building;
