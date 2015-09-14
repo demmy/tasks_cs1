@@ -26,7 +26,7 @@ namespace University.Tatyana
         public University(string title, IEnumerable<Group> groups1, IEnumerable<Teacher> teachers1,
                               IEnumerable<Room> rooms1):this(title)
         {
-            
+ 
             groups.AddRange(groups1);
             
             teachers.AddRange(teachers1);
@@ -34,7 +34,10 @@ namespace University.Tatyana
             
         }
 
-
+        public bool AddLesson(DateTime date, LessonsOrder lesson, Room room, IEnumerable<Teacher> teachers, IEnumerable<Group> groups)
+        {
+          return  schedule.AddLesson(date, lesson, room, teachers, groups);
+        }
 
         public ISchedule CurrentSchedule
         {
