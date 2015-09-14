@@ -7,17 +7,15 @@ using System.Threading.Tasks;
 namespace University.Tatyana
 {
 
-
+    
     class Schedule : ISchedule
     {
         class ScheduleItem
         {
-            List<Teacher> teachers = new List<Teacher>();
-            List<Group> groups = new List<Group>();
             public LessonsOrder Lesson { get; set; }
             public Room Room { get; set; }
-            public IEnumerable<Teacher> Teachsrs { get { return teachers; } set { teachers.AddRange(value); } }
-            public IEnumerable<Group> Groups { get { return groups; } set { groups.AddRange(value); } }
+            public IEnumerable<Teacher> Teachsrs { get; set; }
+            public IEnumerable<Group> Groups { get; set; }
             public ScheduleItem()
             {
             }
@@ -30,7 +28,7 @@ namespace University.Tatyana
                 
             }
         }
-        Dictionary<DateTime, List<ScheduleItem>> items;
+        Dictionary<DateTime, List<ScheduleItem>> items = new Dictionary<DateTime, List<ScheduleItem>>();
         TimeSpan[] timeOfStart = new TimeSpan[9] { new TimeSpan(6, 30, 0), new TimeSpan(8,0,0),
                new TimeSpan(9,30,0), new TimeSpan(11,10,0), new TimeSpan(12,30,0),
                new TimeSpan(14,10,0), new TimeSpan(15,40,0), new TimeSpan(16,10,0) ,
@@ -45,12 +43,15 @@ namespace University.Tatyana
 
         private bool IsLessonRoom(DateTime date, LessonsOrder lesson, Room room)
         {
-            bool b = true;
-            foreach (ScheduleItem s in items[date])
+            bool b = false;
+            if (items.ContainsKey(date))
             {
-                if (s.Lesson==lesson && object.Equals(s.Room, room))
+                foreach (ScheduleItem s in items[date])
                 {
-                    b = false;
+                    if (s.Lesson == lesson && object.Equals(s.Room, room))
+                    {
+                        b = true;
+                    }
                 }
             }
             return b;
@@ -59,64 +60,95 @@ namespace University.Tatyana
         public bool AddLesson(DateTime date, LessonsOrder lesson, Room room, IEnumerable<Teacher> teachers, IEnumerable<Group> groups)
         {
             bool b = true;
-            
-            //foreach (Teacher t in teachers)
-            //{
-            //    if (IsLessonTeacher(date, lesson, t))
-            //    {
-            //        b = false;
-            //        break;
-            //    }
-            //}
-            //if (b)
-            //{
-            //    foreach (Group g in groups)
-            //    {
-            //        if (IsLessonGroup(date, lesson, g))
-            //        {
-            //            b = false;
-            //            break;
-            //        }
-            //    }
-            //}
-            //if (IsLessonRoom(date, lesson, room))
-            //{
-            //    b = false;
-            //}
-            //    if (b)
-            //    {
-            //        if (!items.ContainsKey(date))
-            //        {
-            //            items[date] = new List<ScheduleItem>();
-            //        }
-                    items[date].Add(new ScheduleItem() { Lesson = lesson, Room = room, Teachsrs = teachers, Groups = groups });
-             //   }
+
+            foreach (Teacher t in teachers)
+            {
+                if (IsLessonTeacher(date, lesson, t))
+                {
+                    b = false;
+                    break;
+                }
+            }
+            if (b)
+            {
+                foreach (Group g in groups)
+                {
+                    if (IsLessonGroup(date, lesson, g))
+                    {
+                        b = false;
+                        break;
+                    }
+                }
+            }
+            if (IsLessonRoom(date, lesson, room))
+            {
+                b = false;
+            }
+            if (b)
+            {
+                if (!items.ContainsKey(date))
+                {
+                    items[date] = new List<ScheduleItem>();
+                }
+                items[date].Add(new ScheduleItem() { Lesson = lesson, Room = room, Teachsrs = teachers, Groups = groups });
+            }
             return b;
         }
 
         private bool IsLessonTeacher(DateTime date, LessonsOrder lesson, Teacher teacher)
         {
-            bool b = true;
-            foreach (ScheduleItem s in items[date])
+            bool b = false;
+            if (items.ContainsKey(date))
             {
-                if (s.Lesson == lesson && s.Teachsrs.Contains<Teacher>(teacher) )
+                foreach (ScheduleItem s in items[date])
                 {
-                    b = false;
+                    if (s.Lesson == lesson && s.Teachsrs.Contains<Teacher>(teacher))
+                    {
+                        b = true;
+                        break;
+                    }
                 }
             }
             return b;
         }
         private bool IsLessonGroup(DateTime date, LessonsOrder lesson, Group group)
         {
-            bool b = true;
+            bool b = false;
+
+            if (items.ContainsKey(date))
+            {
             foreach (ScheduleItem s in items[date])
             {
                 if (s.Lesson == lesson && s.Groups.Contains<Group>(group))
                 {
-                    b = false;
+                    b = true;
+                    break;
                 }
             }
+        }
+
             return b;
+        }
+
+        public void W(DateTime t)
+        {
+            int i = (int)t.DayOfWeek;
+
+            Console.WriteLine();
+            Console.WriteLine(t);
+            Console.WriteLine(t.DayOfWeek);
+            Console.WriteLine(i);
+
+            DateTime t1 = new DateTime(1, 1, (i > 0) ? i : 7);
+            DateTime t2 = new DateTime(1, 1, 1);
+            TimeSpan t3 = new TimeSpan((i > 0) ? i - 1 : 6, 0, 0, 0);
+            DateTime monday = new DateTime(t.Ticks - t1.Ticks + t2.Ticks);
+            DateTime sunday = (i > 0) ? t.AddDays(7 - i) : t;
+            Console.WriteLine();
+            Console.WriteLine(t1);
+            Console.WriteLine(t2);
+            Console.WriteLine("{0}    {1}", monday, monday.DayOfWeek);
+            Console.WriteLine("{0}    {1}", sunday, sunday.DayOfWeek);
         }
 
 
@@ -162,6 +194,7 @@ namespace University.Tatyana
                         new Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>(date, teacher, group);
                     a[s.Room.Id].Add(timeTeacherGroups);
                 }
+                
                 foreach (var t in a.Keys)
                 {
                     b[t] = a[t];
@@ -170,7 +203,8 @@ namespace University.Tatyana
             return b;
         }
 
-        public IReadOnlyDictionary<DateTime, IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>> GetAll()
+        public IReadOnlyDictionary<DateTime, IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, 
+                      IReadOnlyList<string>>>>> GetAll()
         {
             Dictionary<DateTime, Dictionary<string, List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>> a=
                 new Dictionary<DateTime, Dictionary<string,List<Tuple<DateTime,IReadOnlyList<string>,IReadOnlyList<string>>>>>();
@@ -178,7 +212,9 @@ namespace University.Tatyana
                 new Dictionary<DateTime, Dictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>>();
             Dictionary<DateTime, IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>> b =
                 new Dictionary<DateTime, IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>>();
-                            foreach (DateTime d in items.Keys )
+
+            
+            foreach (DateTime d in items.Keys )
             {
                 a[d] = new Dictionary<string, List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
                foreach (ScheduleItem s in items[d])
@@ -188,6 +224,7 @@ namespace University.Tatyana
                     {
                         a[d][s.Room.Id] = new List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>();
                     }
+                    
                     TimeSpan t = TimeOfStart(s.Lesson);
                     DateTime date = new DateTime(d.Year, d.Month, d.Day, t.Hours, t.Minutes, t.Seconds);
                     List<string> group = new List<string>();
@@ -200,27 +237,30 @@ namespace University.Tatyana
                     {
                         group.Add(g.ID);
                     }
-
+                    
                     Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>> timeTeacherGroups =
                         new Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>(date, teacher, group);
                     a[d][s.Room.Id].Add(timeTeacherGroups);
+                    
                    
                   }
-               foreach (ScheduleItem s in items[d])
-               {
-                   a1[d][s.Room.Id] = a[d][s.Room.Id];
-               }
-
-               //a1[d] = a[d];
             }
+
                             foreach (DateTime d in items.Keys)
                             {
+                                foreach (string s in a[d].Keys)
+                                {
+                                    a1[d] = new Dictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>,
+                                            IReadOnlyList<string>>>>();
+                                    a1[d][s] = a[d][s];
+                                }
                                 b[d] = a1[d];
                             }
                             return b;        
         }
 
-        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>> GetByRoom(string roomName)
+        public IReadOnlyDictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>
+                                            GetByRoom(string roomName)
         {
             Dictionary<DateTime, List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>> a =
                 new Dictionary<DateTime, List<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
@@ -228,8 +268,10 @@ namespace University.Tatyana
                 new Dictionary<DateTime, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>>();
             foreach (DateTime d in items.Keys)
             {
+                
                 foreach (ScheduleItem s in items[d])
                 {
+                    
                     if (object.Equals(s.Room.Id, roomName ))
                     {
                         if (!a.ContainsKey(d))
@@ -257,8 +299,7 @@ namespace University.Tatyana
                 }
                 
             }
-
-            foreach (DateTime d in items.Keys)
+            foreach (DateTime d in a.Keys)
             {
                 b[d] = a[d];
             }
@@ -306,7 +347,7 @@ namespace University.Tatyana
                 }
             }
 
-            foreach (DateTime d in items.Keys)
+            foreach (DateTime d in a.Keys)
             {
                 b[d] = a[d];
             }
@@ -349,7 +390,7 @@ namespace University.Tatyana
                 }
             }
 
-            foreach (DateTime d in items.Keys)
+            foreach (DateTime d in a.Keys)
             {
                 b[d] = a[d];
             }
@@ -361,21 +402,29 @@ namespace University.Tatyana
             get { return items.Keys; }
         }
 
-        public IReadOnlyDictionary<Tuple<DateTime, LessonsOrder>, IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>> 
-                                                                            GetWeekData(DateTime dateAtThisWeek)
+        public IReadOnlyDictionary<Tuple<DateTime, LessonsOrder>, IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>,
+                           IReadOnlyList<IReadOnlyGroup>>>>    GetWeekData(DateTime dateAtThisWeek)
         {
             Dictionary<Tuple<DateTime, LessonsOrder>, List<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>> a =
                 new Dictionary<Tuple<DateTime, LessonsOrder>, List<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>>();
             Dictionary<Tuple<DateTime, LessonsOrder>, IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>> b =
                 new Dictionary<Tuple<DateTime, LessonsOrder>, IReadOnlyList<Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>>>();
-            DateTime dateAtThisWeek1 = new DateTime(dateAtThisWeek.Year, dateAtThisWeek.Month, dateAtThisWeek.Day, 1, 0, 0);
+             DateTime dateAtThisWeek1 = new DateTime(dateAtThisWeek.Year, dateAtThisWeek.Month, dateAtThisWeek.Day, 0, 0, 0);
             int i=(int) dateAtThisWeek.DayOfWeek;
-            DateTime monday = new DateTime(dateAtThisWeek1.Ticks - new DateTime(0, 0, i>0?(i - 1):6).Ticks);
+            DateTime t1 = new DateTime(1, 1, (i > 0) ? i : 7);
+            DateTime t2 = new DateTime(1, 1, 1);
+            DateTime monday = new DateTime(dateAtThisWeek1.Ticks - t1.Ticks+t2.Ticks);
             DateTime sunday = (i > 0) ? dateAtThisWeek.AddDays(7 - i) : dateAtThisWeek;
-            
+            Console.WriteLine("{0}    {1}", monday, monday.DayOfWeek);
+            Console.WriteLine("{0}    {1}", sunday, sunday.DayOfWeek);
+            DateTime monday1 = new DateTime(dateAtThisWeek1.Ticks - t1.Ticks + t2.Ticks);
+            DateTime monday2 = new DateTime(monday1.Ticks+ new TimeSpan(7,0,0,0).Ticks);
+            Console.WriteLine("{0}    {1}", monday1, monday1.DayOfWeek);
+            Console.WriteLine("{0}    {1}", monday2, monday2.DayOfWeek);
+
             foreach (DateTime d in items.Keys)
             {
-                if (d >= monday && d <= sunday)
+                if (d >= monday1 && d <= monday2)
                 {
                     foreach (ScheduleItem s in items[d])
                     {
@@ -400,7 +449,6 @@ namespace University.Tatyana
                         a[lesson].Add(roomTeachersGroup);
                     }
                 }
-       
             }
 
             foreach (var t in a.Keys)
