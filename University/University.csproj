@@ -48,19 +48,18 @@
     <Compile Include="ISchedule.cs" />
     <Compile Include="IUniversity.cs" />
     <Compile Include="IUniversityFactory.cs" />
-    <Compile Include="Nikita\Group.cs" />
-    <Compile Include="Nikita\Person.cs" />
-    <Compile Include="Nikita\Room.cs" />
-    <Compile Include="Nikita\Schedule.cs" />
-    <Compile Include="Nikita\ScheduleItem.cs" />
-    <Compile Include="Nikita\Student.cs" />
-    <Compile Include="Nikita\Teacher.cs" />
-    <Compile Include="Nikita\University.cs" />
     <Compile Include="Nikita\UniversityFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sergey\UniversityFactory.cs" />
     <Compile Include="Taisiya\UniversityFactory.cs" />
+    <Compile Include="Tatyana\Group.cs" />
+    <Compile Include="Tatyana\Person.cs" />
+    <Compile Include="Tatyana\Room.cs" />
+    <Compile Include="Tatyana\Schedule.cs" />
+    <Compile Include="Tatyana\Student.cs" />
+    <Compile Include="Tatyana\Teacher.cs" />
+    <Compile Include="Tatyana\University.cs" />
     <Compile Include="Tatyana\UniversityFactory.cs" />
   </ItemGroup>
   <ItemGroup>
