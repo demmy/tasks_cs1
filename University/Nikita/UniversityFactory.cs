@@ -10,15 +10,12 @@ namespace University.Nikita
     {
         public IUniversity CreateUniversity(string title)
         {
-            return new University(title)
-            {
-                
-            };
+            throw new NotImplementedException();
         }
 
         public string ProgrammerName
         {
-            get { return "Nikita"; }
+            get { throw new NotImplementedException(); }
         }
     }
 }

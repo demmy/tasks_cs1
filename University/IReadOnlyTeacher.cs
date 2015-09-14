@@ -5,7 +5,7 @@ using System.Text;
 
 namespace University
 {
-    enum PositionType { Professor, Lector, Assistant };
+    enum PositionType { Professor, Lector, Assistant, AfterLastPosition };
 
     interface IReadOnlyTeacher: IReadOnlyPerson
     {
