@@ -47,8 +47,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sergey\CollectionsExercises.cs" />
+    <Compile Include="Sergey\Collections\Exceptions\EmptyPriorityQueueException.cs" />
     <Compile Include="Sergey\Collections\MySimpleCollection.cs" />
     <Compile Include="Sergey\Collections\PriorityQueue.cs" />
+    <Compile Include="Sergey\Collections\PriorityQueueCollection.cs" />
     <Compile Include="Sergey\Loger\ILoger.cs" />
     <Compile Include="Sergey\Loger\MyLoger.cs" />
     <Compile Include="Sergey\Models\User.cs" />
