@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Collections.Tatyana
 {
-    class PriorityQueue<T> :IPriorityQueue<T> , ICollection<T>
+    class PriorityQueue<T> :IPriorityQueue<T> //, ICollection<T>
     {
         Dictionary<int, List<T>> elements = new Dictionary<int, List<T>>();
 
@@ -23,21 +23,32 @@ namespace Collections.Tatyana
         private int Min()
         {
             int n = 0;
-            foreach (int i in elements.Keys)
+            if (elements.Keys.Count > 0)
             {
-                if (i < n)
-                    n = i;
+                n = elements.Keys.ElementAt<int>(0);
+
+                foreach (int i in elements.Keys)
+                {
+                    if (i < n)
+                        n = i;
+                }
             }
+            
             return n;
         }
 
         private int Max()
         {
             int n = 0;
-            foreach (int i in elements.Keys)
+            if (elements.Keys.Count > 0)
             {
-                if (i > n)
-                    n = i;
+                n = elements.Keys.ElementAt<int>(0);
+
+                foreach (int i in elements.Keys)
+                {
+                    if (i > n)
+                        n = i;
+                }
             }
             return n;
         }
@@ -66,6 +77,7 @@ namespace Collections.Tatyana
 
         public T Last()
         {
+            
             T a = elements[Min()].ElementAt(elements[Min()].Count-1);
             return a;
            
@@ -89,7 +101,9 @@ namespace Collections.Tatyana
 
         public int GetCount(int priority)
         {
-            return elements[priority].Count;
+           
+            
+                return elements.ContainsKey(priority)? elements[priority].Count:0;
         }
 
 
@@ -105,75 +119,75 @@ namespace Collections.Tatyana
             }
         }
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        //public IEnumerator<T> GetEnumerator()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        //System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void Add(T item)
-        {
-            elements[0].Add(item);
-        }
+        //public void Add(T item)
+        //{
+        //    elements[0].Add(item);
+        //}
 
-        public void Clear()
-        {
-            Dictionary<int, List<T>> elements = new Dictionary<int, List<T>>();
-        }
+        //public void Clear()
+        //{
+        //    Dictionary<int, List<T>> elements = new Dictionary<int, List<T>>();
+        //}
 
-        public bool Contains(T item)
-        {
-            bool b = false;
-            foreach (int i in elements.Keys)
-            {
-                foreach (T e in elements[i])
-                {
-                    if (object.Equals(e, item))
-                    {
+        //public bool Contains(T item)
+        //{
+        //    bool b = false;
+        //    foreach (int i in elements.Keys)
+        //    {
+        //        foreach (T e in elements[i])
+        //        {
+        //            if (object.Equals(e, item))
+        //            {
                         
-                        b=true;
-                        break;
-                    }
-                }
-            }
-            return b;
-        }
+        //                b=true;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    return b;
+        //}
 
-        public void CopyTo(T[] array, int arrayIndex)
-        {
-            elements[0].Add(array[arrayIndex]);
-        }
+        //public void CopyTo(T[] array, int arrayIndex)
+        //{
+        //    elements[0].Add(array[arrayIndex]);
+        //}
 
-        int ICollection<T>.Count
-        {
-            get { return this.elements.Count; }
-        }
+        //int ICollection<T>.Count
+        //{
+        //    get { return this.elements.Count; }
+        //}
 
-        public bool IsReadOnly
-        {
-            get { return false; }
-        }
+        //public bool IsReadOnly
+        //{
+        //    get { return false; }
+        //}
 
-        public bool Remove(T item)
-        {
-            bool b = false;
-            foreach (int i in elements.Keys)
-            {
-                foreach (T e in elements[i])
-                {
-                    if (object.Equals(e, item))
-                    {
-                        elements[i].Remove(e);
-                        b = true;
+        //public bool Remove(T item)
+        //{
+        //    bool b = false;
+        //    foreach (int i in elements.Keys)
+        //    {
+        //        foreach (T e in elements[i])
+        //        {
+        //            if (object.Equals(e, item))
+        //            {
+        //                elements[i].Remove(e);
+        //                b = true;
                        
-                    }
-                }
-            }
-            return b;
-        }
+        //            }
+        //        }
+        //    }
+        //    return b;
+        //}
     }
 }
