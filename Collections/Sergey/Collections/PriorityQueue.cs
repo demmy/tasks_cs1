@@ -4,7 +4,7 @@ using Collections.Sergey.Collections.Exceptions;
 
 namespace Collections.Sergey.Collections
 {
-    partial class PriorityQueue<T>
+    partial class PriorityQueue<T>: IPriorityQueue<T>
     {
         private const string KeyNotFoundMessage = "There are no elements of such priority";
         private const string EmptyQueueMessage = "The queue is empty, nothing to dequeue";

@@ -15,7 +15,7 @@ namespace Collections.Sergey.Models
         {
             get
             {
-                return _firstName;
+                return FirstName;
             }
         }
 
@@ -23,7 +23,7 @@ namespace Collections.Sergey.Models
         {
             get
             {
-                return _familyName;
+                return FamilyName;
             }
         }
     }

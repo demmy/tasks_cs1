@@ -1,29 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Collections.Sergey.Models
 {
     class User
     {
-        protected readonly string _firstName;
-        protected readonly string _familyName;
-        protected readonly DateTime _dateOfBirth;
+        protected readonly string FirstName;
+        protected readonly string FamilyName;
+        protected readonly DateTime DateOfBirth;
 
         public User(string firstName, string familyName, DateTime dateOfBirth)
         {
-            _firstName = firstName;
-            _familyName = familyName;
-            _dateOfBirth = dateOfBirth;
+            FirstName = firstName;
+            FamilyName = familyName;
+            DateOfBirth = dateOfBirth;
         }
 
         public string FullName
         {
             get
             {
-                return string.Format("{0} {1}", _firstName, _familyName);
+                return string.Format("{0} {1}", FirstName, FamilyName);
             }
         }
 
@@ -32,8 +28,8 @@ namespace Collections.Sergey.Models
             get
             {
                 var now = DateTime.Today;
-                int age = now.Year - _dateOfBirth.Year;
-                return (_dateOfBirth > now.AddYears(-age)) ? age - 1 : age;
+                int age = now.Year - DateOfBirth.Year;
+                return (DateOfBirth > now.AddYears(-age)) ? age - 1 : age;
             }
         }
     }
