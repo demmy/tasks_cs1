@@ -9,8 +9,8 @@ namespace University.Nikita
     class Teacher : Person, IReadOnlyTeacher
     {
         public PositionType Position { get; private set; }
-        public Teacher(int age, string fullName, PositionType position)
-            : base(age, fullName)
+        public Teacher(int age, string firstName, string secondName, PositionType position)
+            : base(age, firstName, secondName)
         {
             Position = position;
         }

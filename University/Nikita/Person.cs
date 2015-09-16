@@ -8,13 +8,13 @@ namespace University.Nikita
 {
     class Person : IReadOnlyPerson
     {
-        public string FullName { get; set; }
+        public string FullName { get; private set; }
         public int Age { get; private set; }
 
-        public Person(int age, string fullName)
+        public Person(int age, string firstName, string lastName)
         {
             Age = age;
-            FullName = fullName;
+            FullName = firstName + lastName;
         }
     }
 }
