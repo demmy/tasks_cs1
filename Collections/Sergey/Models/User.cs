@@ -4,15 +4,15 @@ namespace Collections.Sergey.Models
 {
     class User
     {
-        protected readonly string FirstName;
-        protected readonly string FamilyName;
-        protected readonly DateTime DateOfBirth;
+        private readonly string _firstName;
+        private readonly string _familyName;
+        private readonly DateTime _dateOfBirth;
 
         public User(string firstName, string familyName, DateTime dateOfBirth)
         {
-            FirstName = firstName;
-            FamilyName = familyName;
-            DateOfBirth = dateOfBirth;
+            _firstName = firstName;
+            _familyName = familyName;
+            _dateOfBirth = dateOfBirth;
         }
 
         public string FullName
@@ -31,6 +31,21 @@ namespace Collections.Sergey.Models
                 int age = now.Year - DateOfBirth.Year;
                 return (DateOfBirth > now.AddYears(-age)) ? age - 1 : age;
             }
+        }
+
+        public string FirstName
+        {
+            get { return _firstName; }
+        }
+
+        public string FamilyName
+        {
+            get { return _familyName; }
+        }
+
+        public DateTime DateOfBirth
+        {
+            get { return _dateOfBirth; }
         }
     }
 }

@@ -10,21 +10,5 @@ namespace Collections.Sergey.Models
         public Student(string firstName, string familyName, DateTime dateOfBirth) : base(firstName, familyName, dateOfBirth)
         {
         }
-
-        public string FirstName
-        {
-            get
-            {
-                return FirstName;
-            }
-        }
-
-        public string FamilyName 
-        {
-            get
-            {
-                return FamilyName;
-            }
-        }
     }
 }

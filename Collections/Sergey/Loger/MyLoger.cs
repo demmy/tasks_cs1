@@ -5,11 +5,15 @@ namespace Collections.Sergey.Loger
 {
     class MyLoger: ILoger
     {
-        public List<string> Logs { get; private set; }
+        private readonly List<string> _logs;
+        public List<string> Logs
+        {
+            get { return _logs; }
+        }
 
         public MyLoger()
         {
-            Logs = new List<string>();
+            _logs = new List<string>();
         }
         public void Log(params object[] arrayToLog)
         {

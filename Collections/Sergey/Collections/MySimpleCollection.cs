@@ -13,35 +13,34 @@ namespace Collections.Sergey.Collections
         }
         protected override void ClearItems()
         {
-            _loger.Log("The collection going to be empty", ArrayToLogString());
+            _loger.Log("The collection going to be empty", ToString());
             base.ClearItems();
-            _loger.Log("The collection is empty", ArrayToLogString());
+            _loger.Log("The collection is empty", ToString());
         }
-
-        private string ArrayToLogString()
-        {
-            return Items.Aggregate("{", (currentString, el) => currentString + (el.ToString() + ", ")) + "}";
-        }
-
         protected override void InsertItem(int index, T item)
         {
-            _loger.Log("Before entering the item", ArrayToLogString());
+            _loger.Log("Before entering the item", ToString());
             base.InsertItem(index, item);
-            _loger.Log("After entering the item", ArrayToLogString());
+            _loger.Log("After entering the item", ToString());
         }
 
         protected override void RemoveItem(int index)
         {
-            _loger.Log(string.Format("Before removing the item {0} on index {1}", base[index], index), Count, ArrayToLogString());
+            _loger.Log(string.Format("Before removing the item {0} on index {1}", base[index], index), Count, ToString());
             base.RemoveItem(index);
-            _loger.Log("After removing of the item", ArrayToLogString());
+            _loger.Log("After removing of the item", ToString());
         }
 
         protected override void SetItem(int index, T item)
         {
-            _loger.Log(string.Format("Before setting item {0} on index {1}", item.ToString(), index), ArrayToLogString());
+            _loger.Log(string.Format("Before setting item {0} on index {1}", item.ToString(), index), ToString());
             base.SetItem(index, item);
-            _loger.Log("After setting item", ArrayToLogString());
+            _loger.Log("After setting item", ToString());
+        }
+
+        public override string ToString()
+        {
+            return Items.Aggregate("{", (currentString, el) => currentString + (el.ToString() + ", ")) + "}";
         }
     }
 }
