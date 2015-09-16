@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace University.Nikita
     internal class Group : IReadOnlyGroup
     {
         private List<Student> _students = new List<Student>();
-        private static Dictionary<Tuple<int, string>, int> _existingGroupsCount = new Dictionary<Tuple<int, string>, int>();
+        private static readonly Dictionary<Tuple<int, string>, int> ExistingGroupsCount = new Dictionary<Tuple<int, string>, int>();
 
         public string ID { get; private set; }
 
@@ -23,15 +24,20 @@ namespace University.Nikita
         public Group(FacultyType f, int year, string speciality)
         {
             Faculty = f;
-            ID = year + " " + speciality;
-            if (_existingGroupsCount.ContainsKey(new Tuple<int, string>(year, speciality)))
+            ID = GenerateId(year, speciality);
+            if (ExistingGroupsCount.ContainsKey(new Tuple<int, string>(year, speciality)))
             {
-                _existingGroupsCount[new Tuple<int, string>(year, speciality)]++;
+                ExistingGroupsCount[new Tuple<int, string>(year, speciality)]++;
             }
             else
             {
-                _existingGroupsCount.Add(new Tuple<int, string>(year, speciality), 1);
+                ExistingGroupsCount.Add(new Tuple<int, string>(year, speciality), 1);
             }
+        }
+
+        private static string GenerateId(int year, string speciality)
+        {
+            return string.Format("{0} {1}", year, speciality);
         }
 
         public void Add(Student s)
