@@ -56,9 +56,15 @@ namespace Collections.Tatyana
         public T Dequeue()
         {
             if (elements.Count > 0)
-            {
-                T a = elements[Max()].ElementAt(0);
-                elements[Max()].Remove(a);
+            {   
+                int i=Max();
+                T a = elements[i].ElementAt(0);
+                elements[i].Remove(a);
+                if (elements[i].Count == 0)
+                {
+                    elements.Remove(i);
+
+                }
                 return a;
             }
             else
@@ -147,15 +153,15 @@ namespace Collections.Tatyana
             }
         }
 
-        //public IEnumerator<T> GetEnumerator()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
 
-        //System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
 
         //public void Add(T item)
         //{
