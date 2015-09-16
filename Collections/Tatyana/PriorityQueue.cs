@@ -22,7 +22,7 @@ namespace Collections.Tatyana
 
         private int Min()
         {
-            int n = 0;
+            int n = int.MinValue;
             if (elements.Keys.Count > 0)
             {
                 n = elements.Keys.ElementAt<int>(0);
@@ -32,14 +32,13 @@ namespace Collections.Tatyana
                     if (i < n)
                         n = i;
                 }
-            }
-            
+             }
             return n;
         }
 
         private int Max()
         {
-            int n = 0;
+            int n = int.MaxValue;
             if (elements.Keys.Count > 0)
             {
                 n = elements.Keys.ElementAt<int>(0);
@@ -56,38 +55,69 @@ namespace Collections.Tatyana
 
         public T Dequeue()
         {
-            T a = elements[Max()].ElementAt(0);
-            elements[Max()].Remove(a);
-            return a;
-            
+            if (elements.Count > 0)
+            {
+                T a = elements[Max()].ElementAt(0);
+                elements[Max()].Remove(a);
+                return a;
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public T First()
         {
-            T a = elements[Max()].ElementAt(0);
-            return a;
-            
+            if (elements.Count > 0)
+            {
+                T a = elements[Max()].ElementAt(0);
+                return a;
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public T First(int priority)
         {
-            T a = elements[priority].ElementAt(0);
-            return a;
+            if (elements.ContainsKey(priority))
+            {
+                T a = elements[priority].ElementAt(0);
+                return a;
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public T Last()
         {
-            
-            T a = elements[Min()].ElementAt(elements[Min()].Count-1);
-            return a;
-           
+            if (elements.Count > 0)
+            {
+                T a = elements[Min()].ElementAt(elements[Min()].Count - 1);
+                return a;
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public T Last(int priority)
         {
-            T a = elements[priority].ElementAt(elements[Min()].Count - 1);
-            return a;
-        }
+            if (elements.ContainsKey(priority))
+            {
+                T a = elements[priority].ElementAt(elements[Min()].Count - 1);
+                return a;
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+         }
 
         public int Count()
         {
@@ -101,8 +131,6 @@ namespace Collections.Tatyana
 
         public int GetCount(int priority)
         {
-           
-            
                 return elements.ContainsKey(priority)? elements[priority].Count:0;
         }
 
