@@ -13,29 +13,29 @@ namespace Collections.Sergey.Collections
         }
         protected override void ClearItems()
         {
-            _loger.Log("The collection going to be empty", ToString());
+            _loger.Log("The collection going to be empty", this);
             base.ClearItems();
-            _loger.Log("The collection is empty", ToString());
+            _loger.Log("The collection is empty", this);
         }
         protected override void InsertItem(int index, T item)
         {
-            _loger.Log("Before entering the item", ToString());
+            _loger.Log("Before entering the item", this);
             base.InsertItem(index, item);
-            _loger.Log("After entering the item", ToString());
+            _loger.Log("After entering the item", this);
         }
 
         protected override void RemoveItem(int index)
         {
-            _loger.Log(string.Format("Before removing the item {0} on index {1}", base[index], index), Count, ToString());
+            _loger.Log(string.Format("Before removing the item {0} on index {1}", base[index], index), Count, this);
             base.RemoveItem(index);
-            _loger.Log("After removing of the item", ToString());
+            _loger.Log("After removing of the item", this);
         }
 
         protected override void SetItem(int index, T item)
         {
-            _loger.Log(string.Format("Before setting item {0} on index {1}", item.ToString(), index), ToString());
+            _loger.Log(string.Format("Before setting item {0} on index {1}", item.ToString(), index), this);
             base.SetItem(index, item);
-            _loger.Log("After setting item", ToString());
+            _loger.Log("After setting item", this);
         }
 
         public override string ToString()
