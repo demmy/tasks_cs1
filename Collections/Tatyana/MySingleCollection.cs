@@ -9,7 +9,14 @@ namespace Collections.Tatyana
     class MySingleCollection<T>: ICollection<T>
     {
         List<T> list = new List<T>();
-        MyLogger history = new MyLogger();
+        ILogger history;
+
+
+        public MySingleCollection( ILogger h)
+
+    {
+        history = h;
+    }
 
         public void Add(T item)
         {

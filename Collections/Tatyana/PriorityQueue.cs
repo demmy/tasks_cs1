@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Collections.Tatyana
 {
-    class PriorityQueue<T> :IPriorityQueue<T> //, ICollection<T>
+    class PriorityQueue<T> :IPriorityQueue<T> , ICollection<T>
     {
         Dictionary<int, List<T>> elements = new Dictionary<int, List<T>>();
 
@@ -20,7 +20,7 @@ namespace Collections.Tatyana
 
         }
 
-        private int Min()
+        private int MinPriority()
         {
             int n = int.MinValue;
             if (elements.Keys.Count > 0)
@@ -36,7 +36,7 @@ namespace Collections.Tatyana
             return n;
         }
 
-        private int Max()
+        private int MaxPriority()
         {
             int n = int.MaxValue;
             if (elements.Keys.Count > 0)
@@ -57,7 +57,7 @@ namespace Collections.Tatyana
         {
             if (elements.Count > 0)
             {   
-                int i=Max();
+                int i=MaxPriority();
                 T a = elements[i].ElementAt(0);
                 elements[i].Remove(a);
                 if (elements[i].Count == 0)
@@ -77,7 +77,7 @@ namespace Collections.Tatyana
         {
             if (elements.Count > 0)
             {
-                T a = elements[Max()].ElementAt(0);
+                T a = elements[MaxPriority()].ElementAt(0);
                 return a;
             }
             else
@@ -103,7 +103,7 @@ namespace Collections.Tatyana
         {
             if (elements.Count > 0)
             {
-                T a = elements[Min()].ElementAt(elements[Min()].Count - 1);
+                T a = elements[MinPriority()].ElementAt(elements[MinPriority()].Count - 1);
                 return a;
             }
             else
@@ -116,7 +116,7 @@ namespace Collections.Tatyana
         {
             if (elements.ContainsKey(priority))
             {
-                T a = elements[priority].ElementAt(elements[Min()].Count - 1);
+                T a = elements[priority].ElementAt(elements[MinPriority()].Count - 1);
                 return a;
             }
             else
@@ -125,15 +125,7 @@ namespace Collections.Tatyana
             }
          }
 
-        public int Count()
-        {
-            int n=0;
-            foreach (int i in elements.Keys)
-            {
-                n += elements[i].Count;
-            }
-            return n;
-        }
+        
 
         public int GetCount(int priority)
         {
@@ -141,7 +133,7 @@ namespace Collections.Tatyana
         }
 
 
-        int IPriorityQueue<T>.Count
+       public int Count
         {
             get {
                 int n = 0;
@@ -155,73 +147,86 @@ namespace Collections.Tatyana
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            if (elements.Count > 0)
+            {
+               foreach (int i in elements.Keys)
+                {
+                        foreach (var t in elements[i])
+                        {
+                            yield return t;
+                        }
+                  }
+                }
+            
+            
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
-        //public void Add(T item)
-        //{
-        //    elements[0].Add(item);
-        //}
+        public void Add(T item)
+        {
+            int i = MinPriority();
+            if (this.Count==0)
+            {
+                elements[i] = new List<T>();
+            }
+            
+           elements[i].Add(item);
+        }
 
-        //public void Clear()
-        //{
-        //    Dictionary<int, List<T>> elements = new Dictionary<int, List<T>>();
-        //}
+        public void Clear()
+        {
+            elements = new Dictionary<int, List<T>>();
+        }
 
-        //public bool Contains(T item)
-        //{
-        //    bool b = false;
-        //    foreach (int i in elements.Keys)
-        //    {
-        //        foreach (T e in elements[i])
-        //        {
-        //            if (object.Equals(e, item))
-        //            {
-                        
-        //                b=true;
-        //                break;
-        //            }
-        //        }
-        //    }
-        //    return b;
-        //}
+        public bool Contains(T item)
+        {
+            bool b = false;
+            foreach (int i in elements.Keys)
+            {
+                foreach (T e in elements[i])
+                {
+                    if (object.Equals(e, item))
+                    {
+                        b = true;
+                        break;
+                    }
+                }
+            }
+            return b;
+        }
 
-        //public void CopyTo(T[] array, int arrayIndex)
-        //{
-        //    elements[0].Add(array[arrayIndex]);
-        //}
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            elements[MinPriority()].Add(array[arrayIndex]);
+        }
 
-        //int ICollection<T>.Count
-        //{
-        //    get { return this.elements.Count; }
-        //}
+        
 
-        //public bool IsReadOnly
-        //{
-        //    get { return false; }
-        //}
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
 
-        //public bool Remove(T item)
-        //{
-        //    bool b = false;
-        //    foreach (int i in elements.Keys)
-        //    {
-        //        foreach (T e in elements[i])
-        //        {
-        //            if (object.Equals(e, item))
-        //            {
-        //                elements[i].Remove(e);
-        //                b = true;
-                       
-        //            }
-        //        }
-        //    }
-        //    return b;
-        //}
+        public bool Remove(T item)
+        {
+            bool b = false;
+            foreach (int i in elements.Keys)
+            {
+                foreach (T e in elements[i])
+                {
+                    if (object.Equals(e, item))
+                    {
+                        elements[i].Remove(e);
+                        b = true;
+
+                    }
+                }
+            }
+            return b;
+        }
     }
 }
