@@ -52,6 +52,23 @@ namespace Collections.Tatyana
             return n;
         }
 
+        private int NextPriority()
+        {
+            int n=MinPriority();
+            int m=0;
+            int pred=n;
+                if (elements.Count>1)
+                {
+                    pred = elements.Keys.ElementAt<int>(0);
+                    foreach (int i in elements.Keys)
+                    {
+                        if (i > n)
+                        {
+                            m = i;
+                        }
+                    }
+                }
+        }
 
         public T Dequeue()
         {
