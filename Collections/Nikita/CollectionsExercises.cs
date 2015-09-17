@@ -10,7 +10,19 @@ namespace Collections.Nikita
     {
         public void WorkPriorityQueue()
         {
-            throw new NotImplementedException();
+            MyLogger logger = new MyLogger();
+            MySingleCollection<int> coll = new MySingleCollection<int>(logger);
+            coll.Add(5);
+            coll.Add(4);
+            coll.Add(2);
+            coll.Add(40);
+            coll.Add(2);
+            coll.Add(1);
+
+            coll.RemoveAt(2);
+            coll.Clear();
+            logger.ShowAllItems();
+            
         }
     }
 }
