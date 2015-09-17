@@ -77,27 +77,28 @@ namespace Collections.Nikita
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            Enqueue(item, 5);
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            _itemsList.Clear();
         }
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            return _itemsList.Any(pair => pair.Value.Contains(item));
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            List<T> interList = _itemsList.SelectMany(pair => pair.Value).ToList();
+            interList.CopyTo(array, arrayIndex);
         }
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            return _itemsList.Select(pair => pair.Value.Remove(item)).FirstOrDefault();
         }
 
         public int Count
@@ -110,7 +111,7 @@ namespace Collections.Nikita
 
         public bool IsReadOnly
         {
-            get { throw new NotImplementedException(); }
+            get { return false; }
         }
 
         public int GetCount(int priority)
@@ -120,7 +121,7 @@ namespace Collections.Nikita
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _itemsList.SelectMany(pair => pair.Value).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
