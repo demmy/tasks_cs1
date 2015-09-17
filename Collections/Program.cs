@@ -19,7 +19,7 @@ namespace Collections
                         exercises = new Nikita.CollectionsExercises();
                         break;
                     case "Taisiya":
-                        exercises = new Nikita.CollectionsExercises();
+                        exercises = new Taisiya.CollectionsExercises();
                         break;
                     case "Sergey":
                         exercises = new Sergey.CollectionsExercises();
