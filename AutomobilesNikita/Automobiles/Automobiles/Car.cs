@@ -18,7 +18,13 @@ namespace Automobiles
         private IPedals _pedals;
 
         public string Name { get; private set; }
-        public double Fuel { get; private set; }
+
+        public double Fuel
+        {
+            get { return _gasolineTank.FuelAmount; }
+            set { _gasolineTank.FuelAmount = value; }
+        }
+
         public int Direction { get; private set; }
         public Lights Lights { get; private set; }
         public int Speed { get; private set; }
@@ -27,6 +33,7 @@ namespace Automobiles
         {
             Name = name;
             Direction = 90;
+            Lights = Lights.Off;
             _controlPanel = controlPanel;
             _engine = engine;
             _gasolineTank = gasolineTank;

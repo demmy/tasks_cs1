@@ -7,7 +7,7 @@ namespace ComponentsInterfaces
 {
     public interface IGasolineTank
     {
-        int FuelAmount { get; set; }
+        double FuelAmount { get; set; }
         int FuelRoominess { get; set; }
     }
 }

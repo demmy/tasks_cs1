@@ -10,14 +10,14 @@ namespace GermanComponents
 
     public class GasolineTank : IGasolineTank
     {
-        private int _fuelAmount = 40;
+        private double _fuelAmount = 40;
         private int _fuelRoominess = 40;
 
         public GasolineTank()
         {
         }
         
-        public int FuelAmount
+        public double FuelAmount
         {
             get { return _fuelAmount; }
             set { _fuelAmount = value; }

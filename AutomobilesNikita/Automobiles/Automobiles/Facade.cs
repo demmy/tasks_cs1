@@ -42,9 +42,15 @@ namespace Automobiles
             get { return _carFactory; }
         }
 
-        public IEnumerable<ICar> AvalaibleCars
+        public void NewFactory(CarType ct)
+        {
+            _carFactory = new Factory(ct);
+        }
+
+        public List<ICar> AvalaibleCars
         {
             get { return _avalaibleCars;  }
+            set { _avalaibleCars = (List<ICar>) value; }
         }
     }
 }

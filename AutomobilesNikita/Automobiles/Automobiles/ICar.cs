@@ -7,7 +7,7 @@ namespace Automobiles
 {
     public enum Lights
     {
-        Far, Close, Off
+        Off, Far, Close
     }
     public interface ICar
     {

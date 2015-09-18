@@ -8,7 +8,7 @@ namespace UkrainianComponents
 {
     public class GasolineTank : IGasolineTank
     {
-        private int _fuelAmount = 35;
+        private double _fuelAmount = 35;
         private int _fuelRoominess = 35;
 
         public GasolineTank()
@@ -16,7 +16,7 @@ namespace UkrainianComponents
 
         }
         
-        public int FuelAmount
+        public double FuelAmount
         {
             get { return _fuelAmount; }
             set { _fuelAmount = value; }
