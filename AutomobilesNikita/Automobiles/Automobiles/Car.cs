@@ -18,13 +18,15 @@ namespace Automobiles
         private IPedals _pedals;
 
         public string Name { get; private set; }
-        public int Fuel { get; private set; }
+        public double Fuel { get; private set; }
         public int Direction { get; private set; }
         public Lights Lights { get; private set; }
         public int Speed { get; private set; }
 
-        public Car(IControlPanel controlPanel, IEngine engine, IGasolineTank gasolineTank, IPedals pedals, ITransmission transmission, ISteeringWheel steeringWheel)
+        public Car(string name,IControlPanel controlPanel, IEngine engine, IGasolineTank gasolineTank, IPedals pedals, ITransmission transmission, ISteeringWheel steeringWheel)
         {
+            Name = name;
+            Direction = 90;
             _controlPanel = controlPanel;
             _engine = engine;
             _gasolineTank = gasolineTank;
@@ -33,40 +35,45 @@ namespace Automobiles
             _steeringWheel = steeringWheel;
         }
 
+        public void RefreshCarState()
+        {
+            Fuel -= 0.146*Speed;
+        }
 
         public void PressAccelerator(int pressurePower)
         {
-            throw new NotImplementedException();
+            Speed = Speed + pressurePower;
         }
 
         public void PressBrakes(int pressurePower)
         {
-            throw new NotImplementedException();
+            Speed = Speed - pressurePower;
         }
 
         public void RotateSteeringWheelRight(int angle)
         {
-            throw new NotImplementedException();
+            Direction += angle > _steeringWheel.Luft ? angle - _steeringWheel.Luft : 0;
         }
 
         public void RotateSteeringWheelLeft(int angle)
         {
-            throw new NotImplementedException();
+            Direction -= angle > _steeringWheel.Luft ? angle - _steeringWheel.Luft : 0;
+
         }
 
         public void TurnOnFarLights()
         {
-            throw new NotImplementedException();
+            Lights=Lights.Far;
         }
 
         public void TurnOnCloseLights()
         {
-            throw new NotImplementedException();
+            Lights = Lights.Close;
         }
 
         public void TurnOffLights()
         {
-            throw new NotImplementedException();
+            Lights = Lights.Off;
         }
     }
 }

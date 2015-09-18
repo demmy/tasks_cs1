@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using ComponentsInterfaces;
 
-namespace GermanComponents
+namespace UkrainianComponents
 {
     public class Transmission : ITransmission
     {
-        int _groundResistance = 7;
+        int _groundResistance = 4;
         public Transmission()
         {
         }

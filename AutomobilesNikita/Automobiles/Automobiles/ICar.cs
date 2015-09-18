@@ -11,7 +11,6 @@ namespace Automobiles
     }
     public interface ICar
     {
-        
         void PressAccelerator(int pressurePower);
         void PressBrakes(int pressurePower);
         void RotateSteeringWheelRight(int angle);
@@ -19,6 +18,5 @@ namespace Automobiles
         void TurnOnFarLights();
         void TurnOnCloseLights();
         void TurnOffLights();
-
     }
 }

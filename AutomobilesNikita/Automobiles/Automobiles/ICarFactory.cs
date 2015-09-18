@@ -7,6 +7,6 @@ namespace Automobiles
 {
     public interface ICarFactory
     {
-        ICar CreateCar();
+        ICar CreateCar(string name);
     }
 }

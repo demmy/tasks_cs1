@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ComponentsInterfaces;
+using GermanComponents;
 
 namespace Automobiles
 {
@@ -14,32 +15,32 @@ namespace Automobiles
 
         public IEngine CreateEngine()
         {
-            throw new NotImplementedException();
+            return new Engine();
         }
 
         public ISteeringWheel CreateWheel()
         {
-            throw new NotImplementedException();
+            return new SteeringWheel();
         }
 
         public IGasolineTank CreateTank()
         {
-            throw new NotImplementedException();
+            return new GasolineTank();
         }
 
         public IPedals CreatePedals()
         {
-            throw new NotImplementedException();
+            return new Pedals();
         }
 
         public IControlPanel CeratePanel()
         {
-            throw new NotImplementedException();
+            return new ControlPanel();
         }
 
         public ITransmission CreateTransmission()
         {
-            throw new NotImplementedException();
+            return new Transmission();
         }
     }
 }
