@@ -8,8 +8,25 @@ using ComponentsInterfaces;
 
 namespace Automobiles
 {
+
     public class Car : ICar
     {
+        public class CarEventArgs : EventArgs
+        {
+            private string _data;
+
+            public CarEventArgs(string data)
+            {
+                _data = data;
+            }
+
+            public string Data
+            {
+                get { return _data; }
+            }
+        }
+
+        private event EventHandler<CarEventArgs> Stopped = delegate(object sender, CarEventArgs args) {  }; 
         private IEngine _engine;
         private IGasolineTank _gasolineTank;
         private ISteeringWheel _steeringWheel;
@@ -40,11 +57,18 @@ namespace Automobiles
             _pedals = pedals;
             _transmission = transmission;
             _steeringWheel = steeringWheel;
+            Stopped += OnCarStopped();
+        }
+
+        private EventHandler<CarEventArgs> OnCarStopped()
+        {
+            Speed = 0;
         }
 
         public void RefreshCarState()
         {
             Fuel -= 0.146*Speed;
+            if (Fuel <= 0) Stopped(this, new CarEventArgs("Fuel ended"));
         }
 
         public void PressAccelerator(int pressurePower)
@@ -83,4 +107,6 @@ namespace Automobiles
             Lights = Lights.Off;
         }
     }
+
+
 }

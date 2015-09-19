@@ -12,7 +12,7 @@ namespace Automobiles
 {
     public partial class CreatingCarForm : Form
     {
-        private Facade _facade;
+        private readonly Facade _facade; 
 
         public CreatingCarForm(Facade facade)
         {
@@ -25,7 +25,6 @@ namespace Automobiles
             carTypeComboBox.DataSource = EnumList.Of<CarType>();
             carTypeComboBox.DisplayMember = "Key";
             carTypeComboBox.SelectedIndex = 0;
-
         }
 
         public class EnumList
@@ -41,6 +40,10 @@ namespace Automobiles
 
         private void carTypeComboBox_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Enter)
+            {
+                createButton_Click(this, e);
+            }
             e.SuppressKeyPress = true;
         }
 
@@ -49,11 +52,15 @@ namespace Automobiles
             if (!IsNameTextBoxValid()) return;
             CreateFactory();
             CreateCar();
+            MessageBox.Show(string.Format("Car {0} was created successfully!", nameTextBox.Text), "Car created", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            Close();
         }
 
         private void CreateCar()
         {
-            _facade.AvalaibleCars.Add(_facade.CarFactory.CreateCar(nameTextBox.Text));
+            List<ICar> avCars = _facade.AvalaibleCars as List<ICar> ?? new List<ICar>();
+            avCars.Add(_facade.CarFactory.CreateCar(nameTextBox.Text));
+            _facade.AvalaibleCars = avCars;
         }
 
         private void CreateFactory()
@@ -70,6 +77,14 @@ namespace Automobiles
                 return false;
             }
             return true;
+        }
+
+        private void nameTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                createButton_Click(this, e);
+            }
         }
     }
 }

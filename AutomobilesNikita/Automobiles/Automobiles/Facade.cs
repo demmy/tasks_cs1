@@ -18,7 +18,7 @@ namespace Automobiles
     public partial class Facade : Form
     {
         private CreatingCarForm _ccf;
-        private List<ICar> _avalaibleCars = new List<ICar>();
+        private IEnumerable<ICar> _avalaibleCars = new List<ICar>();
         private ICarFactory _carFactory;
 
         public Facade()
@@ -47,10 +47,10 @@ namespace Automobiles
             _carFactory = new Factory(ct);
         }
 
-        public List<ICar> AvalaibleCars
+        public IEnumerable<ICar> AvalaibleCars
         {
             get { return _avalaibleCars;  }
-            set { _avalaibleCars = (List<ICar>) value; }
+            set { _avalaibleCars = value; }
         }
     }
 }
