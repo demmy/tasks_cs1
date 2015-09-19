@@ -51,6 +51,7 @@
             this.rideButton.TabIndex = 1;
             this.rideButton.Text = "Ride a car";
             this.rideButton.UseVisualStyleBackColor = true;
+            this.rideButton.Click += new System.EventHandler(this.rideButton_Click);
             // 
             // exitButton
             // 

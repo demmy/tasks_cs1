@@ -18,6 +18,8 @@ namespace Automobiles
     public partial class Facade : Form
     {
         private CreatingCarForm _ccf;
+
+        private RidingCarForm _rcf;
         private IEnumerable<ICar> _avalaibleCars = new List<ICar>();
         private ICarFactory _carFactory;
 
@@ -51,6 +53,12 @@ namespace Automobiles
         {
             get { return _avalaibleCars;  }
             set { _avalaibleCars = value; }
+        }
+
+        private void rideButton_Click(object sender, EventArgs e)
+        {
+            _rcf = new RidingCarForm(this);
+            _rcf.ShowDialog();
         }
     }
 }

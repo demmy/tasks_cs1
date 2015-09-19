@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using ComponentsInterfaces;
+using Timer = System.Windows.Forms.Timer;
 
 
 namespace Automobiles
@@ -11,22 +13,10 @@ namespace Automobiles
 
     public class Car : ICar
     {
-        public class CarEventArgs : EventArgs
-        {
-            private string _data;
+        
+        public event EventHandler<CarEventArgs> FuelEnded = delegate(object sender, CarEventArgs args) {  };
+        public event EventHandler<CarEventArgs> CarStopped = delegate(object sender, CarEventArgs args) { }; 
 
-            public CarEventArgs(string data)
-            {
-                _data = data;
-            }
-
-            public string Data
-            {
-                get { return _data; }
-            }
-        }
-
-        private event EventHandler<CarEventArgs> Stopped = delegate(object sender, CarEventArgs args) {  }; 
         private IEngine _engine;
         private IGasolineTank _gasolineTank;
         private ISteeringWheel _steeringWheel;
@@ -34,17 +24,29 @@ namespace Automobiles
         private ITransmission _transmission;
         private IPedals _pedals;
 
-        public string Name { get; private set; }
+        private Timer _timer;
+        private int _speedSubstract;
+        private int _speed;
+
+        public string Name { get; set; }
+        public int Direction { get; set; }
+        public Lights Lights { get; set; }
+
+        public int Speed
+        {
+            get { return _speed; }
+            set
+            {
+                if(value==0) CarStopped(this, new CarEventArgs("Car stopped")); 
+                _speed = value;
+            }
+        }
 
         public double Fuel
         {
             get { return _gasolineTank.FuelAmount; }
             set { _gasolineTank.FuelAmount = value; }
         }
-
-        public int Direction { get; private set; }
-        public Lights Lights { get; private set; }
-        public int Speed { get; private set; }
 
         public Car(string name,IControlPanel controlPanel, IEngine engine, IGasolineTank gasolineTank, IPedals pedals, ITransmission transmission, ISteeringWheel steeringWheel)
         {
@@ -57,37 +59,67 @@ namespace Automobiles
             _pedals = pedals;
             _transmission = transmission;
             _steeringWheel = steeringWheel;
-            Stopped += OnCarStopped();
+            FuelEnded += OnFuelEnded;
         }
 
-        private EventHandler<CarEventArgs> OnCarStopped()
+        private void OnFuelEnded(object sender, CarEventArgs e)
         {
-            Speed = 0;
+            _timer = new Timer { Interval = 1000 };
+            _timer.Start();
+            _timer.Tick += OnTimerElapsed;
+            _speedSubstract = Convert.ToInt32(Speed / 20);
         }
 
-        public void RefreshCarState()
+
+        private void OnTimerElapsed(object sender, EventArgs eventArgs)
         {
-            Fuel -= 0.146*Speed;
-            if (Fuel <= 0) Stopped(this, new CarEventArgs("Fuel ended"));
+            Speed -= _speedSubstract;
+            if (Speed <= 0)
+            {
+                StopTimer();
+                CarStopped(this, new CarEventArgs("Car stopped"));
+            }
         }
 
+        private void StopTimer()
+        {
+            _timer.Stop();
+        }
+
+        public void RefreshCarState(object sender, EventArgs eventArgs)
+        {
+            Fuel -= 0.00146*Speed;
+            if (Fuel <= 0)
+            {
+                FuelEnded(this, new CarEventArgs("Fuel ended"));
+            }
+        }
+        
         public void PressAccelerator(int pressurePower)
         {
-            Speed = Speed + pressurePower;
+            Speed = (int) (Speed + pressurePower / (_transmission.GroundResistance*0.25));
         }
 
         public void PressBrakes(int pressurePower)
         {
-            Speed = Speed - pressurePower;
+            Speed = (int) (Speed - pressurePower/(_transmission.GroundResistance*0.25));
         }
 
         public void RotateSteeringWheelRight(int angle)
         {
+            if (angle > 50)
+            {
+                Speed /= 2;
+            } 
             Direction += angle > _steeringWheel.Luft ? angle - _steeringWheel.Luft : 0;
         }
 
         public void RotateSteeringWheelLeft(int angle)
         {
+            if (angle > 50)
+            {
+                Speed /= 2;
+            }
             Direction -= angle > _steeringWheel.Luft ? angle - _steeringWheel.Luft : 0;
 
         }
@@ -105,6 +137,11 @@ namespace Automobiles
         public void TurnOffLights()
         {
             Lights = Lights.Off;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}", Name);
         }
     }
 
