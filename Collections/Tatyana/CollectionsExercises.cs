@@ -78,6 +78,7 @@ namespace Collections.Tatyana
                 Console.WriteLine();
                 numbers.Enqueue(1, 5);
                 numbers.Add(5);
+                numbers.Enqueue(23, 1);
                 Print(numbers);
                 Console.WriteLine();
             }

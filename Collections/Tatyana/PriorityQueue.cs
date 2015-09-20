@@ -9,12 +9,14 @@ namespace Collections.Tatyana
     class PriorityQueue<T> :IPriorityQueue<T> , ICollection<T>
     {
         Dictionary<int, List<T>> elements = new Dictionary<int, List<T>>();
+        bool isSortedKey = true;
 
         public void Enqueue(T val, int priority)
         {
             if (!elements.ContainsKey(priority))
             {
                 elements[priority] = new List<T>();
+                isSortedKey = false;
             }
             elements[priority].Add(val);
 
@@ -52,23 +54,7 @@ namespace Collections.Tatyana
             return n;
         }
 
-        private int NextPriority()
-        {
-            int n=MinPriority();
-            int m=0;
-            int pred=n;
-                if (elements.Count>1)
-                {
-                    pred = elements.Keys.ElementAt<int>(0);
-                    foreach (int i in elements.Keys)
-                    {
-                        if (i > n)
-                        {
-                            m = i;
-                        }
-                    }
-                }
-        }
+        
 
         public T Dequeue()
         {
@@ -165,13 +151,24 @@ namespace Collections.Tatyana
         public IEnumerator<T> GetEnumerator()
         {
             if (elements.Count > 0)
+
             {
-               foreach (int i in elements.Keys)
+                List<int> a = new List<int>();
+                if (!isSortedKey)
                 {
+                    a.AddRange(elements.Keys);
+                    a.Sort();
+                    a.Reverse();
+                }
+               foreach (int i in a)
+                {
+                    if (elements.ContainsKey(i))
+                    {
                         foreach (var t in elements[i])
                         {
                             yield return t;
                         }
+                    }
                   }
                 }
             
@@ -189,6 +186,7 @@ namespace Collections.Tatyana
             if (this.Count==0)
             {
                 elements[i] = new List<T>();
+                isSortedKey = false;
             }
             
            elements[i].Add(item);
@@ -197,6 +195,7 @@ namespace Collections.Tatyana
         public void Clear()
         {
             elements = new Dictionary<int, List<T>>();
+            isSortedKey = true;
         }
 
         public bool Contains(T item)
