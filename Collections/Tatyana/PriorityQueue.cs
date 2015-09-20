@@ -28,12 +28,6 @@ namespace Collections.Tatyana
             if (elements.Keys.Count > 0)
             {
                 n = elements.Keys.Min();
-
-                //foreach (int i in elements.Keys)
-                //{
-                //    if (i < n)
-                //        n = i;
-                //}
              }
             return n;
         }
@@ -44,13 +38,7 @@ namespace Collections.Tatyana
             if (elements.Keys.Count > 0)
             {
                 n = elements.Keys.Max();
-
-                //foreach (int i in elements.Keys)
-                //{
-                //    if (i > n)
-                //        n = i;
-                //}
-            }
+             }
             return n;
         }
 
