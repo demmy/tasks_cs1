@@ -17,6 +17,26 @@ namespace University.Sergey.Models.Abstracts
             _dateOfBirth = dateOfBirth;
         }
 
+        public string FirstName
+        {
+            get { return _firstName; }
+        }
+
+        public string FamilyName
+        {
+            get { return _familyName; }
+        }
+
+        public string Patronymic
+        {
+            get { return _patronymic; }
+        }
+
+        public string DateOfBirth
+        {
+            get { return _dateOfBirth.ToShortTimeString(); }
+        }
+
         public string FullName
         {
             get { return string.Format("{0} {1} {2}", _firstName, _patronymic, _familyName); }

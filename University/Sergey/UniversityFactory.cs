@@ -10,12 +10,12 @@ namespace University.Sergey
     {
         public IUniversity CreateUniversity(string title)
         {
-            throw new NotImplementedException();
+            return new Models.University(title);
         }
 
         public string ProgrammerName
         {
-            get { throw new NotImplementedException(); }
+            get { return "Sergey Matvienko"; }
         }
     }
 }

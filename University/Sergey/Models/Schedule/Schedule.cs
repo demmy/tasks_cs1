@@ -8,7 +8,7 @@ namespace University.Sergey.Models.Schedule
 {
     partial class Schedule: ISchedule
     {
-        private Dictionary<DateTime, List<ScheduleItem>> _items;
+        private IDictionary<DateTime, List<ScheduleItem>> _items;
 
         public IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>> GetByDay(DateTime day)
         {

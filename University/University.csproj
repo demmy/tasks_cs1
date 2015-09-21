@@ -51,8 +51,7 @@
     <Compile Include="Nikita\UniversityFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sergey\Enums\Enums.cs" />
-    <Compile Include="Sergey\Models\Abstracs\Person.cs" />
+    <Compile Include="Sergey\Models\Abstracts\Person.cs" />
     <Compile Include="Sergey\Models\Group.cs" />
     <Compile Include="Sergey\Models\Room.cs" />
     <Compile Include="Sergey\Models\Schedule\Schedule.cs" />
