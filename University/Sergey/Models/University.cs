@@ -9,7 +9,7 @@ namespace University.Sergey.Models
     class University: IUniversity
     {
         #region Statics
-
+        //The connection between Names of Faculties and their enums
         public static readonly IReadOnlyDictionary<FacultyType, string> FacultyNaming = new Dictionary
             <FacultyType, string>
         {
@@ -18,7 +18,7 @@ namespace University.Sergey.Models
             {FacultyType.Languages, "Languages"},
             {FacultyType.Physics, "Physics"}
         };
-
+        //The relation of hierarchy (speciality -> faculty)
         public static readonly IReadOnlyDictionary<string, IEnumerable<string>> FacultyToSpecialityRelations = new Dictionary
             <string, IEnumerable<string>>
         {
@@ -39,7 +39,7 @@ namespace University.Sergey.Models
                 new[] {"English", "German"}
             }
         };
-
+        //TODO: find better solution than using lts of static dictionary, have a closer look to some patterns
         #endregion
         private string _title;
         private ISchedule _schedule;

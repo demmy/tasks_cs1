@@ -8,6 +8,7 @@ namespace University.Sergey.Models
     class Group : IReadOnlyGroup, IList<Student>
     {
         private readonly IList<Student> _students;
+        //The field to control number of existing groups of each faculty and speciality
         private static readonly IDictionary<Tuple<string, string>, int> ExistingGroupsOnSpecialityNumber;
 
         static Group()
