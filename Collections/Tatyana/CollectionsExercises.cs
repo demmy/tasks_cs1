@@ -10,9 +10,9 @@ namespace Collections.Tatyana
     {
         public void WorkPriorityQueue()
         {
-            //WorkWithPriorityQueue();
+            WorkWithPriorityQueue();
           //  WorkWithStudentDictionary();
-            WorkWithMySingleCollection();
+           // WorkWithMySingleCollection();
         }
 
         static void WorkWithMySingleCollection()
