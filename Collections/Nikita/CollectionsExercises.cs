@@ -10,17 +10,19 @@ namespace Collections.Nikita
     {
         public void WorkPriorityQueue()
         {
-            PriorityQueue<string> pq = new PriorityQueue<string>();
-            pq.Enqueue("Лалка", 4);
-            pq.Enqueue("Палка", 3);
-            pq.Enqueue("Стрелка", 7);
-            pq.Enqueue("Дралка", 3);
-            pq.Enqueue("Ломалка", 1);
-            string deq = pq.Dequeue();
-            int pCount = pq.GetCount(7);
-            string first = pq.First();
-            string last = pq.Last();
-            string pLast = pq.Last(3);
+            MyLogger logger = new MyLogger();
+            MySingleCollection<int> coll = new MySingleCollection<int>(logger);
+            coll.Add(5);
+            coll.Add(4);
+            coll.Add(2);
+            coll.Add(40);
+            coll.Add(2);
+            coll.Add(1);
+
+            coll.RemoveAt(2);
+            coll.Clear();
+            logger.ShowAllItems();
+            
         }
     }
 }
