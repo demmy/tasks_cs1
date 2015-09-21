@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Collections.Sergey.Models
 {
@@ -23,7 +19,7 @@ namespace Collections.Sergey.Models
         {
             get
             {
-                return string.Format("{0} {1}", _firstName, _familyName);
+                return string.Format("{0} {1}", FirstName, FamilyName);
             }
         }
 
@@ -32,9 +28,24 @@ namespace Collections.Sergey.Models
             get
             {
                 var now = DateTime.Today;
-                int age = now.Year - _dateOfBirth.Year;
-                return (_dateOfBirth > now.AddYears(-age)) ? age - 1 : age;
+                int age = now.Year - DateOfBirth.Year;
+                return (DateOfBirth > now.AddYears(-age)) ? age - 1 : age;
             }
+        }
+
+        public string FirstName
+        {
+            get { return _firstName; }
+        }
+
+        public string FamilyName
+        {
+            get { return _familyName; }
+        }
+
+        public DateTime DateOfBirth
+        {
+            get { return _dateOfBirth; }
         }
     }
 }

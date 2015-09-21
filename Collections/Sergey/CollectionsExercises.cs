@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Collections.Sergey.Models;
 using Collections.Sergey.Collections;
+using Collections.Sergey.Loger;
 
 namespace Collections.Sergey
 {
@@ -54,13 +51,44 @@ namespace Collections.Sergey
                 userPriorityQueue.Enqueue(new User("Somalien", "Fred", new DateTime(1976, 12, 5)), 2);
                 //Console.WriteLine("First element of 4th priority = {0}", userPriorityQueue.First(4).FullName);
                 //Console.WriteLine("Last element of 4th priority = {0}", userPriorityQueue.Last(4).FullName);
-                Console.WriteLine("Queue length = {0}", userPriorityQueue.Count);                
+                Console.WriteLine("Queue length = {0}", userPriorityQueue.Count);
+                MySimpleCollectionTesting();
+                StudentDictionaryTesting();
             }
             catch (Exception e)
             {
                 Console.WriteLine("Exception occured - {0}", e.Message);
             }
             Console.ReadKey();
+        }
+
+        private void MySimpleCollectionTesting()
+        {
+            MyLoger loger = new MyLoger();
+            var simpleTestCollection = new MySimpleCollection<decimal>(loger)
+            {
+                45,
+                32,
+                67,
+                23478
+            };
+            simpleTestCollection.Insert(2, 33);
+            simpleTestCollection.Remove(23478);
+            simpleTestCollection[3] = 41;
+            simpleTestCollection.Clear();
+            foreach (var log in loger.Logs)
+                Console.WriteLine(log);
+        }
+
+        private void StudentDictionaryTesting()
+        {
+            StudentDictionary studentDictionary = new StudentDictionary 
+            {
+                new Student("Albert", "Guiness", new DateTime(1426,2,1)),
+                new Student("Peter", "Stranford", new DateTime(1963, 4, 2))
+            };
+            foreach (var key in studentDictionary.Keys)
+                Console.WriteLine("<<<<{0} {1} in Student(Keyed)Collection", key.Item1, key.Item2);
         }
     }
 }
