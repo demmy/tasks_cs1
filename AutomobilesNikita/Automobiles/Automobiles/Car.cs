@@ -91,6 +91,7 @@ namespace Automobiles
             Fuel -= 0.00146*Speed;
             if (Fuel <= 0)
             {
+                Fuel = 0;
                 FuelEnded(this, new CarEventArgs("Fuel ended"));
             }
         }
