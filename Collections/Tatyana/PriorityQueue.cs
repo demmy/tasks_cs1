@@ -20,80 +20,137 @@ namespace Collections.Tatyana
 
         }
 
-        private int Min()
+        private int MinPriority()
         {
-            int n = 0;
-            foreach (int i in elements.Keys)
+            int n = int.MinValue;
+            if (elements.Keys.Count > 0)
             {
-                if (i < n)
-                    n = i;
+                n = elements.Keys.ElementAt<int>(0);
+
+                foreach (int i in elements.Keys)
+                {
+                    if (i < n)
+                        n = i;
+                }
+             }
+            return n;
+        }
+
+        private int MaxPriority()
+        {
+            int n = int.MaxValue;
+            if (elements.Keys.Count > 0)
+            {
+                n = elements.Keys.ElementAt<int>(0);
+
+                foreach (int i in elements.Keys)
+                {
+                    if (i > n)
+                        n = i;
+                }
             }
             return n;
         }
 
-        private int Max()
+        private int NextPriority()
         {
-            int n = 0;
-            foreach (int i in elements.Keys)
-            {
-                if (i > n)
-                    n = i;
-            }
-            return n;
+            int n=MinPriority();
+            int m=0;
+            int pred=n;
+                if (elements.Count>1)
+                {
+                    pred = elements.Keys.ElementAt<int>(0);
+                    foreach (int i in elements.Keys)
+                    {
+                        if (i > n)
+                        {
+                            m = i;
+                        }
+                    }
+                }
         }
-
 
         public T Dequeue()
         {
-            T a = elements[Max()].ElementAt(0);
-            elements[Max()].Remove(a);
-            return a;
-            
+            if (elements.Count > 0)
+            {   
+                int i=MaxPriority();
+                T a = elements[i].ElementAt(0);
+                elements[i].Remove(a);
+                if (elements[i].Count == 0)
+                {
+                    elements.Remove(i);
+
+                }
+                return a;
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public T First()
         {
-            T a = elements[Max()].ElementAt(0);
-            return a;
-            
+            if (elements.Count > 0)
+            {
+                T a = elements[MaxPriority()].ElementAt(0);
+                return a;
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public T First(int priority)
         {
-            T a = elements[priority].ElementAt(0);
-            return a;
+            if (elements.ContainsKey(priority))
+            {
+                T a = elements[priority].ElementAt(0);
+                return a;
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public T Last()
         {
-            T a = elements[Min()].ElementAt(elements[Min()].Count-1);
-            return a;
-           
+            if (elements.Count > 0)
+            {
+                T a = elements[MinPriority()].ElementAt(elements[MinPriority()].Count - 1);
+                return a;
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public T Last(int priority)
         {
-            T a = elements[priority].ElementAt(elements[Min()].Count - 1);
-            return a;
-        }
-
-        public int Count()
-        {
-            int n=0;
-            foreach (int i in elements.Keys)
+            if (elements.ContainsKey(priority))
             {
-                n += elements[i].Count;
+                T a = elements[priority].ElementAt(elements[MinPriority()].Count - 1);
+                return a;
             }
-            return n;
-        }
+            else
+            {
+                throw new NotImplementedException();
+            }
+         }
+
+        
 
         public int GetCount(int priority)
         {
-            return elements[priority].Count;
+                return elements.ContainsKey(priority)? elements[priority].Count:0;
         }
 
 
-        int IPriorityQueue<T>.Count
+       public int Count
         {
             get {
                 int n = 0;
@@ -107,47 +164,86 @@ namespace Collections.Tatyana
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            if (elements.Count > 0)
+            {
+               foreach (int i in elements.Keys)
+                {
+                        foreach (var t in elements[i])
+                        {
+                            yield return t;
+                        }
+                  }
+                }
+            
+            
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            int i = MinPriority();
+            if (this.Count==0)
+            {
+                elements[i] = new List<T>();
+            }
+            
+           elements[i].Add(item);
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            elements = new Dictionary<int, List<T>>();
         }
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            bool b = false;
+            foreach (int i in elements.Keys)
+            {
+                foreach (T e in elements[i])
+                {
+                    if (object.Equals(e, item))
+                    {
+                        b = true;
+                        break;
+                    }
+                }
+            }
+            return b;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            elements[MinPriority()].Add(array[arrayIndex]);
         }
 
-        int ICollection<T>.Count
-        {
-            get { throw new NotImplementedException(); }
-        }
+        
 
         public bool IsReadOnly
         {
-            get { throw new NotImplementedException(); }
+            get { return false; }
         }
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            bool b = false;
+            foreach (int i in elements.Keys)
+            {
+                foreach (T e in elements[i])
+                {
+                    if (object.Equals(e, item))
+                    {
+                        elements[i].Remove(e);
+                        b = true;
+
+                    }
+                }
+            }
+            return b;
         }
     }
 }
