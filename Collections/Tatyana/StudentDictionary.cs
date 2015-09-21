@@ -11,8 +11,6 @@ namespace Collections.Tatyana
     {
         private string firstName;
         private string lastName;
-        private string[] subjects1 = new string[0];
-        private int[] marks = new int[0];
         private Dictionary<string, int> subjects = new Dictionary<string, int>();
         public string FirstName 
         { 

@@ -11,8 +11,8 @@ namespace Collections.Tatyana
         public void WorkPriorityQueue()
         {
             WorkWithPriorityQueue();
-          //  WorkWithStudentDictionary();
-           // WorkWithMySingleCollection();
+            WorkWithStudentDictionary();
+            WorkWithMySingleCollection();
         }
 
         static void WorkWithMySingleCollection()
@@ -26,6 +26,7 @@ namespace Collections.Tatyana
             collection.Insert(1, 8);
             collection.Remove(23);
             collection.Remove(11);
+            collection[0] = 25;
             collection.Clear();
             collectionDate.Add(new DateTime(2005, 5, 4));
             Console.WriteLine( logger.AllInformation());

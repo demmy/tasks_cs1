@@ -39,7 +39,7 @@ namespace Collections.Tatyana
 
         protected override void SetItem(int index, T item)
         {
-            history.Log("SetElement", "array[", index, "] =", base.Items[index], "new value=",  "array[", index, "] =", item);
+            history.Log("SetElement", "array[", index, "] =", base.Items[index], "new value",  "array[", index, "] =", item);
                 base.SetItem(index, item);
         }
        
