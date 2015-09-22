@@ -9,12 +9,18 @@ namespace Collections.Tatyana
     class PriorityQueue<T> :IPriorityQueue<T> , ICollection<T>
     {
         Dictionary<int, List<T>> elements = new Dictionary<int, List<T>>();
+        /// <summary>
+        ///  Сначала из очереди выходит элемент с самым меньшим приоритетом
+        /// </summary>
+        /// <param name="val"></param>
+        /// <param name="priority"></param>
 
         public void Enqueue(T val, int priority)
         {
             if (!elements.ContainsKey(priority))
             {
                 elements[priority] = new List<T>();
+                
             }
             elements[priority].Add(val);
 
@@ -25,13 +31,7 @@ namespace Collections.Tatyana
             int n = int.MinValue;
             if (elements.Keys.Count > 0)
             {
-                n = elements.Keys.ElementAt<int>(0);
-
-                foreach (int i in elements.Keys)
-                {
-                    if (i < n)
-                        n = i;
-                }
+                n = elements.Keys.Min();
              }
             return n;
         }
@@ -41,40 +41,18 @@ namespace Collections.Tatyana
             int n = int.MaxValue;
             if (elements.Keys.Count > 0)
             {
-                n = elements.Keys.ElementAt<int>(0);
-
-                foreach (int i in elements.Keys)
-                {
-                    if (i > n)
-                        n = i;
-                }
-            }
+                n = elements.Keys.Max();
+             }
             return n;
         }
 
-        private int NextPriority()
-        {
-            int n=MinPriority();
-            int m=0;
-            int pred=n;
-                if (elements.Count>1)
-                {
-                    pred = elements.Keys.ElementAt<int>(0);
-                    foreach (int i in elements.Keys)
-                    {
-                        if (i > n)
-                        {
-                            m = i;
-                        }
-                    }
-                }
-        }
+        
 
         public T Dequeue()
         {
             if (elements.Count > 0)
-            {   
-                int i=MaxPriority();
+            {
+                int i = MinPriority();
                 T a = elements[i].ElementAt(0);
                 elements[i].Remove(a);
                 if (elements[i].Count == 0)
@@ -94,7 +72,7 @@ namespace Collections.Tatyana
         {
             if (elements.Count > 0)
             {
-                T a = elements[MaxPriority()].ElementAt(0);
+                T a = elements[MinPriority()].ElementAt(0);
                 return a;
             }
             else
@@ -120,7 +98,7 @@ namespace Collections.Tatyana
         {
             if (elements.Count > 0)
             {
-                T a = elements[MinPriority()].ElementAt(elements[MinPriority()].Count - 1);
+                T a = elements[MaxPriority()].ElementAt(elements[MaxPriority()].Count - 1);
                 return a;
             }
             else
@@ -133,7 +111,7 @@ namespace Collections.Tatyana
         {
             if (elements.ContainsKey(priority))
             {
-                T a = elements[priority].ElementAt(elements[MinPriority()].Count - 1);
+                T a = elements[priority].ElementAt(elements[priority].Count - 1);
                 return a;
             }
             else
@@ -165,13 +143,21 @@ namespace Collections.Tatyana
         public IEnumerator<T> GetEnumerator()
         {
             if (elements.Count > 0)
+
             {
-               foreach (int i in elements.Keys)
+                List<int> a = new List<int>();
+                    a.AddRange(elements.Keys);
+                    a.Sort();
+                    
+               foreach (int i in a)
                 {
+                    if (elements.ContainsKey(i))
+                    {
                         foreach (var t in elements[i])
                         {
                             yield return t;
                         }
+                    }
                   }
                 }
             
@@ -185,10 +171,11 @@ namespace Collections.Tatyana
 
         public void Add(T item)
         {
-            int i = MinPriority();
+            int i = MaxPriority();
             if (this.Count==0)
             {
                 elements[i] = new List<T>();
+          
             }
             
            elements[i].Add(item);
@@ -197,6 +184,7 @@ namespace Collections.Tatyana
         public void Clear()
         {
             elements = new Dictionary<int, List<T>>();
+           
         }
 
         public bool Contains(T item)
@@ -218,7 +206,7 @@ namespace Collections.Tatyana
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            elements[MinPriority()].Add(array[arrayIndex]);
+            elements[MaxPriority() ].Add(array[arrayIndex]);
         }
 
         

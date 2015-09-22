@@ -6,81 +6,42 @@ using System.Threading.Tasks;
 
 namespace Collections.Tatyana
 {
-    class MySingleCollection<T>: ICollection<T>
+    class MySingleCollection<T>: System.Collections.ObjectModel.Collection<T>
     {
-        List<T> list = new List<T>();
         ILogger history;
 
-
-        public MySingleCollection( ILogger h)
-
-    {
-        history = h;
-    }
-
-        public void Add(T item)
+        public MySingleCollection(ILogger h)
         {
-            list.Add(item);
-            history.Log("AddNewElement", item);
+            history = h;
         }
 
-        
-        public void Clear()
+        protected override void ClearItems()
         {
-
-            history.Log("Delete all elements", list);
-            list.Clear();
-
-        }
-
-        public bool Contains(T item)
-        {
-            return list.Contains(item);
-        }
-
-        public void CopyTo(T[] array, int arrayIndex)
-        {
-            list.Add(array[arrayIndex]);
-            history.Log("AddNewElement", array[arrayIndex]);
-        }
-
-        public int Count
-        {
-            get { return list.Count; }
-        }
-
-        public bool IsReadOnly
-        {
-            get { return false; }
-        }
-
-        public bool Remove(T item)
-        {
-            bool b = false;
-            foreach (T i in list)
+            string s="";
+            foreach (var t in base.Items )
             {
-                if (object.Equals(item, i))
-                {
-                    list.Remove(item);
-                    history.Log("DeleteElement", item);
-                    b = true;
-                }
+                s+=" "+t.ToString();
             }
-            return b;
+            history.Log("Delete all elements ", s);
+            base.ClearItems();
+        }
+        protected override void InsertItem(int index, T item)
+        {
+            base.InsertItem(index, item);
+            history.Log("AddNewElement", "array[", index, "] =", item);
         }
 
-        public IEnumerator<T> GetEnumerator()
+        protected override void RemoveItem(int index)
         {
-            foreach (T t in list)
-            {
-                yield return t;
-            }
-            
+            history.Log("DeleteElement", "array[", index, "] =", base.Items[index]);
+            base.RemoveItem(index);
         }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        protected override void SetItem(int index, T item)
         {
-            return GetEnumerator();
+            history.Log("SetElement", "array[", index, "] =", base.Items[index], "new value",  "array[", index, "] =", item);
+                base.SetItem(index, item);
         }
-    }
+       
+    } 
 }
