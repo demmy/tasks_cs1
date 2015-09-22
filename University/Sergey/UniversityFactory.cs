@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace University.Sergey
+﻿namespace University.Sergey
 {
     class UniversityFactory : IUniversityFactory
     {
         public IUniversity CreateUniversity(string title)
         {
-            throw new NotImplementedException();
+            return new Models.University(title);
         }
 
         public string ProgrammerName
         {
-            get { throw new NotImplementedException(); }
+            get { return "Sergey Matvienko"; }
         }
     }
 }

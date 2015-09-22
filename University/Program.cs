@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using University.Sergey;
 
 namespace University
 {
@@ -271,7 +272,9 @@ namespace University
 
         static void MainSergey()
         {
-        
+            IUniversityFactory factory = new Sergey.UniversityFactory();
+            var univer = factory.CreateUniversity("Dnipropetrovs'k National University named after Oles' Gonchar");
+            
         }
 
         static void MainNikita()
