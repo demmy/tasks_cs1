@@ -63,7 +63,7 @@ namespace Collections.Tatyana
            return information.ToString();
         }
 
-        public string IformationForDate(DateTime data, string a="\n\r" )
+        public string IformationForDate(DateTime data, string disjunctive="\n\r" )
         {
             string result = " ";
             foreach (var t in information)
@@ -75,13 +75,13 @@ namespace Collections.Tatyana
                     {
                         result += " " + i.ToString();
                     }
-                    result +=  a;
+                    result +=  disjunctive;
                 }
             }
             return result;
  
         }
-        public string InformationBetweenDates(DateTime data1, DateTime data2, string a = "\n\r")
+        public string InformationBetweenDates(DateTime data1, DateTime data2, string disjunctive = "\n\r")
         {
             string result = " ";
             foreach (var t in information)
@@ -93,7 +93,7 @@ namespace Collections.Tatyana
                     {
                         result += " " + i.ToString();
                     }
-                    result += a;
+                    result += disjunctive;
                 }
             }
             return result;
