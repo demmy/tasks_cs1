@@ -1,19 +1,17 @@
 ﻿using System;   
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using University.Sergey.Models.Interfaces;
 
 namespace University.Sergey.Models.Schedule
 {
     partial class Schedule
     {
-        private class ScheduleItem
+        private class ScheduleItem: IElementsManager<IReadOnlyTeacher>, IElementsManager<IReadOnlyGroup>
         {
             private readonly LessonsOrder _lesson;
             private readonly IRoom _room;
-            private readonly IEnumerable<IReadOnlyTeacher> _teachers;
-            private readonly IEnumerable<IReadOnlyGroup> _groups;
+            private readonly List<IReadOnlyTeacher> _teachers;
+            private readonly List<IReadOnlyGroup> _groups;
 
             #region Timing
 
@@ -73,16 +71,16 @@ namespace University.Sergey.Models.Schedule
             {
                 _lesson = lesson;
                 _room = room;
-                _teachers = teachers;
-                _groups = groups;
+                _teachers.AddRange(teachers);
+                _groups.AddRange(groups);
             }
 
-            public IEnumerable<IReadOnlyGroup> Groups
+            public IReadOnlyList<IReadOnlyGroup> Groups
             {
                 get { return _groups; }
             }
 
-            public IEnumerable<IReadOnlyTeacher> Teachers
+            public IReadOnlyList<IReadOnlyTeacher> Teachers
             {
                 get { return _teachers; }
             }
@@ -95,6 +93,36 @@ namespace University.Sergey.Models.Schedule
             public IRoom Room
             {
                 get { return _room; }
+            }
+
+            public void Add(IReadOnlyTeacher item)
+            {
+                _teachers.Add(item);
+            }
+
+            public void AddRange(IEnumerable<IReadOnlyTeacher> items)
+            {
+                _teachers.AddRange(items);
+            }
+
+            public void Remove(IReadOnlyTeacher item)
+            {
+                _teachers.Add(item);
+            }
+
+            public void Add(IReadOnlyGroup item)
+            {
+                _groups.Add(item);
+            }
+
+            public void AddRange(IEnumerable<IReadOnlyGroup> items)
+            {
+                _groups.AddRange(items);
+            }
+
+            public void Remove(IReadOnlyGroup item)
+            {
+                _groups.Add(item);
             }
         }
     }

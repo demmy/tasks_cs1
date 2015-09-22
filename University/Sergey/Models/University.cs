@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using University.Sergey.Models.Interfaces;
 
 namespace University.Sergey.Models
 {
-    class University: IUniversity
+    class University: IUniversity, IElementsManager<IReadOnlyTeacher>, IElementsManager<IRoom>, IElementsManager<IReadOnlyGroup>
     {
         #region Statics
         //The connection between Names of Faculties and their enums
@@ -62,8 +61,8 @@ namespace University.Sergey.Models
         private readonly ISchedule _schedule;
 
         private readonly GroupDictionary _groups;
-        private readonly IReadOnlyTeacher[] _teachers;
-        private readonly IRoom[] _rooms;
+        private readonly List<IReadOnlyTeacher> _teachers;
+        private readonly List<IRoom> _rooms;
 
         #endregion
         
@@ -73,8 +72,8 @@ namespace University.Sergey.Models
         {
             _title = title;
             _schedule = new Schedule.Schedule();
-            _rooms = new IRoom[0];
-            _teachers = new IReadOnlyTeacher[0];
+            _rooms = new List<IRoom>();
+            _teachers = new List<IReadOnlyTeacher>();
             _groups = new GroupDictionary();
         }
 
@@ -82,8 +81,8 @@ namespace University.Sergey.Models
         {
             _title = title;
             _schedule = schedule;
-            _rooms = new IRoom[0];
-            _teachers = new IReadOnlyTeacher[0];
+            _rooms = new List<IRoom>();
+            _teachers = new List<IReadOnlyTeacher>();
             _groups = new GroupDictionary();
         }
 
@@ -91,8 +90,8 @@ namespace University.Sergey.Models
         {
             _title = title;
             _schedule = schedule;
-            _rooms = rooms;
-            _teachers = new IReadOnlyTeacher[0];
+            _rooms.AddRange(rooms);
+            _teachers = new List<IReadOnlyTeacher>();
             _groups = new GroupDictionary();
         }
 
@@ -100,13 +99,20 @@ namespace University.Sergey.Models
         {
             _title = title;
             _schedule = schedule;
-            _rooms = rooms;
-            _teachers = teachers;
+            _rooms.AddRange(rooms);
+            _teachers.AddRange(teachers);
             _groups = new GroupDictionary();
         }
 
         #endregion
 
+        public void AddLesson(DateTime date, LessonsOrder lesson, Room room, IEnumerable<Teacher> teachers,
+            IEnumerable<Group> groups)
+        {
+            var schedule = _schedule as Schedule.Schedule;
+            if (schedule != null)
+                schedule.AddLesson(date, lesson, room, teachers, groups);
+        }
 
         public ISchedule CurrentSchedule
         {
@@ -134,6 +140,52 @@ namespace University.Sergey.Models
         public IReadOnlyList<string> GetStudentsNames(string groupName)
         {
             return (from @student in _groups[groupName].Students select @student.FullName).ToList();
+        }
+
+        public void Add(IReadOnlyTeacher item)
+        {
+            _teachers.Add(item);
+        }
+
+        public void AddRange(IEnumerable<IReadOnlyTeacher> items)
+        {
+            _teachers.AddRange(items);
+        }
+
+        public void Remove(IReadOnlyTeacher item)
+        {
+            _teachers.Remove(item);
+        }
+
+        public void Add(IRoom item)
+        {
+            _rooms.Add(item);
+        }
+
+        public void AddRange(IEnumerable<IRoom> items)
+        {
+            _rooms.AddRange(items);
+        }
+
+        public void Remove(IRoom item)
+        {
+            _rooms.Remove(item);
+        }
+
+        public void Add(IReadOnlyGroup item)
+        {
+            _groups.Add(item);
+        }
+
+        public void AddRange(IEnumerable<IReadOnlyGroup> items)
+        {
+            foreach (IReadOnlyGroup @group in items)
+                _groups.Add(group);
+        }
+
+        public void Remove(IReadOnlyGroup item)
+        {
+            _groups.Add(item);
         }
     }
 }

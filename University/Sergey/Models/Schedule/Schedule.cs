@@ -12,11 +12,20 @@ namespace University.Sergey.Models.Schedule
         {
             _items = new Dictionary<DateTime, List<ScheduleItem>>();
         }
+
+        public void AddLesson(DateTime date, LessonsOrder lesson, Room room, IEnumerable<Teacher> teachers,
+            IEnumerable<Group> groups)
+        {
+            if(!_items.ContainsKey(date))
+                _items.Add(date, new List<ScheduleItem>());
+            _items[date].Add(new ScheduleItem(lesson, room, teachers, groups));
+        }
+
         public IReadOnlyDictionary<string, IReadOnlyList<Tuple<DateTime, IReadOnlyList<string>, IReadOnlyList<string>>>> GetByDay(DateTime day)
         {
             //if (!_items.ContainsKey(day))
             //    throw new KeyNotFoundException();
-            //If there is no such day in collection it should return an empty collection
+            //If there is no such day in collection it should return an empty collection, waiting for testing
             var grouping = 
                 from @item in _items
                     from @scheduleItem in item.Value
@@ -116,8 +125,8 @@ namespace University.Sergey.Models.Schedule
 
                     group new Tuple<IRoom, IReadOnlyList<IReadOnlyTeacher>, IReadOnlyList<IReadOnlyGroup>>
                             (scheduleItem.Room,
-                            scheduleItem.Teachers.ToList(),
-                            scheduleItem.Groups.ToList())
+                            scheduleItem.Teachers,
+                            scheduleItem.Groups)
                            
                     by new Tuple<DateTime, LessonsOrder>(item.Key, scheduleItem.Lesson)
 
