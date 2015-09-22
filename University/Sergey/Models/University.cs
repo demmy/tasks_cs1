@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,12 +42,22 @@ namespace University.Sergey.Models
         };
         //TODO: find better solution than using lts of static dictionary, have a closer look to some patterns
         #endregion
+        private class GroupDictionary : KeyedCollection<string, IReadOnlyGroup>
+        {
+
+            protected override string GetKeyForItem(IReadOnlyGroup item)
+            {
+                return item.ID;
+            }
+        }
+
         private string _title;
         private ISchedule _schedule;
         
-        private static IReadOnlyGroup[] _groups;
+        private static GroupDictionary _groups;
         private static IReadOnlyTeacher[] _teachers;
         private static IRoom[] _rooms;
+
         public University(string title)
         {
             _title = title;
@@ -72,7 +83,7 @@ namespace University.Sergey.Models
 
         public IReadOnlyList<string> GetStudentsNames(string groupName)
         {
-
+            return (from @student in _groups[groupName].Students select @student.FullName).ToList();
         }
     }
 }
