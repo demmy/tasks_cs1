@@ -42,6 +42,9 @@ namespace University.Sergey.Models
         };
         //TODO: find better solution than using lts of static dictionary, have a closer look to some patterns
         #endregion
+
+        #region Inner Classes
+
         private class GroupDictionary : KeyedCollection<string, IReadOnlyGroup>
         {
 
@@ -51,17 +54,59 @@ namespace University.Sergey.Models
             }
         }
 
+        #endregion
+
+        #region Private Fields
+
         private string _title;
-        private ISchedule _schedule;
+        private readonly ISchedule _schedule;
+
+        private readonly GroupDictionary _groups;
+        private readonly IReadOnlyTeacher[] _teachers;
+        private readonly IRoom[] _rooms;
+
+        #endregion
         
-        private static GroupDictionary _groups;
-        private static IReadOnlyTeacher[] _teachers;
-        private static IRoom[] _rooms;
+        #region Ctors
 
         public University(string title)
         {
             _title = title;
+            _schedule = new Schedule.Schedule();
+            _rooms = new IRoom[0];
+            _teachers = new IReadOnlyTeacher[0];
+            _groups = new GroupDictionary();
         }
+
+        public University(string title, ISchedule schedule)
+        {
+            _title = title;
+            _schedule = schedule;
+            _rooms = new IRoom[0];
+            _teachers = new IReadOnlyTeacher[0];
+            _groups = new GroupDictionary();
+        }
+
+        public University(string title, ISchedule schedule, IRoom[] rooms)
+        {
+            _title = title;
+            _schedule = schedule;
+            _rooms = rooms;
+            _teachers = new IReadOnlyTeacher[0];
+            _groups = new GroupDictionary();
+        }
+
+        public University(string title, ISchedule schedule, IRoom[] rooms, IReadOnlyTeacher[] teachers)
+        {
+            _title = title;
+            _schedule = schedule;
+            _rooms = rooms;
+            _teachers = teachers;
+            _groups = new GroupDictionary();
+        }
+
+        #endregion
+
 
         public ISchedule CurrentSchedule
         {
@@ -80,6 +125,11 @@ namespace University.Sergey.Models
 
         public IReadOnlyList<string> GroupsNames {
             get { return (from @group in _groups select @group.ID).ToList(); }}
+
+        public string Title
+        {
+            get { return _title; }
+        }
 
         public IReadOnlyList<string> GetStudentsNames(string groupName)
         {
