@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Collections
+namespace Collections.Taisiya
 {
     class StudentDictionary : KeyedCollection<Tuple<string, string>, Student> 
     {
