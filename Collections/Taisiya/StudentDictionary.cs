@@ -19,13 +19,11 @@ namespace Collections.Taisiya
     {
         private string firstName;
         private string lastName;
-        private int age;
 
-        public Student(string firstName, string lastName, int age)
+        public Student(string firstName, string lastName)
         {
             this.firstName = firstName;
             this.lastName = lastName;
-            this.age = age;
         }
 
         public string FirstName
