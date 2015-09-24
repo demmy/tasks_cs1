@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automobiles", "Automobiles\Automobiles.csproj", "{6CECF84A-8B2B-4FAD-AFBD-D5F4E3302611}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZavodZaporozhje", "ZavodZaporozhje\ZavodZaporozhje.csproj", "{449DF042-6482-4006-AB51-587E4A70A019}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfacesDetails", "InterfacesDetails\InterfacesDetails.csproj", "{44818350-7F1E-4468-AEC0-4E9E56C931F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{6CECF84A-8B2B-4FAD-AFBD-D5F4E3302611}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CECF84A-8B2B-4FAD-AFBD-D5F4E3302611}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CECF84A-8B2B-4FAD-AFBD-D5F4E3302611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{449DF042-6482-4006-AB51-587E4A70A019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{449DF042-6482-4006-AB51-587E4A70A019}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{449DF042-6482-4006-AB51-587E4A70A019}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{449DF042-6482-4006-AB51-587E4A70A019}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44818350-7F1E-4468-AEC0-4E9E56C931F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44818350-7F1E-4468-AEC0-4E9E56C931F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44818350-7F1E-4468-AEC0-4E9E56C931F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44818350-7F1E-4468-AEC0-4E9E56C931F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
