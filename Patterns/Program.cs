@@ -48,6 +48,9 @@ namespace Patterns
         static void MainTaisiya()
         {
             #region Observer
+            Taisiya.Shopping shop = new Taisiya.Shopping();
+            shop.MakeShopping();
+            Console.ReadLine();
             #endregion
         }
 

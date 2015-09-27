@@ -59,6 +59,11 @@
     <Compile Include="Sergey\Models\Student.cs" />
     <Compile Include="Sergey\Collections\StudentDictionary.cs" />
     <Compile Include="Taisiya\CollectionsExercises.cs" />
+    <Compile Include="Taisiya\Group.cs" />
+    <Compile Include="Taisiya\IPriorityQueue.cs" />
+    <Compile Include="Taisiya\MySingleCollection.cs" />
+    <Compile Include="Taisiya\PriorityQueue.cs" />
+    <Compile Include="Taisiya\StudentDictionary.cs" />
     <Compile Include="Tatyana\CollectionsExercises.cs" />
     <Compile Include="Tatyana\ILogger.cs" />
     <Compile Include="Tatyana\MyLogger.cs" />
