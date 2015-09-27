@@ -43,13 +43,18 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sergey\Interfaces\IProduct.cs" />
+    <Compile Include="Sergey\Interfaces\IShop.cs" />
+    <Compile Include="Sergey\Models\Product.cs" />
+    <Compile Include="Sergey\UserDialogActions.cs" />
+    <Compile Include="Sergey\Shop\E-Shop.cs" />
+    <Compile Include="Sergey\UserDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Nikita\" />
-    <Folder Include="Sergey\" />
     <Folder Include="Taisiya\" />
     <Folder Include="Tatyana\" />
   </ItemGroup>
