@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GermanPedals.cs" />
     <Compile Include="UkrainianPedals.cs" />
     <Compile Include="IPedals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,6 +52,10 @@
     <ProjectReference Include="..\FuelTanks\FuelTanks.csproj">
       <Project>{528be13d-6baa-47a5-8a83-2dc5dc65cf95}</Project>
       <Name>FuelTanks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GearBoxes\Gearboxes.csproj">
+      <Project>{076B2215-B23F-4D8F-8DA0-26F6D359B2B3}</Project>
+      <Name>Gearboxes</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
