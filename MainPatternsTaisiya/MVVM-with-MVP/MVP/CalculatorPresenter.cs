@@ -8,13 +8,31 @@ namespace MVP
 {
     class CalculatorPresenter
     {
-        private ICalculatorModel model;
         private ICalculatorView view;
 
-        public CalculatorPresenter(ICalculatorModel model, ICalculatorView view)
+        public CalculatorPresenter(ICalculatorView view)
         {
-            this.model = model;
             this.view = view;
+        }
+
+        public string Calculate()
+        {
+            switch (view.Operation)
+            {
+                case ("+"):
+                    return (Convert.ToDouble(view.FirstOperand) + Convert.ToDouble(view.SecondOperand)).ToString();        
+   
+                case ("-"):
+                    return (Convert.ToDouble(view.FirstOperand) - Convert.ToDouble(view.SecondOperand)).ToString();
+
+                case ("*"):
+                    return (Convert.ToDouble(view.FirstOperand) * Convert.ToDouble(view.SecondOperand)).ToString();
+
+                case ("/"):
+                    return (Convert.ToDouble(view.FirstOperand) / Convert.ToDouble(view.SecondOperand)).ToString();
+            }
+            return "0";
+      
         }
     }
 }

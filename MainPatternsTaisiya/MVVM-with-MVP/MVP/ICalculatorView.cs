@@ -8,5 +8,10 @@ namespace MVP
 {
     interface ICalculatorView
     {
+
+        string FirstOperand { get; set; }
+        string SecondOperand { get; set; }
+        string Operation { get; set; }
+
     }
 }
