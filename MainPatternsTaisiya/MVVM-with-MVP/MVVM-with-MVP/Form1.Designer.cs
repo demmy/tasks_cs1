@@ -42,7 +42,6 @@
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.CalculatorBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // label4
@@ -121,30 +120,11 @@
             this.operationsComboBox.Size = new System.Drawing.Size(161, 21);
             this.operationsComboBox.TabIndex = 9;
             // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Location = new System.Drawing.Point(40, 198);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(75, 23);
-            this.simpleButton1.TabIndex = 18;
-            this.simpleButton1.Text = "simpleButton1";
-            // 
-            // comboBoxEdit1
-            // 
-            this.comboBoxEdit1.Location = new System.Drawing.Point(121, 143);
-            this.comboBoxEdit1.Name = "comboBoxEdit1";
-            //this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            //new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEdit1.Size = new System.Drawing.Size(100, 20);
-            this.comboBoxEdit1.TabIndex = 19;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(314, 281);
-            this.Controls.Add(this.comboBoxEdit1);
-            this.Controls.Add(this.simpleButton1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -158,7 +138,6 @@
             this.Text = "MVVM Calculator";
             ((System.ComponentModel.ISupportInitialize)(this.CalculatorBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,8 +156,6 @@
         private System.Windows.Forms.ComboBox operationsComboBox;
         private System.Windows.Forms.BindingSource CalculatorBindingSource;
         private System.Windows.Forms.BindingSource bindingSource1;
-        //private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        //private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
     }
 }
 

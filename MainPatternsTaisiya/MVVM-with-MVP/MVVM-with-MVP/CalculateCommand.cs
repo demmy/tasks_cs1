@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace MVVM_with_MVP
 {
-    class AddCommand: ICommand
+    class CalculateCommand: ICommand
     { 
         private readonly CalculatorViewModel viewModel;
 
-        public AddCommand(CalculatorViewModel viewModel) 
+        public CalculateCommand(CalculatorViewModel viewModel) 
         {
             this.viewModel = viewModel;
         }
@@ -22,25 +22,25 @@ namespace MVVM_with_MVP
                 switch (viewModel.Operation)
                 {
                     case ("+"):
-                        viewModel.Display = (Convert.ToDouble(viewModel.FirstOperand) + Convert.ToDouble(viewModel.SecondOperand)).ToString();
+                        viewModel.Result = (Convert.ToDouble(viewModel.FirstOperand) + Convert.ToDouble(viewModel.SecondOperand)).ToString();
                         break;
 
                     case ("-"):
-                        viewModel.Display = (Convert.ToDouble(viewModel.FirstOperand) - Convert.ToDouble(viewModel.SecondOperand)).ToString();
+                        viewModel.Result = (Convert.ToDouble(viewModel.FirstOperand) - Convert.ToDouble(viewModel.SecondOperand)).ToString();
                         break;
 
                     case ("*"):
-                        viewModel.Display = (Convert.ToDouble(viewModel.FirstOperand) * Convert.ToDouble(viewModel.SecondOperand)).ToString();
+                        viewModel.Result = (Convert.ToDouble(viewModel.FirstOperand) * Convert.ToDouble(viewModel.SecondOperand)).ToString();
                         break;
 
                     case ("/"):
-                        viewModel.Display = (Convert.ToDouble(viewModel.FirstOperand) / Convert.ToDouble(viewModel.SecondOperand)).ToString();
+                        viewModel.Result = (Convert.ToDouble(viewModel.FirstOperand) / Convert.ToDouble(viewModel.SecondOperand)).ToString();
                         break;
                 }
             }
             catch (Exception)
             {
-                viewModel.Display = "Error";
+                viewModel.Result = "Error";
                 throw;
             }
         }

@@ -20,36 +20,24 @@ namespace MVVM_with_MVP
             InitializeComponent();
             viewModel = new CalculatorViewModel();
             BindToViewModel();
-            BindCommands();
         }
 
         private void BindToViewModel()
         {
             BindingSource binding = new BindingSource();
             binding.DataSource = viewModel;
+            operationsComboBox.Items.AddRange(Operations);
 
             firstOperandText.DataBindings.Add("Text", binding, "FirstOperand");
             secondOperandText.DataBindings.Add("Text", binding, "SecondOperand");
-            operationsComboBox.Items.AddRange(Operations);
-            //something wrong with binding combobox
-            operationsComboBox.DisplayMember = "Operations";
-            ResultText.DataBindings.Add("Text", binding, "Display");
-
+            ResultText.DataBindings.Add("Text", binding, "Result");
         }
 
         private void CalculateButton_Click(object sender, EventArgs e)
         {
-            //Because of wrong binding comdodox we should set operation here
             viewModel.Operation = operationsComboBox.SelectedItem.ToString();
-            viewModel.AddCommand.Execute();
+            viewModel.CalculateCommand.Execute();
         }
 
-
-        private void BindCommands()
-        {
-            //this work only for devExpress button
-            // simpleButton1.BindCommand(() => viewModel.AddCommand.Execute(), viewModel.AddCommand);
- 
-        }
     }
 }

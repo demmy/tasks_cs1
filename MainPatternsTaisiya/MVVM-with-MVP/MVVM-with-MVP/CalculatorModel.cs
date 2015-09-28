@@ -11,7 +11,6 @@ namespace MVVM_with_MVP
         private string firstOperand;
         private string secondOperand;
         private string operation;
-        private string result;
 
 
         public CalculatorModel()
@@ -43,40 +42,7 @@ namespace MVVM_with_MVP
             set { operation = value; }
         }
 
-        public string Result 
-        { 
-            get { return result; } 
-        }
 
-
-        public void CalculateResult()
-        {
-            try
-            {
-                switch (Operation)
-                {
-                    case ("+"):
-                        result = (Convert.ToDouble(FirstOperand) + Convert.ToDouble(SecondOperand)).ToString();
-                        break;
-
-                    case ("-"):
-                        result = (Convert.ToDouble(FirstOperand) - Convert.ToDouble(SecondOperand)).ToString();
-                        break;
-
-                    case ("*"):
-                        result = (Convert.ToDouble(FirstOperand) * Convert.ToDouble(SecondOperand)).ToString();
-                        break;
-
-                    case ("/"):
-                        result = (Convert.ToDouble(FirstOperand) / Convert.ToDouble(SecondOperand)).ToString();
-                        break;
-                }
-            }
-            catch (Exception)
-            {
-                result = "Error";
-                throw;
-            }
-        }
+        
     }
 }

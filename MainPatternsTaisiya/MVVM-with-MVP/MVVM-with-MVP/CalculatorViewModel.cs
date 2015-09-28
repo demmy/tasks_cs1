@@ -11,10 +11,12 @@ namespace MVVM_with_MVP
     class CalculatorViewModel: INotifyPropertyChanged
     {
         private CalculatorModel calculation;
-        private string display;
+        private string result;
+        private CalculateCommand calculateCommand;
+
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private AddCommand addCommand;
+        private CalculateCommand addCommand;
 
         protected void OnPropertyChanged(string propertyName)
         {
@@ -30,12 +32,12 @@ namespace MVVM_with_MVP
         public CalculatorViewModel()
         {
             this.calculation = new CalculatorModel();
-            this.display = "0";
+            this.result = "0";
             this.FirstOperand = string.Empty;
             this.SecondOperand = string.Empty;
             this.Operation = string.Empty;
            
-            addCommand = new AddCommand(this);
+            calculateCommand = new CalculateCommand(this);
         }
 
 
@@ -59,22 +61,17 @@ namespace MVVM_with_MVP
 
         public string Result
         {
-            get { return calculation.Result; }
-        }
-
-        public string Display
-        {
-            get { return display; }
+            get { return result; }
             set
             {
-                display = value;
-                OnPropertyChanged("Display");
+                result = value;
+                OnPropertyChanged("Result");
             }
         }
 
-        public ICommand AddCommand
+        public ICommand CalculateCommand
         {
-            get { return addCommand; }
+            get { return calculateCommand; }
         }
     }
 }
