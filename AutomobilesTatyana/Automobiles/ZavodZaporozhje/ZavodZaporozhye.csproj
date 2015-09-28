@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6CECF84A-8B2B-4FAD-AFBD-D5F4E3302611}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{449DF042-6482-4006-AB51-587E4A70A019}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Automobiles</RootNamespace>
-    <AssemblyName>Automobiles</AssemblyName>
+    <RootNamespace>ZavodGermany</RootNamespace>
+    <AssemblyName>ZavodZaporozhje</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,16 +22,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>Automobiles.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -44,25 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutomobilesDictionary.cs" />
-    <Compile Include="Car.cs" />
-    <Compile Include="CarFactory.cs" />
-    <Compile Include="ICar.cs" />
-    <Compile Include="ICarFactory.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="ControlPanelZaporozhye.cs" />
+    <Compile Include="EngineZaporozhye.cs" />
+    <Compile Include="PedalBreakZ.cs" />
+    <Compile Include="PedalGasZ.cs" />
+    <Compile Include="PlantZaporozhye.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <Compile Include="SteeringWheelZaporozhye.cs" />
+    <Compile Include="TankZaporozhye.cs" />
+    <Compile Include="TransmissionZaporozhye.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InterfacesDetails\InterfacesDetails.csproj">
       <Project>{44818350-7f1e-4468-aec0-4e9e56c931f5}</Project>
       <Name>InterfacesDetails</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ZavodZaporozhje\ZavodZaporozhye.csproj">
-      <Project>{449df042-6482-4006-ab51-587e4a70a019}</Project>
-      <Name>ZavodZaporozhye</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

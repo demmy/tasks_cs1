@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace InterfacesDetails
 {
-    public class Class1
+    public interface IEngine
     {
+        double CountFuelOnInHour(double speed);
+        double CountFuelOnKilometer(double speed);
     }
 }

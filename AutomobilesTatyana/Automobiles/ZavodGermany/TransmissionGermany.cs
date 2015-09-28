@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using InterfacesDetails;
 
-
-namespace Automobiles
+namespace ZavodGermany
 {
-    interface ICarFactory
+    class TransmissionGermany : ITransmission
     {
-        string ProgrammerName { get; }
-
-        ICar CreateCar(string name, IPlant plant);
+        public StatusTransmission Status
+        {
+            get ; set; 
+        }
     }
 }

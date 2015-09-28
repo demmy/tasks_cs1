@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary1
+namespace InterfacesDetails
 {
-    public class Class1
+     public interface IPedal
     {
+        double Speed(double power, ITransmission transmission);
     }
 }

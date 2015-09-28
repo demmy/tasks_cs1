@@ -21,32 +21,32 @@ namespace Automobiles
             Console.WriteLine();
             Console.WriteLine("[3] Выход ");
             Console.WriteLine();
-            Console.Write(" Ваш выбор = ");
+            //Console.Write(" Ваш выбор = ");
             
-            choose = Console.ReadLine().Trim();
-            Console.WriteLine();
-            Console.Write(mainMenu);
-            choose = Console.ReadLine().Trim();
-            Console.Clear();
-            switch (choose)
-            {
-                case "1":
-                    Console.WriteLine("Введите имя автомобиля");
-                    name = Console.ReadLine();
-                    Console.WriteLine("Автомобиль какого именно завода мы создаём");
-                    break;
-                case "2":
-                    Console.WriteLine("Выберите автомобиль");
-                    foreach (var n in automobiles)
-                        Console.WriteLine(n.Name);
-                    break;
-                case "3":
-                    Console.WriteLine("Завершение работы программы");
-                    break;
-                default:
-                    Console.WriteLine("Неправильный выбор");
-                    break;
-            }
+            //choose = Console.ReadLine().Trim();
+            //Console.WriteLine();
+            //Console.Write(mainMenu);
+            //choose = Console.ReadLine().Trim();
+            //Console.Clear();
+            //switch (choose)
+            //{
+            //    case "1":
+            //        Console.WriteLine("Введите имя автомобиля");
+            //        name = Console.ReadLine();
+            //        Console.WriteLine("Автомобиль какого именно завода мы создаём");
+            //        break;
+            //    case "2":
+            //        Console.WriteLine("Выберите автомобиль");
+            //        foreach (var n in automobiles)
+            //            Console.WriteLine(n.Name);
+            //        break;
+            //    case "3":
+            //        Console.WriteLine("Завершение работы программы");
+            //        break;
+            //    default:
+            //        Console.WriteLine("Неправильный выбор");
+            //        break;
+            //}
             Console.ReadKey();
 
         }
