@@ -8,7 +8,7 @@ namespace Patterns.Sergey.Shop
     class EShop: IShop, IDisposable
     {        
         private List<IProduct> _storeProducts;
-        private List<IProduct> _observedProducts;// Observers
+        
         private List<IProduct> _basket;
 
         private bool _disposed;
@@ -21,9 +21,9 @@ namespace Patterns.Sergey.Shop
         public EShop(string title, IEnumerable<IProduct> products)
         {
             _title = title;
+            _storeProducts = new List<IProduct>();
             _storeProducts.AddRange(products);
             _basket = new List<IProduct>();
-            _observedProducts = new List<IProduct>();
             _timer = new Timer(NewInflow, this, 0, 10000);
         }
         public string Title {
@@ -42,25 +42,27 @@ namespace Patterns.Sergey.Shop
         public void Income(IProduct product, int num)
         {
             _storeProducts.Find(x => x.Equals(product)).Number = num;
-            if (_observedProducts.Contains(product))
-                Notify(product, new ProductEventArgs(Title));
+            //if (_observedProducts.Contains(product))
+            //    Notify(product, new ProductEventArgs(Title));
         }
 
         public void Subscribe(IProduct product)
         {
-            _observedProducts.Add(product);
+            product.Subscribe(this);
+            product.Update += ProductsArrived;
         }
 
         public void Unsubscribe(IProduct product)
         {
-            _observedProducts.Remove(product);
+            product.Unsubscribe(this);
+            product.Update -= ProductsArrived;
         }
 
-        public void Notify(IProduct product, ProductEventArgs arg)
-        {
-            if (ProductsArrived != null)
-                ProductsArrived(product, arg);
-        }
+        //public void Notify(IProduct product, ProductEventArgs arg)
+        //{
+        //    if (ProductsArrived != null)
+        //        ProductsArrived(product, arg);
+        //}
 
         public void ClearBasket()
         {
@@ -116,8 +118,6 @@ namespace Patterns.Sergey.Shop
             }
             _storeProducts.Clear();
             _storeProducts = null;
-            _observedProducts.Clear();
-            _observedProducts = null;
             _basket.Clear();
             _basket = null;
             _disposed = true;

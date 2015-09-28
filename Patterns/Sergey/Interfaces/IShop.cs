@@ -13,7 +13,7 @@ namespace Patterns.Sergey.Interfaces
         void Income(IProduct product, int num);
         void Subscribe(IProduct product);
         void Unsubscribe(IProduct product);
-        void Notify(IProduct product, ProductEventArgs arg);
+        //void Notify(IProduct product, ProductEventArgs arg);
         void ClearBasket();
         void AddToBasket(IProduct product);
         void RemoveFromBasket(IProduct product);
