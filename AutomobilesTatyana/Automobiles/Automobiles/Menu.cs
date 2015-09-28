@@ -70,7 +70,7 @@ namespace Automobiles
             Console.WriteLine("Автомобиль какого именно завода мы создаём");
             for (int i = 0; i < plants.Count; i++)
             {
-                Console.WriteLine(" {0} {1} \n\r", i + 1, plants[i]);
+                Console.WriteLine(" {0} {1} \n\r", i + 1, plants[i].NameOfPlant);
             }
             while (!isCorrect)
             {
@@ -82,7 +82,8 @@ namespace Automobiles
                     Console.WriteLine(" Сделайте правильный выбор ");
                 }
             }
-            factory.CreateCar(name, plants[a]);
+            a--;
+            automobiles.Add( factory.CreateCar(name, plants[a]));
             Console.WriteLine("Создана машина {0} завода {1} ", name, plants[a].NameOfPlant);
             Console.ReadKey();
 
@@ -101,7 +102,7 @@ namespace Automobiles
                         Console.WriteLine(n.Name);
                     for (int i = 0; i < automobiles.Count; i++)
                     {
-                        Console.WriteLine(" {0} {1} \n\r", i + 1, automobiles[i]);
+                        Console.WriteLine(" {0} {1} \n\r", i + 1, automobiles[i].Name);
                     }
                     while (!isCorrect)
                     {
@@ -121,7 +122,10 @@ namespace Automobiles
                 
                 }
         }
+        public void GoForADriveByCar(ICar car)
+        {
 
+        }
         private void EndWork()
         {
             Console.WriteLine("Завершение работы программы");
