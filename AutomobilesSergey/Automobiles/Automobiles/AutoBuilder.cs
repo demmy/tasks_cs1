@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +13,13 @@ namespace Automobiles
     /// </summary>
     class AutoBuilder
     {
-        public IAutomobile GetGermanAutomobile(string name)
+        public Automobile GetGermanAutomobile(string name, GerModels model)
         {
-            return new GermanAutomobile();
+            return new GermanAutomobile(name, model);
         }
-        public IAutomobile GetUkrainianAutomobile(string name)
+        public Automobile GetUkrainianAutomobile(string name, UkrModels model)
         {
-            return new UkrainianAutomobile();
+            return new UkrainianAutomobile(name, model);
         }
     }
 }

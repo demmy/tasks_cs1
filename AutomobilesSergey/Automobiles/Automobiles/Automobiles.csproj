@@ -44,7 +44,7 @@
     <Compile Include="AutoBuilder.cs" />
     <Compile Include="Automobiles\GermanAutomobile.cs" />
     <Compile Include="Automobiles\UkrainianAutomobile.cs" />
-    <Compile Include="IAutomobile.cs" />
+    <Compile Include="Automobile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,9 +52,29 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Engines\Engines.csproj">
+      <Project>{7e460721-22df-46c1-8baa-26025c0ca20c}</Project>
+      <Name>Engines</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FuelTanks\FuelTanks.csproj">
+      <Project>{528be13d-6baa-47a5-8a83-2dc5dc65cf95}</Project>
+      <Name>FuelTanks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GearBoxes\Gearboxes.csproj">
+      <Project>{076b2215-b23f-4d8f-8da0-26f6d359b2b3}</Project>
+      <Name>Gearboxes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Panels\Panels.csproj">
       <Project>{92783c02-08fd-42db-970d-c16229c08bbc}</Project>
       <Name>Panels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pedals\Pedals.csproj">
+      <Project>{3c96065d-0475-4fa4-9973-466e24c8289d}</Project>
+      <Name>Pedals</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SteeringWheel\SteeringWheel.csproj">
+      <Project>{a208f988-caba-42c6-a027-802a84383dff}</Project>
+      <Name>SteeringWheel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

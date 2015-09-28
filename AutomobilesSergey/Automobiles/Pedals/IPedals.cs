@@ -1,8 +1,11 @@
-﻿namespace Pedals
+﻿using Engines;
+
+namespace Pedals
 {
     public interface IPedals
     {
-        void Brake(int pressure);
-        void Accelerate(int pressure);
+        IEngine Engine { get; }
+        void Brake(double pressure);
+        void Accelerate(double pressure);
     }
 }

@@ -41,6 +41,13 @@
   <ItemGroup>
     <Compile Include="IEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UkrainianEngine.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FuelTanks\FuelTanks.csproj">
+      <Project>{528be13d-6baa-47a5-8a83-2dc5dc65cf95}</Project>
+      <Name>FuelTanks</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

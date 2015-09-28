@@ -1,10 +1,13 @@
-﻿namespace Engines
+﻿using FuelTanks;
+using GearBoxes;
+
+namespace Engines
 {
     public interface IEngine
     {
-        int Speed { get; }
+        IFuelTank Tank { get; }
+        IGearbox Gearbox { get; }
         void Start();
         void Stop();
-        void Explode();
     }
 }

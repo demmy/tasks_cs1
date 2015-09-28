@@ -39,8 +39,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UkrainianPedals.cs" />
     <Compile Include="IPedals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Engines\Engines.csproj">
+      <Project>{7e460721-22df-46c1-8baa-26025c0ca20c}</Project>
+      <Name>Engines</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FuelTanks\FuelTanks.csproj">
+      <Project>{528be13d-6baa-47a5-8a83-2dc5dc65cf95}</Project>
+      <Name>FuelTanks</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
