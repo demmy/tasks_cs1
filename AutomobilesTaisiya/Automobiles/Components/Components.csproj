@@ -1,19 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{965D08DE-45D5-4D9A-975B-EC988DB0BA71}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{91EF7FE4-B2EF-43E4-B450-6A72A340AC6C}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>University</RootNamespace>
-    <AssemblyName>University</AssemblyName>
+    <RootNamespace>Components</RootNamespace>
+    <AssemblyName>Components</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,37 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IReadOnlyGroup.cs" />
-    <Compile Include="IReadOnlyPerson.cs" />
-    <Compile Include="IRoom.cs" />
-    <Compile Include="IReadOnlyTeacher.cs" />
-    <Compile Include="ISchedule.cs" />
-    <Compile Include="IUniversity.cs" />
-    <Compile Include="IUniversityFactory.cs" />
-    <Compile Include="Nikita\UniversityFactory.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Interfaces\IComponents.cs" />
+    <Compile Include="Interfaces\IDashboard.cs" />
+    <Compile Include="Interfaces\IFuelTank.cs" />
+    <Compile Include="Interfaces\IGearBpx.cs" />
+    <Compile Include="Interfaces\IMotor.cs" />
+    <Compile Include="Interfaces\IPedal.cs" />
+    <Compile Include="Interfaces\ISteeringWheel.cs" />
+    <Compile Include="Models\Dashboard.cs" />
+    <Compile Include="Models\FuelTank.cs" />
+    <Compile Include="Models\GearBox.cs" />
+    <Compile Include="Models\Motor.cs" />
+    <Compile Include="Models\Pedal.cs" />
+    <Compile Include="Models\SteeringWheel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sergey\UniversityFactory.cs" />
-    <Compile Include="Taisiya\Group.cs" />
-    <Compile Include="Taisiya\Person.cs" />
-    <Compile Include="Taisiya\Room.cs" />
-    <Compile Include="Taisiya\Schedule.cs" />
-    <Compile Include="Taisiya\ScheduleItem.cs" />
-    <Compile Include="Taisiya\Student.cs" />
-    <Compile Include="Taisiya\Teacher.cs" />
-    <Compile Include="Taisiya\University.cs" />
-    <Compile Include="Taisiya\UniversityFactory.cs" />
-    <Compile Include="Tatyana\Group.cs" />
-    <Compile Include="Tatyana\Person.cs" />
-    <Compile Include="Tatyana\Room.cs" />
-    <Compile Include="Tatyana\Schedule.cs" />
-    <Compile Include="Tatyana\Student.cs" />
-    <Compile Include="Tatyana\Teacher.cs" />
-    <Compile Include="Tatyana\University.cs" />
-    <Compile Include="Tatyana\UniversityFactory.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
