@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Patterns.Sergey;
+using Patterns.Sergey.Interfaces;
+using Patterns.Sergey.Models;
+using Patterns.Sergey.Shop;
 
 namespace Patterns
 {
@@ -39,9 +43,69 @@ namespace Patterns
             }
         }
 
+        static void CustomerMenu(IShop shop)
+        {
+            Console.WriteLine("Hey there - you have visited e-shop {0}, what do wanna do?", shop.Title);
+            while (true)
+            {
+                var command = UserDialog.Dialog();
+                command(shop);
+            }
+        }
+
+        enum Food
+        {
+            Apple,
+            Tomato,
+            Potato,
+            IceCream,
+            Butter,
+            Cheese,
+            Milk,
+            Water,
+            Juice,
+            Tea,
+            Coffee,
+            Cake,
+            Pie,
+            Chocolate,
+            Cookies,
+            Bread,
+            Beef,
+            Pork,
+            Chicken,
+            Turkey,
+            Peach,
+            Grape,
+            Basilic,
+            Rice,
+            Flour,
+            Sugar,
+            Plate,
+            Glass,
+            Cup,
+            Jogurt,
+            Fish,
+            Souce,
+            Doughnut,
+            Quark
+        }
+
         static void MainSergey()
         {
             #region Observer
+
+            Random rnd = new Random();
+            List<IProduct> products = Enum.GetNames(typeof (Food)).Select(food => new Product(food, rnd.Next(10), rnd.NextDouble()*40)).Cast<IProduct>().ToList();
+
+            IShop shop = new EShop("rozetka", products);
+            shop.ProductsArrived += (@this, args) =>
+            {
+                var observedProduct = @this as IProduct;
+                if(observedProduct == null) return;
+                Console.WriteLine("The shop {0} has {2} {1}(s) by {3}$ for one", args.ShopTitle, observedProduct.Title, observedProduct.Number, observedProduct.Price);
+            };
+            CustomerMenu(shop);
             #endregion
         }
 
