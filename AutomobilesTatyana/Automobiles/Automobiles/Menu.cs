@@ -23,12 +23,12 @@ namespace Automobiles
         {
             string mainMenu = " [1] Создать автомобиль \n\r\n\r [2] Покататься \n\r\n\r [3] Выход  \n\r\n\r Ваш выбор = ";
             string choose ="0";
-            Console.Clear();
-            Console.WriteLine();
-            Console.Write(mainMenu);
+            
             while (!object.Equals(choose,"3"))
             {
-            
+                Console.Clear();
+                Console.WriteLine();
+                Console.Write(mainMenu);
             choose = Console.ReadLine().Trim();
             
             switch (choose)
@@ -51,19 +51,75 @@ namespace Automobiles
 
             private void CreateCar()
         {
-            string plants = " [1] Создать автомобиль \n\r\n\r [2] Покататься \n\r\n\r [3] Выход  \n\r\n\r Ваш выбор = ";
-            string a = "0";
+            
+            string  point = "0";
+            int a=0;
             string name = "";
+            bool isCorrect = false;
+            CarFactory factory = new CarFactory();
             Console.WriteLine("Введите имя автомобиля");
-            name = Console.ReadLine();
+            while (object.Equals(name, ""))
+            {
+                Console.Write(" Имя автомобиля = ");
+                name = Console.ReadLine().Trim();
+                if (object.Equals(name, ""))
+                {
+                    Console.WriteLine("имя не может состоять только из пробелов");
+                }
+            }
             Console.WriteLine("Автомобиль какого именно завода мы создаём");
-        }
+            for (int i = 0; i < plants.Count; i++)
+            {
+                Console.WriteLine(" {0} {1} \n\r", i + 1, plants[i]);
+            }
+            while (!isCorrect)
+            {
+                Console.Write(" ваш выбор = ");
+                point = Console.ReadLine().Trim();
+                isCorrect = int.TryParse(point, out a) && (a >= 1) && (a <= plants.Count);
+                if (!isCorrect)
+                {
+                    Console.WriteLine(" Сделайте правильный выбор ");
+                }
+            }
+            factory.CreateCar(name, plants[a]);
+            Console.WriteLine("Создана машина {0} завода {1} ", name, plants[a].NameOfPlant);
+            Console.ReadKey();
+
+         }
 
         private     void GoForADrive()
-        {
-            Console.WriteLine("Выберите автомобиль");
+            {
+                string point = "0";
+                int a = 0;
+                bool isCorrect = false;
+                if (automobiles.Count != 0)
+                {
+
+                    Console.WriteLine("Выберите автомобиль");
                     foreach (var n in automobiles)
                         Console.WriteLine(n.Name);
+                    for (int i = 0; i < automobiles.Count; i++)
+                    {
+                        Console.WriteLine(" {0} {1} \n\r", i + 1, automobiles[i]);
+                    }
+                    while (!isCorrect)
+                    {
+                        Console.Write(" ваш выбор = ");
+                        point = Console.ReadLine().Trim();
+                        isCorrect = int.TryParse(point, out a) && (a >= 1) && (a <= plants.Count);
+                        if (!isCorrect)
+                        {
+                            Console.WriteLine(" Сделайте правильный выбор ");
+                        }
+                    }
+                }
+                else
+                {
+                     Console.WriteLine("Не создано ни одного автомобиля");
+                     Console.ReadKey();
+                
+                }
         }
 
         private void EndWork()
