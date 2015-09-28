@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace InterfacesDetails
-{
+{ 
     public interface IPlant
     {
-
+    
         string ProgrammerName { get; }
+        string NameOfPlant { get; }
         IEngine CreateEngine();
         ITank CreateTank();
         ISteeringWheel CreateSteeringWheel();

@@ -7,13 +7,17 @@ using InterfacesDetails;
 
 namespace ZavodZaporozhye
 {
-    class PlantZaporozhye : IPlant
+    public class PlantZaporozhye : IPlant
     {
         public string ProgrammerName
         {
             get { return "Tatyana"; }
         }
 
+        public string NameOfPlant
+        {
+            get { return "Zaporozhye";  }
+        }
         public IEngine CreateEngine()
         {
             return new EngineZaporozhye();
@@ -52,6 +56,9 @@ namespace ZavodZaporozhye
         }
 
 
-       
+
+
+
+        
     }
 }

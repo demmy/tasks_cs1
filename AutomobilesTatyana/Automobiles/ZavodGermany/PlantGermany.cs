@@ -7,11 +7,16 @@ using InterfacesDetails;
 
 namespace ZavodGermany
 {
-    class PlantGermany : IPlant
+    public class PlantGermany : IPlant
     {
         public string ProgrammerName
         {
             get { return "Tatyana"; }
+        }
+
+        public string NameOfPlant
+        {
+            get { return "GermanyPlant"; }
         }
 
         public IEngine CreateEngine()
@@ -52,6 +57,9 @@ namespace ZavodGermany
         }
 
 
-       
+
+
+
+        
     }
 }
