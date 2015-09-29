@@ -11,9 +11,11 @@ namespace Automobiles
     {
         string name;
         double speed=0;
-        double direction;
+        double direction=0;
         double power=0;
         double angle=0;
+        bool isLight=false;
+        StatusTransmission status = StatusTransmission.Stop;
 
         public IEngine Engine { get; set; }
         public ITank Tank { get; set; }
@@ -35,47 +37,71 @@ namespace Automobiles
 
         public void PressBreak(double power)
         {
-            throw new NotImplementedException();
+            speed = PedalBreak.Speed(power, Transmission);
+
         }
 
         public void PressGas(double power)
         {
-            throw new NotImplementedException();
+            speed = PedalGas.Speed(power, Transmission);
+            
         }
 
         public void TurnSteeringWheelRight(double angle)
         {
-            throw new NotImplementedException();
+            angle = SteeringWheel.AngleTurnWheel(angle);
         }
 
         public void TurnSteeringWheelLeft(double angle)
         {
-            throw new NotImplementedException();
+            angle = SteeringWheel.AngleTurnWheel(angle);
         }
 
-        public void OnHeadLight()
+        public void OnOffHeadLight()
         {
-            throw new NotImplementedException();
+            isLight = !isLight;
         }
 
-        public void OffHeadLight()
+        public bool IsLight
         {
-            throw new NotImplementedException();
+            get
+            {
+                return isLight;
+            }
+            
         }
+
+        public StatusTransmission Status { 
+            get
+            { 
+                return status;
+            }
+            set 
+            { 
+                status = value; 
+            }
+          }
 
         public double Speed()
         {
-            throw new NotImplementedException();
+            return speed;
+
         }
 
         public double Direction()
         {
-            throw new NotImplementedException();
+            return angle;
         }
 
         public double RemainderFuel()
         {
-            throw new NotImplementedException();
+            return Tank.Remainder;
         }
+
+
+
+
+
+        
     }
 }

@@ -52,10 +52,10 @@ namespace Automobiles
             private void CreateCar()
         {
             
-            string  point = "0";
+            
             int a=0;
             string name = "";
-            bool isCorrect = false;
+            
             CarFactory factory = new CarFactory();
             Console.WriteLine("Введите имя автомобиля");
             while (object.Equals(name, ""))
@@ -72,28 +72,17 @@ namespace Automobiles
             {
                 Console.WriteLine(" {0} {1} \n\r", i + 1, plants[i].NameOfPlant);
             }
-            while (!isCorrect)
-            {
-                Console.Write(" ваш выбор = ");
-                point = Console.ReadLine().Trim();
-                isCorrect = int.TryParse(point, out a) && (a >= 1) && (a <= plants.Count);
-                if (!isCorrect)
-                {
-                    Console.WriteLine(" Сделайте правильный выбор ");
-                }
-            }
-            a--;
+            a = Point(plants.Count) - 1;
             automobiles.Add( factory.CreateCar(name, plants[a]));
             Console.WriteLine("Создана машина {0} завода {1} ", name, plants[a].NameOfPlant);
-            Console.ReadKey();
+            Console.ReadKey(true);
 
          }
 
         private     void GoForADrive()
             {
-                string point = "0";
+                
                 int a = 0;
-                bool isCorrect = false;
                 if (automobiles.Count != 0)
                 {
 
@@ -104,16 +93,7 @@ namespace Automobiles
                     {
                         Console.WriteLine(" {0} {1} \n\r", i + 1, automobiles[i].Name);
                     }
-                    while (!isCorrect)
-                    {
-                        Console.Write(" ваш выбор = ");
-                        point = Console.ReadLine().Trim();
-                        isCorrect = int.TryParse(point, out a) && (a >= 1) && (a <= plants.Count);
-                        if (!isCorrect)
-                        {
-                            Console.WriteLine(" Сделайте правильный выбор ");
-                        }
-                    }
+                    a=Point(automobiles.Count);
                 }
                 else
                 {
@@ -123,9 +103,50 @@ namespace Automobiles
                 }
         }
         public void GoForADriveByCar(ICar car)
-        {
-
+        {  double power=10;
+            double angle =10;
+            PrintStatusDrive(car.Name, car.Speed(), car.Direction(), car.Status, car.RemainderFuel(), power, angle, car.IsLight);
         }
+
+
+        public void PrintStatusDrive(string name, double speed, double direction, StatusTransmission status, double remainder,
+                                                                                      double power, double angle , bool isLight)
+        {
+            string information = "Вы катаететесь на машине {0} \n\r\n\r   Состояние:  \n\r   скорость       {1} км/ч \n\r"+
+                "   направление       {2} градусов к северу от востока \n\r" +
+                "   автомобиль       {3}   \n\r   фары       {4}    \n\r   остаток топлива в баке       {5}    \n\r\n\r" +
+                "  Действия:  \n\r [1] Начать движение  \n\r [2] Нажать газ \n\r [3] Нажать тормоз  \n\r" +
+                " [4] Повернуть руль вправо \n\r [5] Повернуть руль влево  \n\r" +
+                " [6] Включить/выключить фары  \n\r [7] Движение врерёд \n\r" +
+            " [8] Задний ход  \n\r [9] Максимальная скорость и движение вперёд  \n\r [10] Остановить машину  \n\r\n\r" +
+             " [11] Изменить силу нажатия,         сила нажатия = {6}     \n\r"+
+             " [12] Изменить угол поворота руля,   угол поворота руля = {7}   ";
+
+            string[] statusDrive = { "остановлен", "едет вперёд", "едет назад", "едет вперёд на максимальной скорости" };
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine(information,name, speed, direction % 360, statusDrive[(int) status], remainder, isLight ? "включены" : "выключены", power, angle);
+            Console.ReadKey();
+        }
+
+        private int Point(int maxValue)
+        {
+            int a=0;
+            string point="";
+            bool isCorrect = false;
+            while (!isCorrect)
+                    {
+                        Console.Write(" ваш выбор = ");
+                        point = Console.ReadLine().Trim();
+                        isCorrect = int.TryParse(point, out a) && (a >= 1) && (a <= maxValue );
+                        if (!isCorrect)
+                        {
+                            Console.WriteLine(" Сделайте правильный выбор ");
+                        }
+                    }
+            return a;
+        }
+
         private void EndWork()
         {
             Console.WriteLine("Завершение работы программы");

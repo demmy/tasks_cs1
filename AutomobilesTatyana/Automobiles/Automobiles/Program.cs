@@ -23,9 +23,14 @@ namespace Automobiles
             PlantsDictionary plants = new PlantsDictionary();
             plants.Add(new PlantZaporozhye());
             plants.Add(new PlantGermany());
+            CarFactory factory=new CarFactory();
+            Car car=(Car) factory.CreateCar("Example", new PlantGermany());
+
             
             Menu menu = new Menu(plants);
-            menu.MainMenu();
+
+            menu.PrintStatusDrive(car.Name, 68.5,45,StatusTransmission.Forward,50,23,5,true);
+           // menu.MainMenu();
             Console.WriteLine("Нажмите любую клавишу ");
             Console.ReadKey();
 
