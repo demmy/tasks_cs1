@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A5991609-BB37-4677-897E-4DEDC73FA8C1}</ProjectGuid>
+    <ProjectGuid>{86403A18-22B2-4637-A7A7-2580D0CB52BD}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Collections</RootNamespace>
-    <AssemblyName>Collections</AssemblyName>
+    <RootNamespace>Automobiles</RootNamespace>
+    <AssemblyName>Automobiles</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,42 +41,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICollectionsExercises.cs" />
-    <Compile Include="IPriorityQueue.cs" />
-    <Compile Include="Nikita\CollectionsExercises.cs" />
-    <Compile Include="Nikita\PriorityQueue.cs" />
-    <Compile Include="Nikita\StudentDictionary.cs" />
+    <Compile Include="CarBuilder.cs" />
+    <Compile Include="Cars\GermanCar.cs" />
+    <Compile Include="ICar.cs" />
+    <Compile Include="Cars\UkrainianCar.cs" />
+    <Compile Include="Interfaces\IComponents.cs" />
+    <Compile Include="Interfaces\IDashboard.cs" />
+    <Compile Include="Interfaces\IFuelTank.cs" />
+    <Compile Include="Interfaces\IGearBox.cs" />
+    <Compile Include="Interfaces\IMotor.cs" />
+    <Compile Include="Interfaces\IPedal.cs" />
+    <Compile Include="Interfaces\ISteeringWheel.cs" />
+    <Compile Include="Models\Dashboard.cs" />
+    <Compile Include="Models\FuelTank.cs" />
+    <Compile Include="Models\GearBox.cs" />
+    <Compile Include="Models\Motor.cs" />
+    <Compile Include="Models\Pedal.cs" />
+    <Compile Include="Models\SteeringWheel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sergey\CollectionsExercises.cs" />
-    <Compile Include="Sergey\Collections\Exceptions\EmptyPriorityQueueException.cs" />
-    <Compile Include="Sergey\Collections\MySimpleCollection.cs" />
-    <Compile Include="Sergey\Collections\PriorityQueue.cs" />
-    <Compile Include="Sergey\Collections\PriorityQueueCollection.cs" />
-    <Compile Include="Sergey\Loger\ILoger.cs" />
-    <Compile Include="Sergey\Loger\MyLoger.cs" />
-    <Compile Include="Sergey\Models\User.cs" />
-    <Compile Include="Sergey\Models\Student.cs" />
-    <Compile Include="Sergey\Collections\StudentDictionary.cs" />
-    <Compile Include="Taisiya\CollectionsExercises.cs" />
-    <Compile Include="Taisiya\Group.cs" />
-    <Compile Include="Taisiya\IPriorityQueue.cs" />
-    <Compile Include="Taisiya\MySingleCollection.cs" />
-    <Compile Include="Taisiya\PriorityQueue.cs" />
-    <Compile Include="Taisiya\StudentDictionary.cs" />
-    <Compile Include="Tatyana\CollectionsExercises.cs" />
-    <Compile Include="Tatyana\ILogger.cs" />
-    <Compile Include="Tatyana\MyLogger.cs" />
-    <Compile Include="Tatyana\MySingleCollection.cs" />
-    <Compile Include="Tatyana\PriorityQueue.cs" />
-    <Compile Include="Tatyana\StudentDictionary.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
