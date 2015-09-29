@@ -17,14 +17,8 @@ namespace Automobiles
 
         public ICar CreateCar(string name, InterfacesDetails.IPlant plant)
         {
-            Car car = new Car(name);
-            car.Engine = plant.CreateEngine();
-            car.Tank = plant.CreateTank();
-            car.SteeringWheel = plant.CreateSteeringWheel();
-            car.Transmission = plant.CreateTransmission();
-            car.PedalGas = plant.CreatePedalGas();
-            car.PedalBreak = plant.CreatePedalBreak();
-            car.ControlPanel = plant.CreateControlPanel();
+            Car car = new Car(name, plant.CreateEngine(), plant.CreateTank(), plant.CreateSteeringWheel(), plant.CreateTransmission(),
+                                           plant.CreatePedalGas(), plant.CreatePedalBreak(), plant.CreateControlPanel());
             return car;
             
              

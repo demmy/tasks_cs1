@@ -40,25 +40,19 @@ namespace ZavodZaporozhye
 
         public IPedal CreatePedalGas()
         {
-            return new PedalGasZ();
+            return new PedalGasZaporozhye();
         }
 
         public IPedal CreatePedalBreak()
         {
-            return new PedalBreakZ();
+            return new PedalBreakZaporozhye();
 
         }
-        
 
-        public IControlPanel CreateControlPanel()
+        public IControlPanelInner CreateControlPanel()
         {
             return new ControlPanelZaporozhye();
+            
         }
-
-
-
-
-
-        
     }
 }

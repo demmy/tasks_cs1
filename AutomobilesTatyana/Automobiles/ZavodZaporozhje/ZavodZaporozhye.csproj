@@ -41,8 +41,8 @@
   <ItemGroup>
     <Compile Include="ControlPanelZaporozhye.cs" />
     <Compile Include="EngineZaporozhye.cs" />
-    <Compile Include="PedalBreakZ.cs" />
-    <Compile Include="PedalGasZ.cs" />
+    <Compile Include="PedalBreakZaporozhye.cs" />
+    <Compile Include="PedalGasZaporozhye.cs" />
     <Compile Include="PlantZaporozhye.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SteeringWheelZaporozhye.cs" />

@@ -10,6 +10,7 @@ namespace InterfacesDetails
 
     public interface ITransmission
     {
+        double TransmissionStatusKoefficient { get; }
         StatusTransmission Status { get; set; }
     }
 }

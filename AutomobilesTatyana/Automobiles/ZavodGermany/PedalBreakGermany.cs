@@ -10,28 +10,15 @@ namespace ZavodGermany
     class PedalBreakGermany : IPedal
     {
         double number = 5;
-        public double Speed(double power, ITransmission transmission)
+        
+        public double Number
         {
-            double speed = 0;
-            double koeficient = 0;
-            switch (transmission.Status)
-            {
-                case StatusTransmission.Stop:
-                    break;
-                case StatusTransmission.Forward:
-                case StatusTransmission.Ago:
-                    koeficient = 1;
-                    break;
-                case StatusTransmission.MaxSpeed:
-                    koeficient = 2;
-                    break;
-                default:
-                    break;
+            get { throw new NotImplementedException(); }
+        }
 
-            }
-
-            speed = number * koeficient / power;
-            return speed;
+        public double SpeedKoefficient(double power)
+        {
+            throw new NotImplementedException();
         }
     }
 }

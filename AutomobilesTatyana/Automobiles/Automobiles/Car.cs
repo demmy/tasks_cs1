@@ -17,19 +17,29 @@ namespace Automobiles
         bool isLight=false;
         StatusTransmission status = StatusTransmission.Stop;
 
-        public IEngine Engine { get; set; }
-        public ITank Tank { get; set; }
-        public ISteeringWheel SteeringWheel { get; set; }
-        public ITransmission Transmission { get; set; }
-        public IPedal PedalGas { get; set; }
-        public IPedal PedalBreak { get; set; }
+        IEngine engine;
+        ITank tank;
+        ISteeringWheel steeringWheel;
+        ITransmission transmission;
+        IPedal pedalGas;
+        IPedal pedalBreak;
+        IControlPanelInner controlPanel;
 
-        IControlPanelInner ControlPanelInner { get; set; }
+        
         public IControlPanel ControlPanel   {  get; set; }
-        public Car(string name1)
+        public Car(string name1, IEngine engine1, ITank tank1, ISteeringWheel steeringWheel1, ITransmission transmission1, 
+                                              IPedal pedalGas1, IPedal pedalBreak1, IControlPanelInner controlPanel1  )
         {
             name = name1;
+            engine = engine1;
+            tank = tank1;
+            steeringWheel = steeringWheel1;
+            transmission = transmission1;
+            pedalGas = pedalGas1;
+            pedalBreak = pedalBreak1;
+            controlPanel = controlPanel1;
         }
+
         public string Name
         {
             get { return name; }
@@ -37,24 +47,24 @@ namespace Automobiles
 
         public void PressBreak(double power)
         {
-            speed = PedalBreak.Speed(power, Transmission);
+           // speed = pedalBreak.Speed(power, transmission);
 
         }
 
         public void PressGas(double power)
         {
-            speed = PedalGas.Speed(power, Transmission);
+           // speed = pedalGas.Speed(power, transmission);
             
         }
 
         public void TurnSteeringWheelRight(double angle)
         {
-            angle = SteeringWheel.AngleTurnWheel(angle);
+            angle = steeringWheel.AngleTurnWheel(angle);
         }
 
         public void TurnSteeringWheelLeft(double angle)
         {
-            angle = SteeringWheel.AngleTurnWheel(angle);
+            angle = steeringWheel.AngleTurnWheel(angle);
         }
 
         public void OnOffHeadLight()
@@ -95,7 +105,7 @@ namespace Automobiles
 
         public double RemainderFuel()
         {
-            return Tank.Remainder;
+            return tank.Remainder;
         }
 
 

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace InterfacesDetails
 {
-   public  interface IControlPanelInner
+   public  interface IControlPanelInner : IControlPanel
     {
-        
             double Speed { get; set; }
             double Way { get; set; }
             double RemainderFuel { get; set; }

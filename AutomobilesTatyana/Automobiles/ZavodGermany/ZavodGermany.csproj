@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlPanelZaporozhye.cs" />
+    <Compile Include="ControlPanelGermany.cs" />
     <Compile Include="EngineGermany.cs" />
     <Compile Include="PedalBreakGermany.cs" />
     <Compile Include="PedalGasGermany.cs" />

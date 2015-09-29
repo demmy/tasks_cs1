@@ -49,17 +49,12 @@ namespace ZavodGermany
             return new PedalBreakGermany();
 
         }
-        
 
-        public IControlPanel CreateControlPanel()
+
+        public IControlPanelInner CreateControlPanel()
         {
             return new ControlPanelGermany();
+            
         }
-
-
-
-
-
-        
     }
 }

@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using InterfacesDetails;
 
-namespace ZavodGermany
+namespace ZavodZaporozhye
 {
-    class PedalGasGermany : IPedal
+    class PedalGasZaporozhye : IPedal
     {
         double number = 5;
-           
-
+        
         public double Number
         {
             get { throw new NotImplementedException(); }

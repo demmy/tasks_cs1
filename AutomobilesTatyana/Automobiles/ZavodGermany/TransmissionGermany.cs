@@ -9,9 +9,13 @@ namespace ZavodGermany
 {
     class TransmissionGermany : ITransmission
     {
-        public StatusTransmission Status
+        double[] koefficient = { 0, 2, 2, 5 };
+        public double TransmissionStatusKoefficient
         {
-            get ; set; 
+            get { return koefficient[(int)Status]; }
         }
+
+        public StatusTransmission Status { get; set; }
+        
     }
 }

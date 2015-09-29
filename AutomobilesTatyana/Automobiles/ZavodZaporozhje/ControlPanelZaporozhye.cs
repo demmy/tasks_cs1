@@ -7,30 +7,15 @@ using InterfacesDetails;
 
 namespace ZavodZaporozhye
 {
-    class ControlPanelZaporozhye : IControlPanel
+    class ControlPanelZaporozhye : IControlPanelInner
     {
-        double speed;
-        double way;
-        double remainder;
-        double direction;
-        public double Speed
-        {
-            get { return speed; }
-        }
 
-        public double Way
-        {
-            get { return way; }
-        }
+        public double Speed   { get;  set;  }
 
-        public double RemainderFuel
-        {
-            get { return remainder; }
-        }
+        public double Way {  get;  set;  }
 
-        public double Direction
-        {
-            get { return direction; }
-        }
+        public double RemainderFuel  {  get;   set;   }
+
+        public double Direction  {   get;   set;   }
     }
 }

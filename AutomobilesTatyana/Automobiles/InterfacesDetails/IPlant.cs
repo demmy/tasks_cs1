@@ -17,7 +17,7 @@ namespace InterfacesDetails
         ITransmission CreateTransmission();
         IPedal CreatePedalGas();
         IPedal CreatePedalBreak();
-        IControlPanel CreateControlPanel();
+        IControlPanelInner CreateControlPanel();
 
 
     }

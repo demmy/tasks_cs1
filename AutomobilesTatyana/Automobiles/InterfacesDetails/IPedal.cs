@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace InterfacesDetails
 {
      public interface IPedal
-    {
-        double Speed(double power, ITransmission transmission);
+     {
+         double Number { get; } 
+         double SpeedKoefficient(double power);
     }
 }
