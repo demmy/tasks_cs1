@@ -9,17 +9,17 @@ namespace ZavodZaporozhye
 {
     class PedalBreakZaporozhye : IPedal
     {
-        double number = 5;
+        double number = 0.5;
 
 
         public double Number
         {
-            get { throw new NotImplementedException(); }
+            get { return number; }
         }
 
         public double SpeedKoefficient(double power)
         {
-            throw new NotImplementedException();
+            return 2 / power;
         }
     }
 }

@@ -11,8 +11,9 @@ namespace Automobiles
     {
         string Name { get; }
         
-         void PressBreak(double power);
+         
          void PressGas(double power);
+         void PressBreak(double power);
          void TurnSteeringWheelRight(double angle);
          void TurnSteeringWheelLeft(double angle);
          void OnOffHeadLight();
@@ -21,6 +22,8 @@ namespace Automobiles
          double Speed();
          double Direction();
          double RemainderFuel();
+
+        
 
     }
 }

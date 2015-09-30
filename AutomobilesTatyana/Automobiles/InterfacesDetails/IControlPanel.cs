@@ -9,8 +9,7 @@ namespace InterfacesDetails
     public  interface IControlPanel
     {
         double Speed { get; }
-        double Way { get; }
-        double RemainderFuel { get; }
         double Direction { get; }
+        double RemainderFuel { get; }
     }
 }

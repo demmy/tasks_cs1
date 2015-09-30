@@ -79,7 +79,7 @@ namespace Automobiles
 
          }
 
-        private     void GoForADrive()
+        private  void GoForADrive()
             {
                 
                 int a = 0;
@@ -93,7 +93,8 @@ namespace Automobiles
                     {
                         Console.WriteLine(" {0} {1} \n\r", i + 1, automobiles[i].Name);
                     }
-                    a=Point(automobiles.Count);
+                    a=Point(automobiles.Count)-1;
+                    GoForADriveByCar(automobiles[a]);
                 }
                 else
                 {
@@ -103,29 +104,77 @@ namespace Automobiles
                 }
         }
         public void GoForADriveByCar(ICar car)
-        {  double power=10;
+        {   
+            double power=10;
             double angle =10;
-            PrintStatusDrive(car.Name, car.Speed(), car.Direction(), car.Status, car.RemainderFuel(), power, angle, car.IsLight);
-        }
-
-
-        public void PrintStatusDrive(string name, double speed, double direction, StatusTransmission status, double remainder,
-                                                                                      double power, double angle , bool isLight)
-        {
+            int a = 0;
             string information = "Вы катаететесь на машине {0} \n\r\n\r   Состояние:  \n\r   скорость       {1} км/ч \n\r"+
                 "   направление       {2} градусов к северу от востока \n\r" +
-                "   автомобиль       {3}   \n\r   фары       {4}    \n\r   остаток топлива в баке       {5}    \n\r\n\r" +
-                "  Действия:  \n\r [1] Начать движение  \n\r [2] Нажать газ \n\r [3] Нажать тормоз  \n\r" +
+                "   установка коробки передач       {3}   \n\r   фары       {4}    \n\r   остаток топлива в баке       {5}    \n\r\n\r" +
+                "  Действия:  \n\r [1] Начать движение = переключить коробку передач на движение вперёд и нажать на газ  \n\r [2] Нажать газ \n\r"+
+                "[3] Нажать тормоз  \n\r" +
                 " [4] Повернуть руль вправо \n\r [5] Повернуть руль влево  \n\r" +
-                " [6] Включить/выключить фары  \n\r [7] Движение врерёд \n\r" +
-            " [8] Задний ход  \n\r [9] Максимальная скорость и движение вперёд  \n\r [10] Остановить машину  \n\r\n\r" +
-             " [11] Изменить силу нажатия,         сила нажатия = {6}     \n\r"+
-             " [12] Изменить угол поворота руля,   угол поворота руля = {7}   ";
+                " [6] Включить/выключить фары  \n\r [7] Переключить коробку передач \n\r" +
+            " [8] Остановить машину = нажать на тормоз и переключить коробку передач на остановку \n\r\n\r" +
+             " [9] Изменить силу нажатия,          сила нажатия = {6}     \n\r"+
+             " [10] Изменить угол поворота руля,   угол поворота руля = {7}   ";
 
-            string[] statusDrive = { "остановлен", "едет вперёд", "едет назад", "едет вперёд на максимальной скорости" };
-            Console.Clear();
-            Console.WriteLine();
-            Console.WriteLine(information,name, speed, direction % 360, statusDrive[(int) status], remainder, isLight ? "включены" : "выключены", power, angle);
+            string[] statusDrive = { "остановка", "движение вперёд", "движение назад", "движение вперёд на максимальной скорости" };
+            while (a != 8)
+            {
+                Console.Clear();
+                Console.WriteLine();
+                Console.WriteLine(information, car.Name, car.Speed(), car.Direction() % 360, statusDrive[(int)car.Status],
+                                       car.IsLight ? "включены" : "выключены", car.RemainderFuel(), power, angle);
+               
+                a = Point(10);
+                switch (a)
+                {
+                    case 1:
+                        car.Status = StatusTransmission.Forward;
+                        car.PressGas(power);
+                        break;
+                    case 2:
+                        car.PressGas(power);
+                        break;
+                    case 3:
+                        car.PressBreak(power);
+                        break;
+                    case 4:
+                        car.TurnSteeringWheelRight(angle);
+                        break;
+                    case 5:
+                        car.TurnSteeringWheelLeft(angle);
+                        break;
+                    case 6:
+                        car.OnOffHeadLight();
+                        break;
+                    case 7:
+                        Console.Clear();
+                        for (int i = 0; i < statusDrive.Length; i++)
+                        {
+                            Console.WriteLine("{0} {1} ", i + 1, statusDrive[i]);
+                        }
+                        int a1 = Point(statusDrive.Length);
+                        car.Status = (StatusTransmission)(a1 - 1);
+                        break;
+                    case 8:
+                        car.PressBreak(power);
+                        car.Status = StatusTransmission.Stop;
+                        break;
+                    case 9:
+                        Console.Clear();
+                        power = IsDouble("Новое значение силы нажатия на педаль = ");
+                        break;
+                    case 10:
+                        Console.Clear();
+                        power = IsDouble("Новое значение угла поворота руля = ");
+                        break;
+                    default:
+                        throw new NotImplementedException();
+
+                }
+            }
             Console.ReadKey();
         }
 
@@ -144,6 +193,23 @@ namespace Automobiles
                             Console.WriteLine(" Сделайте правильный выбор ");
                         }
                     }
+            return a;
+        }
+        private double IsDouble(string s)
+        {
+            double a = 0;
+            string point = "";
+            bool isCorrect = false;
+            while (!isCorrect)
+            {
+                Console.Write(s);
+                point = Console.ReadLine().Trim();
+                isCorrect = double.TryParse(point, out a) && (a > 0);
+                if (!isCorrect)
+                {
+                    Console.WriteLine(" введите действительное число ");
+                }
+            }
             return a;
         }
 

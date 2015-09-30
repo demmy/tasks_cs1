@@ -12,11 +12,9 @@ namespace ZavodGermany
 
         public double Speed { get; set; }
 
-        public double Way { get; set; }
+        public double Direction { get; set; }
 
         public double RemainderFuel { get; set; }
-
-        public double Direction { get; set; }
         
     }
 }

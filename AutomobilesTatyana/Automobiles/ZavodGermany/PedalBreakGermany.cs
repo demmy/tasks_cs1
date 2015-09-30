@@ -13,12 +13,12 @@ namespace ZavodGermany
         
         public double Number
         {
-            get { throw new NotImplementedException(); }
+            get { return number; }
         }
 
         public double SpeedKoefficient(double power)
         {
-            throw new NotImplementedException();
+            return 2 / power;
         }
     }
 }

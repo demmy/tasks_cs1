@@ -47,9 +47,7 @@ namespace ZavodGermany
         public IPedal CreatePedalBreak()
         {
             return new PedalBreakGermany();
-
         }
-
 
         public IControlPanelInner CreateControlPanel()
         {
