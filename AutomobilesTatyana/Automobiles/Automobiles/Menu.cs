@@ -168,7 +168,7 @@ namespace Automobiles
                         break;
                     case 10:
                         Console.Clear();
-                        power = IsDouble("Новое значение угла поворота руля = ");
+                        angle = IsDouble("Новое значение угла поворота руля = ");
                         break;
                     default:
                         throw new NotImplementedException();
