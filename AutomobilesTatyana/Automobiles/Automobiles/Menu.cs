@@ -104,13 +104,17 @@ namespace Automobiles
                 }
         }
         public void GoForADriveByCar(ICar car)
-        {   
+        {
+            DateTime time = DateTime.Now;
+            DateTime prevTime = DateTime.Now;
+            double way=0;
             double power=10;
             double angle =10;
             int a = 0;
-            string information = "Вы катаететесь на машине {0} \n\r\n\r   Состояние:  \n\r   скорость       {1} км/ч \n\r"+
+            string information = "Вы катаететесь на машине {0}     начало {8}     \n\r   Состояние:  \n\r   скорость       {1} км/ч \n\r"+
                 "   направление       {2} градусов к северу от востока \n\r" +
-                "   установка коробки передач       {3}   \n\r   фары       {4}    \n\r   остаток топлива в баке       {5}    \n\r\n\r" +
+                "   установка коробки передач       {3}   \n\r   фары       {4}    \n\r   остаток топлива в баке       {5} \n\r"+
+                "   пройденный путь   {9}           \n\r\n\r" +
                 "  Действия:  \n\r [1] Начать движение = переключить коробку передач на движение вперёд и нажать на газ  \n\r [2] Нажать газ \n\r"+
                 "[3] Нажать тормоз  \n\r" +
                 " [4] Повернуть руль вправо \n\r [5] Повернуть руль влево  \n\r" +
@@ -125,7 +129,8 @@ namespace Automobiles
                 Console.Clear();
                 Console.WriteLine();
                 Console.WriteLine(information, car.Name, car.Speed(), car.Direction() % 360, statusDrive[(int)car.Status],
-                                       car.IsLight ? "включены" : "выключены", car.RemainderFuel(), power, angle);
+                                       car.IsLight ? "включены" : "выключены", car.RemainderFuel(), power, angle,
+                                       time, way);
                
                 a = Point(10);
                 switch (a)
@@ -174,6 +179,8 @@ namespace Automobiles
                         throw new NotImplementedException();
 
                 }
+                way += (DateTime.Now - prevTime).Hours * car.Speed();
+                
             }
             Console.ReadKey();
         }
